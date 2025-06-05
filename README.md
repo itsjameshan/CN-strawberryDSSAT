@@ -110,9 +110,6 @@ brew install cmake gcc
 Run the helper script to compile and install DSSAT. The script also copies the
 sample strawberry experiments and weather files, generates a `STRB.V48` batch
 file, and executes the model, writing results to `/usr/local/BatchFiles`:
-=======
-Run the helper script to compile and install DSSAT:
-
 
 ```bash
 ./scripts/build_dssat_macos.sh
@@ -123,9 +120,6 @@ Run the helper script to compile and install DSSAT:
 Install CMake and a gfortran toolchain such as MinGW-w64. The Windows batch file
 performs the same actions as the macOS script: build, install, stage the
 strawberry data and run the simulation. Execute it from a Windows terminal:
-=======
-Install CMake and a gfortran toolchain such as MinGW-w64. Then execute the batch script from a Windows terminal:
-
 
 ```cmd
 scripts\build_dssat_windows.cmd

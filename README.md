@@ -81,6 +81,25 @@ A unit test suite is provided. Run it with:
 python cropgro-strawberry-test1.py
 ```
 
+## Running the original DSSAT code
+
+The repository also includes the full Fortran source of DSSAT in the `dssat-csm-os-develop` directory. Build it using CMake:
+
+```bash
+cd dssat-csm-os-develop
+mkdir build
+cd build
+cmake ..
+make
+```
+
+After compilation the `run_dssat` helper script is generated in `Utilities`. Invoke it with a Strawberry `.SRX` experiment file:
+
+```bash
+./Utilities/run_dssat ../../dssat-csm-data-develop/Strawberry/UFBA1601.SRX
+```
+
+=======
 
 ## Comparing with the Fortran DSSAT model
 
@@ -90,4 +109,4 @@ To verify the Python implementation against the official Fortran code, use `comp
 python compare_with_fortran.py path/to/UFBA1401.SRX --dssat-dir dssat-csm-os-develop
 ```
 
-The utility runs the Fortran executable for the specified `.SRX` experiment, reads the resulting `summary.csv` (or `PlantGro.OUT`), executes the Python model using the same weather data and planting date, and compares key outputs using `pandas.testing.assert_frame_equal`.
+

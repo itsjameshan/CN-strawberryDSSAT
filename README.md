@@ -81,3 +81,21 @@ A unit test suite is provided. Run it with:
 python cropgro-strawberry-test1.py
 ```
 
+## Running the original DSSAT code
+
+The repository also includes the full Fortran source of DSSAT in the `dssat-csm-os-develop` directory. Build it using CMake:
+
+```bash
+cd dssat-csm-os-develop
+mkdir build
+cd build
+cmake ..
+make
+```
+
+After compilation the `run_dssat` helper script is generated in `Utilities`. Invoke it with a Strawberry `.SRX` experiment file:
+
+```bash
+./Utilities/run_dssat ../../dssat-csm-data-develop/Strawberry/UFBA1601.SRX
+```
+

@@ -99,3 +99,14 @@ After compilation the `run_dssat` helper script is generated in `Utilities`. Inv
 ./Utilities/run_dssat ../../dssat-csm-data-develop/Strawberry/UFBA1601.SRX
 ```
 
+=======
+
+## Comparing with the Fortran DSSAT model
+
+To verify the Python implementation against the official Fortran code, use `compare_with_fortran.py`. The script requires a compiled DSSAT installation containing `Utilities/run_dssat`.
+
+```bash
+python compare_with_fortran.py path/to/UFBA1401.SRX --dssat-dir dssat-csm-os-develop
+```
+
+

@@ -99,7 +99,27 @@ After compilation the `run_dssat` helper script is generated in `Utilities`. Inv
 ./Utilities/run_dssat ../../dssat-csm-data-develop/Strawberry/UFBA1601.SRX
 ```
 
-=======
+### Building on macOS
+
+Install `cmake` and `gcc` (providing `gfortran`), for example via Homebrew:
+
+```bash
+brew install cmake gcc
+```
+
+Run the helper script to compile and install DSSAT:
+
+```bash
+./scripts/build_dssat_macos.sh
+```
+
+### Building on Windows
+
+Install CMake and a gfortran toolchain such as MinGW-w64. Then execute the batch script from a Windows terminal:
+
+```cmd
+scripts\build_dssat_windows.cmd
+```
 
 ## Comparing with the Fortran DSSAT model
 

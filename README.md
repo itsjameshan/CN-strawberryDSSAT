@@ -125,6 +125,14 @@ strawberry data and run the simulation. Execute it from a Windows terminal:
 scripts\build_dssat_windows.cmd
 ```
 
+`build_dssat_windows.cmd` is a Windows batch file that relies on the `cmd.exe`
+shell and Windows-specific commands such as `xcopy` and `mingw32-make`. A macOS
+terminal doesn’t provide these commands or the Windows environment expected by
+the script. Instead, macOS users should run the companion script
+`scripts/build_dssat_macos.sh`, which performs the same setup using standard
+Unix tools. To run the Windows batch file on macOS you’d need a Windows
+environment (e.g., a VM or Wine).
+
 ## Comparing with the Fortran DSSAT model
 
 To verify the Python implementation against the official Fortran code, use `compare_with_fortran.py`. The script requires a compiled DSSAT installation containing `Utilities/run_dssat`.
@@ -144,3 +152,11 @@ python validate_models.py path/to/UFBA1601.SRX --dssat-dir dssat-csm-os-develop 
 ```
 
 See [docs/student_guide.md](docs/student_guide.md) for a concise, step-by-step guide to running the Python model and comparing it with the official DSSAT code.
+
+### Full comparison pipeline
+
+Run `scripts/run_full_comparison.py` to build DSSAT (if needed) and validate all sample experiments. The script detects your operating system and invokes the appropriate build helper automatically. Reports are saved in `comparison_reports/`.
+
+```bash
+python scripts/run_full_comparison.py
+```

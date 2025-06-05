@@ -142,3 +142,5 @@ Use `validate_models.py` to automatically run the official DSSAT executable and 
 ```bash
 python validate_models.py path/to/UFBA1601.SRX --dssat-dir dssat-csm-os-develop --tolerance 1.0
 ```
+
+See [docs/student_guide.md](docs/student_guide.md) for a concise, step-by-step guide to running the Python model and comparing it with the official DSSAT code.

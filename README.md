@@ -134,3 +134,11 @@ python compare_with_fortran.py path/to/UFBA1401.SRX --dssat-dir dssat-csm-os-dev
 ```
 
 
+
+## Automated validation
+
+Use `validate_models.py` to automatically run the official DSSAT executable and the Python implementation, then compare their outputs. The script writes a simple report listing the maximum difference for each common column and whether the results are within the specified tolerance.
+
+```bash
+python validate_models.py path/to/UFBA1601.SRX --dssat-dir dssat-csm-os-develop --tolerance 1.0
+```

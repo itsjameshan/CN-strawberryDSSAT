@@ -6,7 +6,17 @@ from datetime import datetime
 import pandas as pd
 import pandas.testing as pdt
 
-from cropgro-strawberry-implementation import CropgroStrawberry
+# Import the CropgroStrawberry class from a file with a hyphen in its name.
+import importlib.util
+import pathlib
+
+impl_path = pathlib.Path(__file__).resolve().parent / "cropgro-strawberry-implementation.py"
+spec = importlib.util.spec_from_file_location(
+    "cropgro_strawberry_implementation", impl_path
+)
+impl_module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(impl_module)
+CropgroStrawberry = impl_module.CropgroStrawberry
 
 
 def parse_dssat_date(code: str) -> str:

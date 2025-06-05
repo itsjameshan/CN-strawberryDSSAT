@@ -81,3 +81,13 @@ A unit test suite is provided. Run it with:
 python cropgro-strawberry-test1.py
 ```
 
+
+## Comparing with the Fortran DSSAT model
+
+To verify the Python implementation against the official Fortran code, use `compare_with_fortran.py`. The script requires a compiled DSSAT installation containing `Utilities/run_dssat`.
+
+```bash
+python compare_with_fortran.py path/to/UFBA1401.SRX --dssat-dir dssat-csm-os-develop
+```
+
+The utility runs the Fortran executable for the specified `.SRX` experiment, reads the resulting `summary.csv` (or `PlantGro.OUT`), executes the Python model using the same weather data and planting date, and compares key outputs using `pandas.testing.assert_frame_equal`.

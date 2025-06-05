@@ -1,14 +1,20 @@
 #!/usr/bin/env bash
+
 # Build, install, and run DSSAT-CSM with sample strawberry data on macOS
 set -euo pipefail
 
 # Compile the Fortran sources
+=======
+# Build and install DSSAT-CSM on macOS
+set -euo pipefail
+
 cd "$(dirname "$0")/../dssat-csm-os-develop"
 mkdir -p build
 cd build
 cmake ..
 make
 sudo make install
+
 
 # Install sample strawberry experiments and weather files
 sudo mkdir -p /usr/local/Strawberry
@@ -34,4 +40,6 @@ BATCH
 # Run the strawberry model
 cd /usr/local/BatchFiles
 ../dscsm048 CRGRO048 B STRB.V48
+
+=======
 

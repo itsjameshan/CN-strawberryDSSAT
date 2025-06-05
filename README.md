@@ -57,10 +57,10 @@ Requirements:
 - `pandas`
 - `matplotlib`
 
-Install the dependencies:
+Install the dependencies using `requirements.txt`:
 
 ```bash
-pip install numpy pandas matplotlib
+pip install -r requirements.txt
 ```
 
 ## Running the example

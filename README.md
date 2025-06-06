@@ -161,9 +161,12 @@ Run `scripts/run_full_comparison.py` to build DSSAT (if needed) and validate all
 python scripts/run_full_comparison.py
 ```
 
+=======
+
 After running the pipeline you can visualize the validation summaries with `scripts/plot_results.py`:
 
 ```bash
 python scripts/plot_results.py --reports comparison_reports
 ```
+
 

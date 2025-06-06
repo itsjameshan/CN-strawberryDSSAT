@@ -20,8 +20,21 @@ import sys
 # The following is a simplified version of the CropgroStrawberry class for testing purposes
 class CropgroStrawberry:
     """A simplified version of the CROPGRO-Strawberry model for testing."""
-    
+
     def __init__(self, latitude, planting_date, soil_properties, cultivar_params):
+        """Initialize the model with site and cultivar information.
+
+        Parameters
+        ----------
+        latitude : float
+            Geographic latitude in degrees.
+        planting_date : str
+            Date of planting in ``YYYY-MM-DD`` format.
+        soil_properties : dict
+            Soil characteristics such as ``field_capacity`` and ``wilting_point``.
+        cultivar_params : dict
+            Parameters describing the strawberry cultivar.
+        """
         self.latitude = latitude
         self.planting_date = datetime.strptime(planting_date, '%Y-%m-%d')
         self.soil = soil_properties
@@ -60,10 +73,21 @@ class CropgroStrawberry:
         self.results = []
     
     def calculate_daylength(self, day_of_year):
-        """Calculate daylength based on latitude and day of year."""
+        """Calculate astronomical daylength in hours.
+
+        The calculation uses the solar declination angle and latitude. The
+        result is clipped to the range ``0`` to ``24`` hours to handle extreme
+        daylength near the poles.
+        """
+        # Solar declination angle for the given day of year
         declination = 23.45 * np.sin(np.radians(360 * (day_of_year - 80) / 365))
+
+        # Convert latitude to radians
         lat_rad = np.radians(self.latitude)
+
+        # Intermediate term of daylength equation
         term = -np.tan(lat_rad) * np.tan(np.radians(declination))
+
         if term >= 1.0:
             daylength = 0.0
         elif term <= -1.0:
@@ -73,76 +97,89 @@ class CropgroStrawberry:
         return daylength
     
     def calculate_thermal_time(self, tmin, tmax):
-        """Calculate thermal time (degree-days) based on daily temperatures."""
+        """Return thermal time in degree-days.
+
+        Uses a trapezoidal temperature response between ``tbase`` and ``topt``
+        with decline to zero at ``tmax_th``.
+        """
         tbase = self.cultivar['tbase']
         topt = self.cultivar['topt']
         tmax_th = self.cultivar['tmax_th']
-        
+
+        # Mean temperature for the day
         tavg = (tmin + tmax) / 2.0
-        
+
         if tavg <= tbase:
             return 0.0
-        elif tavg > tbase and tavg <= topt:
+        elif tavg <= topt:
             return tavg - tbase
-        elif tavg > topt and tavg <= tmax_th:
+        elif tavg <= tmax_th:
             return topt - tbase - (tavg - topt) * ((topt - tbase) / (tmax_th - topt))
         else:
             return 0.0
     
     def update_phenology(self, thermal_time_today):
-        """Update plant phenological stage based on accumulated thermal time."""
+        """Advance phenological stage when thermal thresholds are reached."""
         self.thermal_time += thermal_time_today
-        
+
         current_stage = self.plant_state['phenological_stage']
         stages = list(self.phenology_stages.keys())
         current_index = stages.index(current_stage)
-        
+
         if current_index < len(stages) - 1:
             next_stage = stages[current_index + 1]
             if self.thermal_time >= self.phenology_stages[next_stage]:
                 self.plant_state['phenological_stage'] = next_stage
     
     def calculate_photosynthesis(self, solar_radiation, tmax, tmin, co2=400):
-        """Calculate daily photosynthesis rate."""
+        """Calculate daily gross photosynthesis.
+
+        Radiation use efficiency (RUE) is modified by temperature, CO2 and the
+        fraction of intercepted light based on LAI.
+        """
         rue = self.cultivar['rue']
         tavg = (tmax + tmin) / 2.0
-        
-        # Temperature effect
+
+        # Temperature response of photosynthesis
         if tavg <= self.cultivar['tbase']:
             temp_effect = 0.0
         elif tavg >= self.cultivar['topt']:
             temp_effect = 1.0
         else:
-            temp_effect = (tavg - self.cultivar['tbase']) / (self.cultivar['topt'] - self.cultivar['tbase'])
-        
-        # CO2 effect
+            temp_effect = (tavg - self.cultivar['tbase']) / (
+                self.cultivar['topt'] - self.cultivar['tbase']
+            )
+
+        # Effect of elevated CO2 concentration
         co2_effect = 1.0 + 0.11 * np.log(co2 / 400.0)
-        
-        # LAI effect
+
+        # Fraction of light intercepted by canopy
         lai = self.plant_state['leaf_area_index']
         light_interception = 1.0 - np.exp(-self.cultivar['k_light'] * lai)
-        
-        # Daily photosynthesis
-        photosynthesis = solar_radiation * rue * temp_effect * co2_effect * light_interception
-        
+
+        photosynthesis = (
+            solar_radiation * rue * temp_effect * co2_effect * light_interception
+        )
+
         return photosynthesis
     
     def calculate_transpiration(self, solar_radiation, tmax, tmin, rh, wind_speed):
-        """Calculate plant transpiration using a simplified approach."""
+        """Estimate crop transpiration from weather conditions."""
         tavg = (tmax + tmin) / 2.0
+        # Vapour pressure deficit (unused but shown for clarity)
         vpd = 0.611 * np.exp(17.27 * tavg / (tavg + 237.3)) * (1 - rh / 100)
-        
-        # Reference ET
+
+        # Reference evapotranspiration using Hargreaves equation
         et0 = 0.0023 * solar_radiation * np.sqrt(tmax - tmin) * (tavg + 17.8)
-        
-        # Crop coefficient
+
+        # Crop coefficient scales ET0 according to canopy size
         lai = self.plant_state['leaf_area_index']
         kc = 0.3 + 0.7 * (1.0 - np.exp(-0.7 * lai))
-        
+
         return et0 * kc
     
     def partition_biomass(self, daily_biomass):
-        """Partition new biomass to plant organs based on development stage."""
+        """Allocate new biomass to leaves, stems, roots and fruits."""
         stage = self.plant_state['phenological_stage']
         
         # Define partition coefficients based on stage
@@ -177,7 +214,7 @@ class CropgroStrawberry:
             stem_fraction = 0.0
             fruit_fraction = 0.0
         
-        # Update biomass values
+        # Add allocated biomass to each compartment
         self.plant_state['root_biomass'] += daily_biomass * root_fraction
         self.plant_state['leaf_biomass'] += daily_biomass * leaf_fraction
         self.plant_state['stem_biomass'] += daily_biomass * stem_fraction
@@ -189,29 +226,33 @@ class CropgroStrawberry:
                                       self.plant_state['stem_biomass'] + 
                                       self.plant_state['fruit_biomass'])
         
-        # Update leaf area index
+        # Convert leaf biomass to leaf area index using specific leaf area
         sla = self.cultivar['sla']
         if stage in ['FRUIT_DEVELOPMENT', 'FRUIT_MATURITY', 'SENESCENCE']:
             sla *= 0.8
         
         self.plant_state['leaf_area_index'] = self.plant_state['leaf_biomass'] * sla
         
-        # Update root depth
+        # Update root depth based on allocated root growth
         max_root_growth_rate = 0.5
         max_root_depth = self.soil['max_root_depth']
         
         potential_root_growth = max_root_growth_rate * root_fraction
         current_root_depth = self.plant_state['root_depth']
-        
+
         if current_root_depth < max_root_depth:
-            self.plant_state['root_depth'] = min(current_root_depth + potential_root_growth, max_root_depth)
+            self.plant_state['root_depth'] = min(
+                current_root_depth + potential_root_growth,
+                max_root_depth,
+            )
     
     def calculate_water_stress(self, rainfall, transpiration):
-        """Calculate water stress factor (0-1) based on simplified water balance."""
+        """Return a water stress factor between 0 and 1."""
         field_capacity = self.soil['field_capacity']
         wilting_point = self.soil['wilting_point']
         root_depth = self.plant_state['root_depth'] / 100.0
-        
+
+        # Available soil water in the root zone
         available_water = (field_capacity - wilting_point) * root_depth
         effective_rainfall = rainfall * 0.7
         deficit = max(0, transpiration - effective_rainfall)
@@ -219,57 +260,80 @@ class CropgroStrawberry:
         if deficit == 0:
             return 0.0
         else:
+            # Scale deficit by available water to determine stress
             stress_factor = min(1.0, deficit / available_water)
             return stress_factor
     
     def calculate_maintenance_respiration(self, tmin, tmax):
         """Calculate maintenance respiration based on biomass and temperature."""
         tavg = (tmin + tmax) / 2.0
-        
+
+        # Base respiration coefficients at 20°C
         coef_leaf = 0.03
         coef_stem = 0.015
         coef_root = 0.01
         coef_fruit = 0.01
-        
+
+        # Temperature effect assuming Q10 of 2
         temp_factor = 2.0 ** ((tavg - 20.0) / 10.0)
-        
+
         resp_leaf = self.plant_state['leaf_biomass'] * coef_leaf * temp_factor
         resp_stem = self.plant_state['stem_biomass'] * coef_stem * temp_factor
         resp_root = self.plant_state['root_biomass'] * coef_root * temp_factor
         resp_fruit = self.plant_state['fruit_biomass'] * coef_fruit * temp_factor
-        
+
         return resp_leaf + resp_stem + resp_root + resp_fruit
     
     def update_runners(self):
-        """Update the number of runners."""
-        if self.plant_state['phenological_stage'] in ['VEGETATIVE', 'FLORAL_INDUCTION']:
+        """Increase runner number during vegetative growth."""
+        if self.plant_state['phenological_stage'] in [
+            'VEGETATIVE',
+            'FLORAL_INDUCTION',
+        ]:
             self.plant_state['runner_number'] += 0.1 * self.plant_state['crown_number']
-    
+
     def update_crowns(self):
-        """Update the number of crowns."""
-        if self.plant_state['phenological_stage'] in ['VEGETATIVE', 'FLORAL_INDUCTION', 'FLOWERING']:
+        """Increment crown number as the canopy develops."""
+        if self.plant_state['phenological_stage'] in [
+            'VEGETATIVE',
+            'FLORAL_INDUCTION',
+            'FLOWERING',
+        ]:
             self.plant_state['crown_number'] += 0.02 * self.plant_state['crown_number']
-    
+
     def update_fruits(self):
-        """Update fruit number."""
+        """Add fruits during flowering and fruit set stages."""
         stage = self.plant_state['phenological_stage']
-        
+
         if stage == 'FLOWERING':
-            new_fruits = self.cultivar['potential_fruits_per_crown'] * self.plant_state['crown_number'] * 0.1
+            # Initial fruit formation
+            new_fruits = (
+                self.cultivar['potential_fruits_per_crown']
+                * self.plant_state['crown_number']
+                * 0.1
+            )
             self.plant_state['fruit_number'] += new_fruits
         elif stage == 'FRUIT_SET':
-            new_fruits = self.cultivar['potential_fruits_per_crown'] * self.plant_state['crown_number'] * 0.2
+            # Additional fruit set
+            new_fruits = (
+                self.cultivar['potential_fruits_per_crown']
+                * self.plant_state['crown_number']
+                * 0.2
+            )
             self.plant_state['fruit_number'] += new_fruits
     
     def simulate_day(self, weather_data):
         """Simulate one day of strawberry growth."""
         self.days_after_planting += 1
-        
+
         current_date = datetime.strptime(weather_data['date'], '%Y-%m-%d')
         day_of_year = current_date.timetuple().tm_yday
-        
+
+        # Environmental forcing
         daylength = self.calculate_daylength(day_of_year)
-        thermal_time_today = self.calculate_thermal_time(weather_data['tmin'], weather_data['tmax'])
+        thermal_time_today = self.calculate_thermal_time(
+            weather_data['tmin'], weather_data['tmax']
+        )
         self.update_phenology(thermal_time_today)
         
         photosynthesis = self.calculate_photosynthesis(
@@ -286,13 +350,18 @@ class CropgroStrawberry:
             weather_data['wind_speed']
         )
         
-        water_stress = self.calculate_water_stress(weather_data['rainfall'], transpiration)
+        # Reduce photosynthesis according to water stress
+        water_stress = self.calculate_water_stress(
+            weather_data['rainfall'], transpiration
+        )
         photosynthesis *= (1 - water_stress)
         
         plant_density = 5.0
         daily_biomass = photosynthesis / plant_density
         
-        maintenance_resp = self.calculate_maintenance_respiration(weather_data['tmin'], weather_data['tmax'])
+        maintenance_resp = self.calculate_maintenance_respiration(
+            weather_data['tmin'], weather_data['tmax']
+        )
         daily_biomass = max(0, daily_biomass - maintenance_resp)
         
         self.partition_biomass(daily_biomass)
@@ -322,7 +391,7 @@ class CropgroStrawberry:
         })
     
     def simulate_growth(self, weather_data_df):
-        """Simulate strawberry growth for a period defined by the weather data."""
+        """Run the model sequentially for each day in the weather dataset."""
         self.results = []
         
         for _, row in weather_data_df.iterrows():
@@ -336,7 +405,8 @@ class CropgroStrawberry:
                 'wind_speed': row['wind_speed']
             }
             self.simulate_day(weather_day)
-        
+
+        # Convert collected results to a DataFrame for analysis
         self.results_df = pd.DataFrame(self.results)
         return self.results_df
     

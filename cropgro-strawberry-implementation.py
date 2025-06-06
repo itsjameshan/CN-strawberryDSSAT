@@ -1,4 +1,11 @@
-"""Python implementation of the CROPGRO-Strawberry crop growth model."""
+"""Python implementation of the CROPGRO-Strawberry crop growth model.
+
+This module contains a simplified, purely Python implementation of the
+CROPGRO strawberry model.  The structure mirrors the original Fortran
+code but trades some complexity for readability.  All major calculation
+steps are implemented as small functions decorated with ``@njit`` to keep
+them fast when the optional ``numba`` dependency is available.
+"""
 
 # CROPGRO-Strawberry Model Implementation in Python
 # This is a simplified implementation of the CROPGRO model for strawberries
@@ -30,8 +37,14 @@ class PlantState:
 
 @njit
 def _calc_daylength(latitude, day_of_year):
+    """Return length of the day in hours for a given latitude and date."""
+    # Solar declination angle for the given day of year
     declination = 23.45 * np.sin(np.deg2rad(360 * (day_of_year - 80) / 365))
+
+    # Convert latitude to radians for trig functions
     lat_rad = np.deg2rad(latitude)
+
+    # Intermediate term of the daylength equation
     term = -np.tan(lat_rad) * np.tan(np.deg2rad(declination))
     if term >= 1.0:
         return 0.0
@@ -43,6 +56,8 @@ def _calc_daylength(latitude, day_of_year):
 
 @njit
 def _thermal_time(tmin, tmax, tbase, topt, tmax_th):
+    """Calculate thermal time accumulation for a single day."""
+    # Mean daily temperature
     tavg = (tmin + tmax) / 2.0
     if tavg <= tbase:
         return 0.0
@@ -56,6 +71,8 @@ def _thermal_time(tmin, tmax, tbase, topt, tmax_th):
 
 @njit
 def _photosynthesis(solar_radiation, tmax, tmin, rue, tbase, topt, k_light, lai, co2):
+    """Estimate daily photosynthesis based on temperature and light."""
+    # Average temperature used for temperature response
     tavg = (tmax + tmin) / 2.0
     if tavg <= tbase:
         temp_effect = 0.0
@@ -70,16 +87,28 @@ def _photosynthesis(solar_radiation, tmax, tmin, rue, tbase, topt, k_light, lai,
 
 @njit
 def _transpiration(solar_radiation, tmax, tmin, rh, lai):
+    """Compute potential plant transpiration using a simple ET0 approach."""
+    # Mean temperature for the day
     tavg = (tmax + tmin) / 2.0
+
+    # Simplified reference evapotranspiration (Hargreaves)
     et0 = 0.0023 * solar_radiation * np.sqrt(tmax - tmin) * (tavg + 17.8)
+
+    # Crop coefficient as a function of canopy development
     kc = 0.3 + 0.7 * (1.0 - np.exp(-0.7 * lai))
     return et0 * kc
 
 
 @njit
 def _water_stress(field_capacity, wilting_point, root_depth, rainfall, transpiration):
+    """Derive a water stress factor from soil moisture balance."""
+    # Total available soil water within the root zone
     available_water = (field_capacity - wilting_point) * root_depth
+
+    # Assume some fraction of rainfall is effective in wetting the soil
     effective_rainfall = rainfall * 0.7
+
+    # Water deficit is unmet transpiration demand
     deficit = max(0.0, transpiration - effective_rainfall)
     if deficit == 0.0:
         return 0.0
@@ -90,8 +119,12 @@ def _water_stress(field_capacity, wilting_point, root_depth, rainfall, transpira
 
 @njit
 def _maintenance_resp(leaf_biomass, stem_biomass, root_biomass, fruit_biomass, tmin, tmax):
+    """Calculate maintenance respiration of all plant organs."""
+    # Temperature dependence of respiration (Q10 model)
     tavg = (tmin + tmax) / 2.0
     temp_factor = 2.0 ** ((tavg - 20.0) / 10.0)
+
+    # Organ specific respiration rates
     resp_leaf = leaf_biomass * 0.03 * temp_factor
     resp_stem = stem_biomass * 0.015 * temp_factor
     resp_root = root_biomass * 0.01 * temp_factor
@@ -197,14 +230,14 @@ class CropgroStrawberry:
         thermal_time_today : float
             Thermal time accumulated for the current day
         """
-        # Add today's thermal time to accumulated thermal time
+        # Add today's heat units to the running total
         self.thermal_time += thermal_time_today
         
-        # Check if plant has moved to the next stage
+        # Determine if the plant should progress to the next stage
         current_stage = self.plant_state.phenological_stage
         stages = list(self.phenology_stages.keys())
         current_index = stages.index(current_stage)
-        
+
         # If not at the last stage and thermal time exceeds threshold for next stage
         if current_index < len(stages) - 1:
             next_stage = stages[current_index + 1]
@@ -279,6 +312,7 @@ class CropgroStrawberry:
         daily_biomass : float
             Daily biomass production (g/plant)
         """
+        # Determine partitioning fractions based on current stage
         stage = self.plant_state.phenological_stage
         
         # Partition coefficients change with development stage
@@ -353,18 +387,21 @@ class CropgroStrawberry:
     
     def update_runners(self):
         """Update the number of runners based on development stage and conditions."""
+        # Runners are produced mainly during vigorous vegetative growth
         if self.plant_state.phenological_stage in ['VEGETATIVE', 'FLORAL_INDUCTION']:
             # Runner production is highest during vegetative growth
             self.plant_state.runner_number += 0.1 * self.plant_state.crown_number
     
     def update_crowns(self):
         """Update the number of crowns based on development stage and conditions."""
+        # Strawberry plants can branch into multiple crowns when growing actively
         if self.plant_state.phenological_stage in ['VEGETATIVE', 'FLORAL_INDUCTION', 'FLOWERING']:
             # Crown development
             self.plant_state.crown_number += 0.02 * self.plant_state.crown_number
     
     def update_fruits(self):
         """Update fruit number and individual fruit weight."""
+        # Fruit initiation depends on current development stage
         stage = self.plant_state.phenological_stage
         
         # New fruit initiation during flowering and fruit set
@@ -391,30 +428,30 @@ class CropgroStrawberry:
             - wind_speed: Wind speed (m/s)
             - date: Date in 'YYYY-MM-DD' format
         """
-        # Increment days after planting
+        # Increment the counter of days since planting
         self.days_after_planting += 1
         
         # Current date
         current_date = datetime.strptime(weather_data['date'], '%Y-%m-%d')
         day_of_year = current_date.timetuple().tm_yday
         
-        # Calculate daylength
+        # Calculate astronomical daylength for the location
         daylength = self.calculate_daylength(day_of_year)
         
-        # Calculate thermal time for the day
+        # Daily degree-day accumulation
         thermal_time_today = self.calculate_thermal_time(weather_data['tmin'], weather_data['tmax'])
         
-        # Update phenological stage
+        # Advance phenological stage if thresholds are met
         self.update_phenology(thermal_time_today)
         
-        # Calculate daily photosynthesis
+        # Gross daily photosynthetic production
         photosynthesis = self.calculate_photosynthesis(
-            weather_data['solar_radiation'], 
-            weather_data['tmax'], 
+            weather_data['solar_radiation'],
+            weather_data['tmax'],
             weather_data['tmin']
         )
         
-        # Calculate transpiration
+        # Potential water loss through transpiration
         transpiration = self.calculate_transpiration(
             weather_data['solar_radiation'],
             weather_data['tmax'],
@@ -423,18 +460,18 @@ class CropgroStrawberry:
             weather_data['wind_speed']
         )
         
-        # Check for water stress
+        # Water stress reduces photosynthesis if rainfall is insufficient
         water_stress = self.calculate_water_stress(weather_data['rainfall'], transpiration)
         
         # Reduce photosynthesis due to water stress
         photosynthesis *= (1 - water_stress)
         
-        # Convert photosynthesis to biomass production (g/plant)
-        # Assume plant density of 5 plants per m²
+        # Convert canopy assimilation to per-plant biomass
+        # Assume a density of five plants per square metre
         plant_density = 5.0  # plants/m²
         daily_biomass = photosynthesis / plant_density
         
-        # Account for maintenance respiration
+        # Subtract respiration costs from produced biomass
         maintenance_resp = self.calculate_maintenance_respiration(weather_data['tmin'], weather_data['tmax'])
         daily_biomass = max(0, daily_biomass - maintenance_resp)
         
@@ -613,6 +650,7 @@ class CropgroStrawberry:
 
 # Example usage of the CROPGRO-Strawberry model
 def run_example_simulation():
+    """Run the model with synthetic weather data and return results."""
     # Define soil properties
     soil_properties = {
         'max_root_depth': 50.0,  # cm

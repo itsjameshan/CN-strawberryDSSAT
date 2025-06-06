@@ -1,3 +1,5 @@
+"""Unit tests for the simplified CROPGRO-Strawberry model implementation."""
+
 import unittest
 import pandas as pd
 import numpy as np

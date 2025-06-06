@@ -1,3 +1,5 @@
+"""Validate the Python implementation of CROPGRO-Strawberry against DSSAT."""
+
 import argparse
 import os
 import subprocess

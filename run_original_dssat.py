@@ -1,3 +1,5 @@
+"""Helper script to execute the original DSSAT strawberry model."""
+
 import argparse
 import os
 import shutil

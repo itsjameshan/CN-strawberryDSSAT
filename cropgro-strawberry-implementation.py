@@ -1,3 +1,5 @@
+"""Python implementation of the CROPGRO-Strawberry crop growth model."""
+
 # CROPGRO-Strawberry Model Implementation in Python
 # This is a simplified implementation of the CROPGRO model for strawberries
 

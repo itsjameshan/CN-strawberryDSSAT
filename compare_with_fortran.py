@@ -1,3 +1,5 @@
+"""Compare outputs from the Fortran DSSAT model with the Python version."""
+
 import argparse
 import os
 import subprocess

@@ -1,3 +1,5 @@
+"""Plot validation summaries produced by DSSAT comparison scripts."""
+
 import argparse
 import glob
 import os

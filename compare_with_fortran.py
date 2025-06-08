@@ -1,39 +1,43 @@
 """Compare outputs from the Fortran DSSAT model with the Python version."""
+"""对比 Fortran DSSAT 模型和 Python 版本的输出结果。"""
 
-import argparse  # parsing command line options
-import os  # file path and process utilities
-import subprocess  # running external programs
-from datetime import datetime  # date computations
+import argparse  # 解析命令行参数
+import os  # 文件路径和进程相关操作
+import subprocess  # 运行外部程序
+from datetime import datetime  # 日期计算
 
-import pandas as pd  # core data structure library
-import pandas.testing as pdt  # dataframe comparison helpers
+import pandas as pd  # 核心数据结构库
+import pandas.testing as pdt  # DataFrame 比较工具
 
-# Import the CropgroStrawberry class from a file with a hyphen in its name.
-import importlib.util  # utilities for dynamic imports
-import pathlib  # filesystem path helpers
+# 从带有连字符文件名的文件导入 CropgroStrawberry 类。
+import importlib.util  # 动态导入工具
+import pathlib  # 文件系统路径助手
 
-impl_path = pathlib.Path(__file__).resolve().parent / "cropgro-strawberry-implementation.py"  # path to implementation
-spec = importlib.util.spec_from_file_location(  # create a module spec pointing at the file
-    "cropgro_strawberry_implementation", impl_path  # module name and path
-)  # end of spec arguments
-impl_module = importlib.util.module_from_spec(spec)  # module object from the spec
-spec.loader.exec_module(impl_module)  # execute the module so attributes are available
-CropgroStrawberry = impl_module.CropgroStrawberry  # extract the class definition
+impl_path = pathlib.Path(__file__).resolve().parent / "cropgro-strawberry-implementation.py"  # 指向实现文件的路径
+
+spec = importlib.util.spec_from_file_location(  # 创建一个指向该文件的模块 spec
+    "cropgro_strawberry_implementation", impl_path  # 模块名和路径
+)  # spec 参数结束
+
+impl_module = importlib.util.module_from_spec(spec)  # 从 spec 获取模块对象
+spec.loader.exec_module(impl_module)  # 执行该模块以获得属性
+
+CropgroStrawberry = impl_module.CropgroStrawberry  # 提取类定义
 
 
 def parse_dssat_date(code: str) -> str:  # decode a YYDDD date
-    """Convert DSSAT YYDDD date code to YYYY-MM-DD string."""
-    year = 2000 + int(code[:2])  # convert first two characters to year
-    doy = int(code[2:])  # remaining characters give day of year
-    return datetime.strptime(f"{year} {doy}", "%Y %j").strftime("%Y-%m-%d")  # parse and format into ISO date
+    """将 DSSAT YYDDD 日期码转换为 YYYY-MM-DD 字符串。"""
+    year = 2000 + int(code[:2])  # 前两位转换为年份
+    doy = int(code[2:])  # 剩下的字符为一年中的天数
+    return datetime.strptime(f"{year} {doy}", "%Y %j").strftime("%Y-%m-%d")  # 解析并格式化为 ISO 日期
 
 
 def parse_srx_file(path: str):  # read planting date and station from experiment
-    """Extract planting date and weather station code from an SRX file."""
-    planting_code = None  # placeholder for planting date code
-    wsta = None  # placeholder for weather station code
-    with open(path) as f:  # open the SRX experiment file
-        lines = f.readlines()  # read all lines into memory
+    """从 SRX 文件中提取种植日期和气象站代码。"""
+    planting_code = None  # 占位种植日期码
+    wsta = None  # 占位气象站代码
+    with open(path) as f:  # 打开 SRX 实验文件
+        lines = f.readlines()  # 读取所有行到内存中
     for i, line in enumerate(lines):  # examine each line with its index
         if line.startswith("@L ID_FIELD"):  # look for the field section indicator
             if i + 1 < len(lines):  # ensure the next line exists
@@ -45,18 +49,18 @@ def parse_srx_file(path: str):  # read planting date and station from experiment
                 parts = lines[i + 1].split()  # split the following line into parts
                 if len(parts) >= 2:  # verify there are enough tokens
                     planting_code = parts[1]  # capture the planting date code
-    planting_date = parse_dssat_date(planting_code) if planting_code else None  # convert code to date string if found
-    return planting_date, wsta  # return extracted values
+    planting_date = parse_dssat_date(planting_code) if planting_code else None  # 如找到则将代码转为日期字符串
+    return planting_date, wsta  # 返回提取的值
 
 
 def read_wth_file(path: str) -> pd.DataFrame:  # read weather data from .WTH
-    """Parse a DSSAT .WTH file into a DataFrame."""
-    with open(path) as f:  # open the weather file
-        lines = f.readlines()  # read file lines
-    start = next(i for i, l in enumerate(lines) if l.startswith("@DATE"))  # locate table header line
-    header = lines[start].split()  # obtain column names
-    indices = {h: idx for idx, h in enumerate(header)}  # map header names to positions
-    records = []  # list to hold daily records
+    """将 DSSAT .WTH 文件解析为 DataFrame。"""
+    with open(path) as f:  # 打开气象文件
+        lines = f.readlines()  # 读取文件行
+    start = next(i for i, l in enumerate(lines) if l.startswith("@DATE"))  # 定位表头所在行
+    header = lines[start].split()  # 获取列名
+    indices = {h: idx for idx, h in enumerate(header)}  # 列名映射到位置
+    records = []  # 用于存储每天记录的列表
     for line in lines[start + 1 :]:  # process each subsequent line
         if not line.strip() or line.startswith("*"):  # skip blank lines and comments
             continue  # ignore lines that have no data
@@ -64,82 +68,82 @@ def read_wth_file(path: str) -> pd.DataFrame:  # read weather data from .WTH
         code = parts[0]  # YYDDD code
         date = parse_dssat_date(code)  # convert to ISO date
         rec = {  # build a record for this day
-            "date": date,  # date string
-            "tmax": float(parts[indices.get("TMAX")]),  # maximum temperature
-            "tmin": float(parts[indices.get("TMIN")]),  # minimum temperature
-            "solar_radiation": float(parts[indices.get("SRAD")]),  # solar radiation
-            "rainfall": float(parts[indices.get("RAIN")]) if "RAIN" in indices else 0.0,  # rainfall amount
-            "rh": float(parts[indices.get("RHUM")]) if "RHUM" in indices else 70.0,  # relative humidity
-            "wind_speed": float(parts[indices.get("WIND")]) if "WIND" in indices else 2.0,  # wind speed
+            "date": date,  # 日期字符串
+            "tmax": float(parts[indices.get("TMAX")]),  # 最高温度
+            "tmin": float(parts[indices.get("TMIN")]),  # 最低温度
+            "solar_radiation": float(parts[indices.get("SRAD")]),  # 太阳辐射
+            "rainfall": float(parts[indices.get("RAIN")]) if "RAIN" in indices else 0.0,  # 降雨量
+            "rh": float(parts[indices.get("RHUM")]) if "RHUM" in indices else 70.0,  # 相对湿度
+            "wind_speed": float(parts[indices.get("WIND")]) if "WIND" in indices else 2.0,  # 风速
         }  # end of record dictionary
         records.append(rec)  # store the day's data
     return pd.DataFrame(records)  # convert list to DataFrame
 
 
 def run_dssat(srx_path: str, dssat_dir: str):  # invoke the DSSAT executable
-    """Run DSSAT using Utilities/run_dssat for the provided SRX file."""
-    util = os.path.join(dssat_dir, "Utilities", "run_dssat")  # path to run_dssat utility
-    if not os.path.exists(util):  # ensure the utility exists
-        raise FileNotFoundError(f"run_dssat not found at {util}")  # raise if run_dssat cannot be found
-    subprocess.run([util, os.path.basename(srx_path)], cwd=os.path.dirname(srx_path), check=True)  # execute run_dssat in experiment directory
+    """使用 Utilities/run_dssat 对指定的 SRX 文件运行 DSSAT。"""
+    util = os.path.join(dssat_dir, "Utilities", "run_dssat")  # run_dssat 工具路径
+    if not os.path.exists(util):  # 确认该工具存在
+        raise FileNotFoundError(f"run_dssat not found at {util}")  # 如未找到则抛出异常
+    subprocess.run([util, os.path.basename(srx_path)], cwd=os.path.dirname(srx_path), check=True)  # 在实验目录下执行 run_dssat
 
 
 def read_fortran_output(exp_dir: str) -> pd.DataFrame:  # read DSSAT output files
-    """Load summary.csv or PlantGro.OUT produced by DSSAT."""
-    summary_path = os.path.join(exp_dir, "summary.csv")  # check for CSV summary
-    if os.path.exists(summary_path):  # load CSV if present
-        return pd.read_csv(summary_path)  # return DataFrame
-    pg_path = os.path.join(exp_dir, "PlantGro.OUT")  # fallback to PlantGro.OUT
-    if os.path.exists(pg_path):  # load fixed width file
-        return pd.read_fwf(pg_path, skiprows=4)  # return DataFrame
-    raise FileNotFoundError("No DSSAT output found")  # raise if neither output exists
+    """读取 DSSAT 生成的 summary.csv 或 PlantGro.OUT 文件。"""
+    summary_path = os.path.join(exp_dir, "summary.csv")  # 检查 CSV 总结文件
+    if os.path.exists(summary_path):  # 如果存在则加载 CSV
+        return pd.read_csv(summary_path)  # 返回 DataFrame
+    pg_path = os.path.join(exp_dir, "PlantGro.OUT")  # 回退到 PlantGro.OUT 文件
+    if os.path.exists(pg_path):  # 如果存在则加载定宽文件
+        return pd.read_fwf(pg_path, skiprows=4)  # 返回 DataFrame
+    raise FileNotFoundError("No DSSAT output found")  # 如未找到任何输出则抛出异常
 
 
 def run_python_model(wth_df: pd.DataFrame, planting_date: str):  # simulate growth using Python model
-    soil = {"max_root_depth": 50.0, "field_capacity": 200.0, "wilting_point": 50.0}  # simple soil parameters
-    cultivar = {  # cultivar traits
-        "name": "Generic",  # cultivar name
-        "tbase": 4.0,  # base temperature
-        "topt": 22.0,  # optimum temperature
-        "tmax_th": 35.0,  # maximum threshold
-        "rue": 2.5,  # radiation use efficiency
-        "k_light": 0.6,  # light extinction coefficient
-        "sla": 0.02,  # specific leaf area
-        "potential_fruits_per_crown": 10.0,  # fruit potential
+    soil = {"max_root_depth": 50.0, "field_capacity": 200.0, "wilting_point": 50.0}  # 简单土壤参数
+    cultivar = {  # 品种特性
+        "name": "Generic",  # 品种名称
+        "tbase": 4.0,  # 基本温度
+        "topt": 22.0,  # 最佳温度
+        "tmax_th": 35.0,  # 最大温度阈值
+        "rue": 2.5,  # 辐射利用效率
+        "k_light": 0.6,  # 光截断系数
+        "sla": 0.02,  # 比叶面积
+        "potential_fruits_per_crown": 10.0,  # 单株潜在果实数
     }
-    model = CropgroStrawberry(40.0, planting_date, soil, cultivar)  # instantiate the model
-    return model.simulate_growth(wth_df)  # run the simulation
+    model = CropgroStrawberry(40.0, planting_date, soil, cultivar)  # 实例化模型
+    return model.simulate_growth(wth_df)  # 运行模拟
 
 
 def main():  # orchestrate the comparison
-    parser = argparse.ArgumentParser(description="Compare DSSAT and Python model outputs")  # set up CLI parser
-    parser.add_argument("srx", help="Path to DSSAT .SRX file")  # SRX experiment path
-    parser.add_argument("--dssat-dir", default="dssat-csm-os-develop", help="DSSAT installation directory")  # directory with DSSAT build
-    args = parser.parse_args()  # parse arguments
+    parser = argparse.ArgumentParser(description="Compare DSSAT and Python model outputs")  # 设置命令行解析器
+    parser.add_argument("srx", help="Path to DSSAT .SRX file")  # DSSAT .SRX 文件路径
+    parser.add_argument("--dssat-dir", default="dssat-csm-os-develop", help="DSSAT installation directory")  # DSSAT 安装目录
+    args = parser.parse_args()  # 解析参数
 
-    planting_date, wsta = parse_srx_file(args.srx)  # extract info from SRX
-    if planting_date is None or wsta is None:  # validate required data
-        raise ValueError("Could not parse SRX file")  # stop if SRX is malformed
+    planting_date, wsta = parse_srx_file(args.srx)  # 从 SRX 提取信息
+    if planting_date is None or wsta is None:  # 校验必需数据
+        raise ValueError("Could not parse SRX file")  # 如果 SRX 格式有误则终止
 
-    run_dssat(args.srx, args.dssat_dir)  # generate Fortran output
+    run_dssat(args.srx, args.dssat_dir)  # 生成 Fortran 输出
 
-    exp_dir = os.path.dirname(args.srx)  # directory containing outputs
-    fort_df = read_fortran_output(exp_dir)  # load DSSAT results
+    exp_dir = os.path.dirname(args.srx)  # 输出文件所在目录
+    fort_df = read_fortran_output(exp_dir)  # 加载 DSSAT 结果
 
-    year = planting_date[:4]  # extract year for weather search
-    weather_dir = os.path.join("dssat-csm-data-develop", "Weather")  # base directory for weather files
-    pattern = f"{wsta}{year[2:]}*.WTH"  # expected weather filename pattern
-    matches = [f for f in os.listdir(weather_dir) if f.startswith(f"{wsta}{year[2:]}") and f.endswith(".WTH")]  # search for matching file
-    if not matches:  # ensure weather file exists
-        raise FileNotFoundError("Weather file not found")  # abort if missing
-    wth_path = os.path.join(weather_dir, matches[0])  # take first matching weather file
-    wth_df = read_wth_file(wth_path)  # load weather into DataFrame
+    year = planting_date[:4]  # 提取年份以检索天气数据
+    weather_dir = os.path.join("dssat-csm-data-develop", "Weather")  # 天气文件根目录
+    pattern = f"{wsta}{year[2:]}*.WTH"  # 预期天气文件名模式
+    matches = [f for f in os.listdir(weather_dir) if f.startswith(f"{wsta}{year[2:]}") and f.endswith(".WTH")]  # 查找匹配文件
+    if not matches:  # 确保天气文件存在
+        raise FileNotFoundError("Weather file not found")  # 若无则报错
+    wth_path = os.path.join(weather_dir, matches[0])  # 取第一个匹配文件
+    wth_df = read_wth_file(wth_path)  # 加载天气文件到 DataFrame
 
-    py_df = run_python_model(wth_df, planting_date)  # run our Python model
+    py_df = run_python_model(wth_df, planting_date)  # 运行 Python 模型
 
-    pdt.assert_frame_equal(py_df.head(len(fort_df)), fort_df.head(len(py_df)), check_dtype=False)  # verify outputs match
-    print("Python model output matches DSSAT output")  # inform the user
+    pdt.assert_frame_equal(py_df.head(len(fort_df)), fort_df.head(len(py_df)), check_dtype=False)  # 验证输出一致
+    print("Python model output matches DSSAT output")  # 通知用户输出一致
 
 
-if __name__ == "__main__":  # run when executed directly
-    main()  # start the program
+if __name__ == "__main__":  # 作为主程序时运行
+    main()  # 启动程序

@@ -64,13 +64,15 @@ def _thermal_time(tmin, tmax, tbase, topt, tmax_th):
     elif tavg <= topt:
         return tavg - tbase
     elif tavg <= tmax_th:
-        return topt - tbase - (tavg - topt) * ((topt - tbase) / (tmax_th - topt))
+        return (topt - tbase - (tavg - topt) * 
+                ((topt - tbase) / (tmax_th - topt)))
     else:
         return 0.0
 
 
 @njit
-def _photosynthesis(solar_radiation, tmax, tmin, rue, tbase, topt, k_light, lai, co2):
+def _photosynthesis(solar_radiation, tmax, tmin, rue, tbase, topt, 
+                    k_light, lai, co2):
     """Estimate daily photosynthesis based on temperature and light."""
     # Average temperature used for temperature response
     tavg = (tmax + tmin) / 2.0
@@ -82,7 +84,8 @@ def _photosynthesis(solar_radiation, tmax, tmin, rue, tbase, topt, k_light, lai,
         temp_effect = (tavg - tbase) / (topt - tbase)
     co2_effect = 1.0 + 0.11 * np.log(co2 / 400.0)
     light_interception = 1.0 - np.exp(-k_light * lai)
-    return solar_radiation * rue * temp_effect * co2_effect * light_interception
+    return (solar_radiation * rue * temp_effect * co2_effect * 
+            light_interception)
 
 
 @njit
@@ -100,7 +103,8 @@ def _transpiration(solar_radiation, tmax, tmin, rh, lai):
 
 
 @njit
-def _water_stress(field_capacity, wilting_point, root_depth, rainfall, transpiration):
+def _water_stress(field_capacity, wilting_point, root_depth, rainfall, 
+                  transpiration):
     """Derive a water stress factor from soil moisture balance."""
     # Total available soil water within the root zone
     available_water = (field_capacity - wilting_point) * root_depth
@@ -118,7 +122,8 @@ def _water_stress(field_capacity, wilting_point, root_depth, rainfall, transpira
 
 
 @njit
-def _maintenance_resp(leaf_biomass, stem_biomass, root_biomass, fruit_biomass, tmin, tmax):
+def _maintenance_resp(leaf_biomass, stem_biomass, root_biomass, 
+                      fruit_biomass, tmin, tmax):
     """Calculate maintenance respiration of all plant organs."""
     # Temperature dependence of respiration (Q10 model)
     tavg = (tmin + tmax) / 2.0
@@ -131,6 +136,7 @@ def _maintenance_resp(leaf_biomass, stem_biomass, root_biomass, fruit_biomass, t
     resp_fruit = fruit_biomass * 0.01 * temp_factor
     return resp_leaf + resp_stem + resp_root + resp_fruit
 
+
 class CropgroStrawberry:
     """
     A Python implementation of the CROPGRO-Strawberry crop model.
@@ -139,7 +145,8 @@ class CropgroStrawberry:
     environmental conditions, plant characteristics, and management practices.
     """
     
-    def __init__(self, latitude, planting_date, soil_properties, cultivar_params):
+    def __init__(self, latitude, planting_date, soil_properties, 
+                 cultivar_params):
         """
         Initialize the CROPGRO-Strawberry model.
         
@@ -150,7 +157,8 @@ class CropgroStrawberry:
         planting_date : str
             Planting date in format 'YYYY-MM-DD'
         soil_properties : dict
-            Dictionary containing soil properties (depth, texture, water holding capacity, etc.)
+            Dictionary containing soil properties (depth, texture, 
+            water holding capacity, etc.)
         cultivar_params : dict
             Dictionary containing cultivar-specific parameters
         """
@@ -238,7 +246,8 @@ class CropgroStrawberry:
         stages = list(self.phenology_stages.keys())
         current_index = stages.index(current_stage)
 
-        # If not at the last stage and thermal time exceeds threshold for next stage
+        # If not at the last stage and thermal time exceeds threshold 
+        # for next stage
         if current_index < len(stages) - 1:
             next_stage = stages[current_index + 1]
             if self.thermal_time >= self.phenology_stages[next_stage]:
@@ -280,7 +289,8 @@ class CropgroStrawberry:
     
     def calculate_transpiration(self, solar_radiation, tmax, tmin, rh, wind_speed):
         """
-        Calculate plant transpiration using a simplified Penman-Monteith approach.
+        Calculate plant transpiration using a simplified 
+        Penman-Monteith approach.
         
         Parameters:
         -----------
@@ -301,7 +311,13 @@ class CropgroStrawberry:
             Daily transpiration (mm)
         """
         lai = self.plant_state.leaf_area_index
-        return _transpiration(solar_radiation, tmax, tmin, rh, lai)
+        base_transpiration = _transpiration(solar_radiation, tmax, tmin, rh, lai)
+        
+        # Wind effect modifier (increases transpiration with higher wind speed)
+        wind_modifier = 1.0 + 0.1 * (wind_speed - 2.0)  # baseline wind = 2 m/s
+        wind_modifier = max(0.5, min(2.0, wind_modifier))  # constrain between 0.5-2.0
+        
+        return base_transpiration * wind_modifier
     
     def partition_biomass(self, daily_biomass):
         """
@@ -383,21 +399,30 @@ class CropgroStrawberry:
         current_root_depth = self.plant_state.root_depth
         
         if current_root_depth < max_root_depth:
-            self.plant_state.root_depth = min(current_root_depth + potential_root_growth, max_root_depth)
+            self.plant_state.root_depth = min(
+                current_root_depth + potential_root_growth, max_root_depth)
     
     def update_runners(self):
-        """Update the number of runners based on development stage and conditions."""
+        """Update the number of runners based on development stage 
+        and conditions."""
         # Runners are produced mainly during vigorous vegetative growth
-        if self.plant_state.phenological_stage in ['VEGETATIVE', 'FLORAL_INDUCTION']:
+        if self.plant_state.phenological_stage in ['VEGETATIVE', 
+                                                   'FLORAL_INDUCTION']:
             # Runner production is highest during vegetative growth
-            self.plant_state.runner_number += 0.1 * self.plant_state.crown_number
+            self.plant_state.runner_number += (
+                0.1 * self.plant_state.crown_number)
     
     def update_crowns(self):
-        """Update the number of crowns based on development stage and conditions."""
-        # Strawberry plants can branch into multiple crowns when growing actively
-        if self.plant_state.phenological_stage in ['VEGETATIVE', 'FLORAL_INDUCTION', 'FLOWERING']:
+        """Update the number of crowns based on development stage 
+        and conditions."""
+        # Strawberry plants can branch into multiple crowns when 
+        # growing actively
+        if self.plant_state.phenological_stage in ['VEGETATIVE', 
+                                                   'FLORAL_INDUCTION', 
+                                                   'FLOWERING']:
             # Crown development
-            self.plant_state.crown_number += 0.02 * self.plant_state.crown_number
+            self.plant_state.crown_number += (
+                0.02 * self.plant_state.crown_number)
     
     def update_fruits(self):
         """Update fruit number and individual fruit weight."""
@@ -406,10 +431,12 @@ class CropgroStrawberry:
         
         # New fruit initiation during flowering and fruit set
         if stage == 'FLOWERING':
-            new_fruits = self.cultivar['potential_fruits_per_crown'] * self.plant_state.crown_number * 0.1
+            new_fruits = (self.cultivar['potential_fruits_per_crown'] * 
+                          self.plant_state.crown_number * 0.1)
             self.plant_state.fruit_number += new_fruits
         elif stage == 'FRUIT_SET':
-            new_fruits = self.cultivar['potential_fruits_per_crown'] * self.plant_state.crown_number * 0.2
+            new_fruits = (self.cultivar['potential_fruits_per_crown'] * 
+                          self.plant_state.crown_number * 0.2)
             self.plant_state.fruit_number += new_fruits
     
     def simulate_day(self, weather_data):
@@ -439,7 +466,8 @@ class CropgroStrawberry:
         daylength = self.calculate_daylength(day_of_year)
         
         # Daily degree-day accumulation
-        thermal_time_today = self.calculate_thermal_time(weather_data['tmin'], weather_data['tmax'])
+        thermal_time_today = self.calculate_thermal_time(
+            weather_data['tmin'], weather_data['tmax'])
         
         # Advance phenological stage if thresholds are met
         self.update_phenology(thermal_time_today)
@@ -461,7 +489,8 @@ class CropgroStrawberry:
         )
         
         # Water stress reduces photosynthesis if rainfall is insufficient
-        water_stress = self.calculate_water_stress(weather_data['rainfall'], transpiration)
+        water_stress = self.calculate_water_stress(
+            weather_data['rainfall'], transpiration)
         
         # Reduce photosynthesis due to water stress
         photosynthesis *= (1 - water_stress)
@@ -472,7 +501,8 @@ class CropgroStrawberry:
         daily_biomass = photosynthesis / plant_density
         
         # Subtract respiration costs from produced biomass
-        maintenance_resp = self.calculate_maintenance_respiration(weather_data['tmin'], weather_data['tmax'])
+        maintenance_resp = self.calculate_maintenance_respiration(
+            weather_data['tmin'], weather_data['tmax'])
         daily_biomass = max(0, daily_biomass - maintenance_resp)
         
         # Partition biomass to plant organs
@@ -524,7 +554,8 @@ class CropgroStrawberry:
         field_capacity = self.soil['field_capacity']
         wilting_point = self.soil['wilting_point']
         root_depth = self.plant_state.root_depth / 100.0
-        return _water_stress(field_capacity, wilting_point, root_depth, rainfall, transpiration)
+        return _water_stress(field_capacity, wilting_point, root_depth, 
+                           rainfall, transpiration)
     
     def calculate_maintenance_respiration(self, tmin, tmax):
         """
@@ -590,44 +621,56 @@ class CropgroStrawberry:
     def plot_results(self):
         """Plot key simulation results."""
         if not hasattr(self, 'results_df') or len(self.results_df) == 0:
-            print("No simulation results to plot. Run simulate_growth() first.")
+            print("No simulation results to plot. "
+                  "Run simulate_growth() first.")
             return
         
         fig, axs = plt.subplots(3, 2, figsize=(14, 12))
         
         # Plot biomass
-        axs[0, 0].plot(self.results_df['dap'], self.results_df['biomass'], 'b-', label='Total')
-        axs[0, 0].plot(self.results_df['dap'], self.results_df['leaf_biomass'], 'g-', label='Leaf')
-        axs[0, 0].plot(self.results_df['dap'], self.results_df['stem_biomass'], 'k-', label='Stem')
-        axs[0, 0].plot(self.results_df['dap'], self.results_df['root_biomass'], 'r-', label='Root')
-        axs[0, 0].plot(self.results_df['dap'], self.results_df['fruit_biomass'], 'm-', label='Fruit')
+        axs[0, 0].plot(self.results_df['dap'], self.results_df['biomass'], 
+                      'b-', label='Total')
+        axs[0, 0].plot(self.results_df['dap'], 
+                      self.results_df['leaf_biomass'], 'g-', label='Leaf')
+        axs[0, 0].plot(self.results_df['dap'], 
+                      self.results_df['stem_biomass'], 'k-', label='Stem')
+        axs[0, 0].plot(self.results_df['dap'], 
+                      self.results_df['root_biomass'], 'r-', label='Root')
+        axs[0, 0].plot(self.results_df['dap'], 
+                      self.results_df['fruit_biomass'], 'm-', label='Fruit')
         axs[0, 0].set_xlabel('Days After Planting')
         axs[0, 0].set_ylabel('Biomass (g/plant)')
         axs[0, 0].set_title('Plant Biomass')
         axs[0, 0].legend()
         
         # Plot LAI
-        axs[0, 1].plot(self.results_df['dap'], self.results_df['leaf_area_index'], 'g-')
+        axs[0, 1].plot(self.results_df['dap'], 
+                      self.results_df['leaf_area_index'], 'g-')
         axs[0, 1].set_xlabel('Days After Planting')
         axs[0, 1].set_ylabel('LAI (m²/m²)')
         axs[0, 1].set_title('Leaf Area Index')
         
         # Plot fruit number
-        axs[1, 0].plot(self.results_df['dap'], self.results_df['fruit_number'], 'm-')
+        axs[1, 0].plot(self.results_df['dap'], 
+                      self.results_df['fruit_number'], 'm-')
         axs[1, 0].set_xlabel('Days After Planting')
         axs[1, 0].set_ylabel('Fruits (number/plant)')
         axs[1, 0].set_title('Fruit Number')
         
         # Plot crowns and runners
-        axs[1, 1].plot(self.results_df['dap'], self.results_df['crown_number'], 'b-', label='Crowns')
-        axs[1, 1].plot(self.results_df['dap'], self.results_df['runner_number'], 'r-', label='Runners')
+        axs[1, 1].plot(self.results_df['dap'], 
+                      self.results_df['crown_number'], 'b-', label='Crowns')
+        axs[1, 1].plot(self.results_df['dap'], 
+                      self.results_df['runner_number'], 'r-', 
+                      label='Runners')
         axs[1, 1].set_xlabel('Days After Planting')
         axs[1, 1].set_ylabel('Number per plant')
         axs[1, 1].set_title('Crowns and Runners')
         axs[1, 1].legend()
         
         # Plot water stress
-        axs[2, 0].plot(self.results_df['dap'], self.results_df['water_stress'], 'r-')
+        axs[2, 0].plot(self.results_df['dap'], 
+                      self.results_df['water_stress'], 'r-')
         axs[2, 0].set_xlabel('Days After Planting')
         axs[2, 0].set_ylabel('Water Stress (0-1)')
         axs[2, 0].set_title('Water Stress Factor')
@@ -635,7 +678,8 @@ class CropgroStrawberry:
         # Plot phenological development
         # Convert stages to numeric values for plotting
         stages = list(self.phenology_stages.keys())
-        stage_values = [stages.index(stage) for stage in self.results_df['stage']]
+        stage_values = [stages.index(stage) 
+                       for stage in self.results_df['stage']]
         
         axs[2, 1].plot(self.results_df['dap'], stage_values, 'b-')
         axs[2, 1].set_xlabel('Days After Planting')
@@ -688,7 +732,8 @@ def run_example_simulation():
     tmin = 10.0 + seasonal_component + np.random.normal(0, 2, n_days)
     
     # Solar radiation follows seasonal pattern
-    solar_rad = 15.0 + 10.0 * np.sin(2 * np.pi * (day_of_year - 172) / 365) + np.random.normal(0, 2, n_days)
+    solar_rad = (15.0 + 10.0 * np.sin(2 * np.pi * (day_of_year - 172) / 365) 
+                + np.random.normal(0, 2, n_days))
     solar_rad = np.maximum(1.0, solar_rad)  # Ensure positive radiation
     
     # Rainfall - random events
@@ -736,8 +781,10 @@ if __name__ == "__main__":
     
     # Display some results
     print(f"Final biomass: {results['biomass'].iloc[-1]:.2f} g/plant")
-    print(f"Final fruit biomass: {results['fruit_biomass'].iloc[-1]:.2f} g/plant")
-    print(f"Final leaf area index: {results['leaf_area_index'].iloc[-1]:.2f} m²/m²")
+    print(f"Final fruit biomass: "
+          f"{results['fruit_biomass'].iloc[-1]:.2f} g/plant")
+    print(f"Final leaf area index: "
+          f"{results['leaf_area_index'].iloc[-1]:.2f} m²/m²")
     print(f"Final phenological stage: {results['stage'].iloc[-1]}")
     
     # Show plot

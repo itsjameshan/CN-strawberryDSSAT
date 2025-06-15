@@ -4,42 +4,47 @@
 set -euo pipefail
 
 # Compile the Fortran sources
-=======
-# Build and install DSSAT-CSM on macOS
-set -euo pipefail
-
 cd "$(dirname "$0")/../dssat-csm-os-develop"
 mkdir -p build
 cd build
-cmake ..
+cmake -DCMAKE_INSTALL_PREFIX=$HOME/dssat ..
 make
-sudo make install
-
+make install
 
 # Install sample strawberry experiments and weather files
-sudo mkdir -p /usr/local/Strawberry
-sudo cp ../../dssat-csm-data-develop/Strawberry/* /usr/local/Strawberry/
-sudo cp ../../dssat-csm-data-develop/Weather/*.WTH /usr/local/Strawberry/
+mkdir -p $HOME/dssat/Strawberry
+cp ../../dssat-csm-data-develop/Strawberry/* $HOME/dssat/Strawberry/
+cp ../../dssat-csm-data-develop/Weather/*.WTH $HOME/dssat/Strawberry/
 
-# Create a batch file referencing the local installation
-sudo tee /usr/local/BatchFiles/STRB.V48 > /dev/null <<'BATCH'
+# Create BatchFiles directory and batch file
+mkdir -p $HOME/dssat/BatchFiles
+
+# Create symbolic link to expected DSSAT path (requires sudo)
+sudo mkdir -p /DSSAT48
+sudo ln -sf $HOME/dssat/* /DSSAT48/
+
+# Create DSSAT configuration file
+tee $HOME/dssat/DSSATPRO.L48 > /dev/null <<'CONFIG'
+*DSSAT 4.8 CONFIGURATION FILE
+! Default settings for DSSAT
+
 $BATCH(STRAWBERRY)
-! Directory    : /usr/local/Strawberry
-! Command Line : /usr/local/dscsm048 CRGRO048 B STRB.V48
+CONFIG
+
+tee $HOME/dssat/BatchFiles/STRB.V48 > /dev/null <<'BATCH'
+$BATCH(STRAWBERRY)
 @FILEX
               TRTNO     RP     SQ     OP     CO
-/usr/local/Strawberry/UFBA1401.SRX           1      1      0      1      0
-/usr/local/Strawberry/UFBA1601.SRX           1      1      0      1      0
-/usr/local/Strawberry/UFBA1601.SRX           2      1      0      1      0
-/usr/local/Strawberry/UFBA1701.SRX           1      1      0      1      0
-/usr/local/Strawberry/UFBA1701.SRX           2      1      0      1      0
-/usr/local/Strawberry/UFWM1401.SRX           1      1      0      1      0
-/usr/local/Strawberry/UFWM1401.SRX           2      1      0      1      0
+../Strawberry/UFBA1401.SRX           1      1      0      1      0
+../Strawberry/UFBA1601.SRX           1      1      0      1      0
+../Strawberry/UFBA1601.SRX           2      1      0      1      0
+../Strawberry/UFBA1701.SRX           1      1      0      1      0
+../Strawberry/UFBA1701.SRX           2      1      0      1      0
+../Strawberry/UFWM1401.SRX           1      1      0      1      0
+../Strawberry/UFWM1401.SRX           2      1      0      1      0
 BATCH
 
 # Run the strawberry model
-cd /usr/local/BatchFiles
+cd $HOME/dssat/BatchFiles
 ../dscsm048 CRGRO048 B STRB.V48
-
-=======
 

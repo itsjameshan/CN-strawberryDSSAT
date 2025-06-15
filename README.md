@@ -204,11 +204,12 @@ environment (e.g., a VM or Wine).
 ## Comparing with the Fortran DSSAT model
 ## 与Fortran DSSAT模型对比
 
-To verify the Python implementation against the official Fortran code, use `compare_with_fortran.py`. The script requires a compiled DSSAT installation containing `Utilities/run_dssat`.
-要验证Python实现与官方Fortran代码的一致性，可使用 `compare_with_fortran.py`。此脚本需要已编译好的DSSAT，并包含 `Utilities/run_dssat`。
+To verify the Python implementation against the official Fortran code, use `compare_with_fortran.py` or `validate_models.py`. The scripts require a compiled DSSAT installation containing `Utilities/run_dssat`.
+要验证Python实现与官方Fortran代码的一致性，可使用 `compare_with_fortran.py` 或 `validate_models.py`。此脚本需要已编译好的DSSAT，并包含 `Utilities/run_dssat`。
 
 ```bash
-python compare_with_fortran.py path/to/UFBA1401.SRX --dssat-dir dssat-csm-os-develop
+
+python compare_with_fortran.py dssat-csm-data-develop/Strawberry/UFBA1401.SRX --dssat-dir dssat-csm-os-develop
 ```
 
 ## Automated validation
@@ -218,7 +219,7 @@ Use `validate_models.py` to automatically run the official DSSAT executable and 
 使用 `validate_models.py` 可自动运行官方DSSAT和Python实现，并对比其输出。脚本会生成简要报告，列出每个共有变量的最大差异及结果是否在设定容差范围内。
 
 ```bash
-python validate_models.py path/to/UFBA1601.SRX --dssat-dir dssat-csm-os-develop --tolerance 1.0
+python validate_models.py ./dssat-csm-data-develop/Strawberry/UFBA1601.SRX --dssat-dir dssat-csm-os-develop --tolerance 1.0
 ```
 
 See [docs/student_guide.md](docs/student_guide.md) for a concise, step-by-step guide to running the Python model and comparing it with the official DSSAT code.

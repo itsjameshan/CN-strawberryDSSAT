@@ -140,11 +140,7 @@ To verify the Python implementation against the official Fortran code, use `vali
 ```bash
 
 python compare_with_fortran.py dssat-csm-data-develop/Strawberry/UFBA1401.SRX --dssat-dir dssat-csm-os-develop
-
-python validate_models.py ./dssat-csm-data-develop/Strawberry/UFBA1401.SRX --dssat-dir dssat-csm-os-develop --tolerance 1.0
 ```
-
-
 
 ## Automated validation
 

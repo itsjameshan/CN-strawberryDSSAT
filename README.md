@@ -135,10 +135,13 @@ environment (e.g., a VM or Wine).
 
 ## Comparing with the Fortran DSSAT model
 
-To verify the Python implementation against the official Fortran code, use `compare_with_fortran.py`. The script requires a compiled DSSAT installation containing `Utilities/run_dssat`.
+To verify the Python implementation against the official Fortran code, use `validate_models.py`. The script requires a compiled DSSAT installation containing `Utilities/run_dssat`.
 
 ```bash
+
 python compare_with_fortran.py dssat-csm-data-develop/Strawberry/UFBA1401.SRX --dssat-dir dssat-csm-os-develop
+
+python validate_models.py ./dssat-csm-data-develop/Strawberry/UFBA1401.SRX --dssat-dir dssat-csm-os-develop --tolerance 1.0
 ```
 
 

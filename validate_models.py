@@ -59,12 +59,12 @@ def read_wth_file(path: str) -> pd.DataFrame:
         date = parse_dssat_date(code)  # convert to YYYY-MM-DD
         rec = {
             "date": date,
-            "tmax": float(parts[indices.get("TMAX")]),  # daily max temperature
-            "tmin": float(parts[indices.get("TMIN")]),  # daily min temperature
-            "solar_radiation": float(parts[indices.get("SRAD")]),  # radiation MJ/m^2
-            "rainfall": float(parts[indices.get("RAIN")]) if "RAIN" in indices else 0.0,  # precipitation
-            "rh": float(parts[indices.get("RHUM")]) if "RHUM" in indices else 70.0,  # relative humidity
-            "wind_speed": float(parts[indices.get("WIND")]) if "WIND" in indices else 2.0,  # wind speed m/s
+            "tmax": float(parts[indices["TMAX"]]),  # daily max temperature
+            "tmin": float(parts[indices["TMIN"]]),  # daily min temperature
+            "solar_radiation": float(parts[indices["SRAD"]]),  # radiation MJ/m^2
+            "rainfall": float(parts[indices["RAIN"]]) if "RAIN" in indices and len(parts) > indices["RAIN"] else 0.0,  # precipitation
+            "rh": float(parts[indices["RHUM"]]) if "RHUM" in indices and len(parts) > indices["RHUM"] else 70.0,  # relative humidity
+            "wind_speed": float(parts[indices["WIND"]]) if "WIND" in indices and len(parts) > indices["WIND"] else 2.0,  # wind speed m/s
         }
         records.append(rec)  # store this day's data
     return pd.DataFrame(records)  # assemble DataFrame
@@ -72,7 +72,7 @@ def read_wth_file(path: str) -> pd.DataFrame:
 
 def run_dssat(srx_path: str, dssat_dir: str):
     """Run the official DSSAT model using the helper utility."""
-    util = Path(dssat_dir) / "Utilities" / "run_dssat"  # path to DSSAT runner
+    util = Path(dssat_dir).resolve() / "Utilities" / "run_dssat"  # absolute path to DSSAT runner
     if not util.exists():  # validate existence
         raise FileNotFoundError(f"run_dssat not found at {util}")
     subprocess.run(

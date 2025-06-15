@@ -1,0 +1,34 @@
+*Soil Carbon Balance
+
+*DSSAT Cropping System Model Ver. 4.8.5.017 pre-release  JUN 12, 2025 18:04:53
+
+*RUN   1        : Radiance                  CRGRO048 UFBA1401    1
+ MODEL          : CRGRO048 - Strawberry
+ EXPERIMENT     : UFBA1401 SR 2014 BALM STRAWBERRY VARIETY TRIAL
+ DATA PATH      :
+ TREATMENT  1   : Radiance                  CRGRO048
+  
+
+! SOIL C BALANCE                                  Initial               Final
+! all units in kg[C]/ha                          Year/DOY            Year/DOY
+!                                                2014-273            2014-273
+! SOIL & SURFACE ORGANIC C
+!   Soil Organic C                               25593.00            25520.50
+!   Surface Organic C                                0.00                0.00
+!   Soil Litter C                                    0.00              165.78
+!   Surface Litter C                                 0.00              165.63
+!   Soil methane C stored                            0.00                0.00
+!                                                --------            --------
+! TOTAL C in Soil and Surface Layers             25593.00            25851.92
+
+! ADDITIONS & REMOVALS:                         Additions            Removals
+!   Harvest residues from prev crop                  0.00
+!   Organic matter applications                      0.00
+!   Senesced plant tissue                          331.41
+!   CO2-C losses                                                        72.50
+!   CH4-C losses                                                         0.00
+
+! SOIL C BALANCE
+!   =      FinalC -    InitialC - Additions +  Removals
+!   =    25851.92 -    25593.00 -    331.41 +     72.50 =               0.000
+

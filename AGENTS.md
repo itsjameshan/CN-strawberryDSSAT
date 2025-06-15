@@ -24,8 +24,8 @@ Use the bundled synthetic weather data or adjust the script for your dataset.
 
 ## Comparing outputs
 
-- `python compare_with_fortran.py path/to/experiment.SRX` checks the Python results against the Fortran model.
-- `python validate_models.py path/to/experiment.SRX --tolerance 1.0` generates a small report of differences.
+- `python validate_models.py ./dssat-csm-data-develop/Strawberry/UFBA1401.SRX --dssat-dir dssat-csm-os-develop --tolerance 1.0` checks the Python results against the Fortran model.
+- `python validate_models.py ./dssat-csm-data-develop/Strawberry/UFBA1401.SRX --dssat-dir dssat-csm-os-develop --tolerance 1.0` generates a small report of differences.
 
 ## Tests
 

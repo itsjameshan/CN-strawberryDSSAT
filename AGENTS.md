@@ -40,15 +40,9 @@ Use the bundled synthetic weather data or adjust the script for your dataset.
 ## Comparing outputs
 ## 输出对比
 
-<<<<<<< HEAD
-- `python compare_with_fortran.py path/to/experiment.SRX` checks the Python results against the Fortran model.
-- `python compare_with_fortran.py path/to/experiment.SRX` 检查 Python 结果与 Fortran 模型的对比情况。
-- `python validate_models.py path/to/experiment.SRX --tolerance 1.0` generates a small report of differences.
-- `python validate_models.py path/to/experiment.SRX --tolerance 1.0` 生成差异的小报告。
-=======
-- `python validate_models.py ./dssat-csm-data-develop/Strawberry/UFBA1401.SRX --dssat-dir dssat-csm-os-develop --tolerance 1.0` checks the Python results against the Fortran model.
-- `python validate_models.py ./dssat-csm-data-develop/Strawberry/UFBA1401.SRX --dssat-dir dssat-csm-os-develop --tolerance 1.0` generates a small report of differences.
->>>>>>> upstream/main
+- `python validate_models.py ./dssat-csm-data-develop/Strawberry/UFBA1401.SRX --dssat-dir dssat-csm-os-develop --tolerance 1.0` checks the Python results against the Fortran model. 检查 Python 结果与 Fortran 模型的对比情况。
+- `python validate_models.py ./dssat-csm-data-develop/Strawberry/UFBA1401.SRX --dssat-dir dssat-csm-os-develop --tolerance 1.0` generates a small report of differences. 生成差异的小报告。
+
 
 ## Tests
 ## 测试

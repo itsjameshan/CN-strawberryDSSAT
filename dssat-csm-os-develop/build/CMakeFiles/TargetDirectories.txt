@@ -1,0 +1,7 @@
+/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/dscsm048.dir
+/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/edit_cache.dir
+/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/rebuild_cache.dir
+/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/list_install_components.dir
+/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/install.dir
+/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/install/local.dir
+/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/install/strip.dir

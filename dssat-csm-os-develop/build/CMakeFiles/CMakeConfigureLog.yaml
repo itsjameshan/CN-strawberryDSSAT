@@ -1,0 +1,1473 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineSystem.cmake:205 (message)"
+      - "CMakeLists.txt:16 (PROJECT)"
+    message: |
+      The system is: Darwin - 24.5.0 - arm64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineFortranCompiler.cmake:190 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:16 (PROJECT)"
+    message: |
+      Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" succeeded.
+      Compiler: /opt/homebrew/bin/gfortran 
+      Build flags: 
+      Id flags: -v 
+      
+      The output was:
+      0
+      Driving: /opt/homebrew/bin/gfortran -v CMakeFortranCompilerId.F -mmacosx-version-min=15.0.0 -asm_macosx_version_min=15.0 -nodefaultexport -l gfortran
+      Using built-in specs.
+      COLLECT_GCC=/opt/homebrew/bin/gfortran
+      COLLECT_LTO_WRAPPER=/opt/homebrew/Cellar/gcc/15.1.0/bin/../libexec/gcc/aarch64-apple-darwin24/15/lto-wrapper
+      Target: aarch64-apple-darwin24
+      Configured with: ../configure --prefix=/opt/homebrew/opt/gcc --libdir=/opt/homebrew/opt/gcc/lib/gcc/current --disable-nls --enable-checking=release --with-gcc-major-version-only --enable-languages=c,c++,objc,obj-c++,fortran --program-suffix=-15 --with-gmp=/opt/homebrew/opt/gmp --with-mpfr=/opt/homebrew/opt/mpfr --with-mpc=/opt/homebrew/opt/libmpc --with-isl=/opt/homebrew/opt/isl --with-zstd=/opt/homebrew/opt/zstd --with-pkgversion='Homebrew GCC 15.1.0' --with-bugurl=https://github.com/Homebrew/homebrew-core/issues --with-system-zlib --build=aarch64-apple-darwin24 --with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk
+      Thread model: posix
+      Supported LTO compression algorithms: zlib zstd
+      gcc version 15.1.0 (Homebrew GCC 15.1.0) 
+      COLLECT_GCC_OPTIONS='-v' '-mmacosx-version-min=15.0.0' '-asm_macosx_version_min=15.0' '-nodefaultexport' '-mcpu=apple-m1' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'a-'
+       /opt/homebrew/Cellar/gcc/15.1.0/bin/../libexec/gcc/aarch64-apple-darwin24/15/f951 CMakeFortranCompilerId.F -ffixed-form -cpp=/var/folders/8n/yvkbz28j3y1bs6ysnxhr5vhc0000gn/T//cclDHWiF.fi -quiet -v -iprefix /opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/ -D__DYNAMIC__ CMakeFortranCompilerId.F -fPIC -quiet -dumpdir a- -dumpbase CMakeFortranCompilerId.F -dumpbase-ext .F -mmacosx-version-min=15.0.0 -mcpu=apple-m1 -mlittle-endian -mabi=lp64 -version -fintrinsic-modules-path /opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/finclude -o /var/folders/8n/yvkbz28j3y1bs6ysnxhr5vhc0000gn/T//ccpVSjdG.s
+      GNU Fortran (Homebrew GCC 15.1.0) version 15.1.0 (aarch64-apple-darwin24)
+      	compiled by GNU C version 15.1.0, GMP version 6.3.0, MPFR version 4.2.2, MPC version 1.3.1, isl version isl-0.27-GMP
+      
+      GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+      ignoring nonexistent directory "/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/../../../../../../aarch64-apple-darwin24/include"
+      ignoring duplicate directory "/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/../../../../lib/gcc/current/gcc/aarch64-apple-darwin24/15/include"
+      ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/local/include"
+      ignoring duplicate directory "/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/../../../../lib/gcc/current/gcc/aarch64-apple-darwin24/15/include-fixed"
+      ignoring nonexistent directory "/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/../../../../lib/gcc/current/gcc/aarch64-apple-darwin24/15/../../../../../../aarch64-apple-darwin24/include"
+      #include "..." search starts here:
+      #include <...> search starts here:
+       /opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/finclude
+       /opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/include
+       /opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/include-fixed
+       /Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/include
+      End of search list.
+      COLLECT_GCC_OPTIONS='-v' '-mmacosx-version-min=15.0.0'  '-nodefaultexport' '-mcpu=apple-m1' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'a-'
+       as -arch arm64 -v -mmacosx-version-min=15.0 -o /var/folders/8n/yvkbz28j3y1bs6ysnxhr5vhc0000gn/T//ccOh0myh.o /var/folders/8n/yvkbz28j3y1bs6ysnxhr5vhc0000gn/T//ccpVSjdG.s
+      Apple clang version 17.0.0 (clang-1700.0.13.5)
+      Target: arm64-apple-darwin24.5.0
+      Thread model: posix
+      InstalledDir: /Library/Developer/CommandLineTools/usr/bin
+       "/Library/Developer/CommandLineTools/usr/bin/clang" -cc1as -triple arm64-apple-macosx15.0.0 -target-sdk-version=15.5 -filetype obj -main-file-name ccpVSjdG.s -target-cpu apple-m1 -target-feature +zcm -target-feature +zcz -target-feature +v8.5a -target-feature +aes -target-feature +altnzcv -target-feature +ccdp -target-feature +complxnum -target-feature +crc -target-feature +dotprod -target-feature +fp-armv8 -target-feature +fp16fml -target-feature +fptoint -target-feature +fullfp16 -target-feature +jsconv -target-feature +lse -target-feature +neon -target-feature +pauth -target-feature +perfmon -target-feature +predres -target-feature +ras -target-feature +rcpc -target-feature +rdm -target-feature +sb -target-feature +sha2 -target-feature +sha3 -target-feature +specrestrict -target-feature +ssbs "-fdebug-compilation-dir=/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/4.0.2/CompilerIdFortran" -dwarf-debug-producer "Apple clang version 17.0.0 (clang-1700.0.13.5)" -dwarf-version=5 -mrelocation-model pic -o /var/folders/8n/yvkbz28j3y1bs6ysnxhr5vhc0000gn/T//ccOh0myh.o /var/folders/8n/yvkbz28j3y1bs6ysnxhr5vhc0000gn/T//ccpVSjdG.s
+      Reading specs from /opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/../../../libgfortran.spec
+      rename spec lib to liborig
+      COLLECT_GCC_OPTIONS='-v' '-mmacosx-version-min=15.0.0'  '-nodefaultexport' '-mcpu=apple-m1' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'a-'
+      COMPILER_PATH=/opt/homebrew/Cellar/gcc/15.1.0/bin/../libexec/gcc/aarch64-apple-darwin24/15/:/opt/homebrew/Cellar/gcc/15.1.0/bin/../libexec/gcc/
+      LIBRARY_PATH=/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/:/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/:/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/../../../
+      COLLECT_GCC_OPTIONS='-v' '-mmacosx-version-min=15.0.0'  '-nodefaultexport' '-mcpu=apple-m1' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'a.'
+       /opt/homebrew/Cellar/gcc/15.1.0/bin/../libexec/gcc/aarch64-apple-darwin24/15/collect2 -demangle -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/ -dynamic -arch arm64 -macos_version_min 15.0.0 -o a.out -L/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15 -L/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc -L/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/../../.. -lemutls_w -lheapt_w /var/folders/8n/yvkbz28j3y1bs6ysnxhr5vhc0000gn/T//ccOh0myh.o -lgfortran -lgcc -lquadmath -lSystem -no_compact_unwind -rpath @loader_path -rpath /opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15 -rpath /opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc -rpath /opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current
+      
+      
+      Compilation of the Fortran compiler identification source "CMakeFortranCompilerId.F" produced "a.out"
+      
+      The Fortran compiler identification is GNU, found in:
+        /Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/4.0.2/CompilerIdFortran/a.out
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestFortranCompiler.cmake:20 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:16 (PROJECT)"
+    checks:
+      - "Detecting Fortran compiler ABI info"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeScratch/TryCompile-5hVKRd"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeScratch/TryCompile-5hVKRd"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "CMAKE_Fortran_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeScratch/TryCompile-5hVKRd'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_19064/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_19064.dir/build.make CMakeFiles/cmTC_19064.dir/build
+        Building Fortran object CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.o
+        /opt/homebrew/bin/gfortran   -v -Wl,-v -c /opt/homebrew/share/cmake/Modules/CMakeFortranCompilerABI.F90 -o CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.o
+        Using built-in specs.
+        COLLECT_GCC=/opt/homebrew/bin/gfortran
+        Target: aarch64-apple-darwin24
+        Configured with: ../configure --prefix=/opt/homebrew/opt/gcc --libdir=/opt/homebrew/opt/gcc/lib/gcc/current --disable-nls --enable-checking=release --with-gcc-major-version-only --enable-languages=c,c++,objc,obj-c++,fortran --program-suffix=-15 --with-gmp=/opt/homebrew/opt/gmp --with-mpfr=/opt/homebrew/opt/mpfr --with-mpc=/opt/homebrew/opt/libmpc --with-isl=/opt/homebrew/opt/isl --with-zstd=/opt/homebrew/opt/zstd --with-pkgversion='Homebrew GCC 15.1.0' --with-bugurl=https://github.com/Homebrew/homebrew-core/issues --with-system-zlib --build=aarch64-apple-darwin24 --with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 15.1.0 (Homebrew GCC 15.1.0) 
+        COLLECT_GCC_OPTIONS='-v' '-c' '-o' 'CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.o' '-mmacosx-version-min=15.0.0' '-asm_macosx_version_min=15.0' '-nodefaultexport' '-mcpu=apple-m1' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_19064.dir/'
+         /opt/homebrew/Cellar/gcc/15.1.0/bin/../libexec/gcc/aarch64-apple-darwin24/15/f951 /opt/homebrew/share/cmake/Modules/CMakeFortranCompilerABI.F90 -cpp=/var/folders/8n/yvkbz28j3y1bs6ysnxhr5vhc0000gn/T//ccBWJKSj.fii -quiet -v -iprefix /opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/ -D__DYNAMIC__ /opt/homebrew/share/cmake/Modules/CMakeFortranCompilerABI.F90 -fPIC -quiet -dumpdir CMakeFiles/cmTC_19064.dir/ -dumpbase CMakeFortranCompilerABI.F90.F90 -dumpbase-ext .F90 -mmacosx-version-min=15.0.0 -mcpu=apple-m1 -mlittle-endian -mabi=lp64 -version -fintrinsic-modules-path /opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/finclude -o /var/folders/8n/yvkbz28j3y1bs6ysnxhr5vhc0000gn/T//ccxe15gN.s
+        GNU Fortran (Homebrew GCC 15.1.0) version 15.1.0 (aarch64-apple-darwin24)
+        	compiled by GNU C version 15.1.0, GMP version 6.3.0, MPFR version 4.2.2, MPC version 1.3.1, isl version isl-0.27-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring nonexistent directory "/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/../../../../../../aarch64-apple-darwin24/include"
+        ignoring duplicate directory "/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/../../../../lib/gcc/current/gcc/aarch64-apple-darwin24/15/include"
+        ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/local/include"
+        ignoring duplicate directory "/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/../../../../lib/gcc/current/gcc/aarch64-apple-darwin24/15/include-fixed"
+        ignoring nonexistent directory "/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/../../../../lib/gcc/current/gcc/aarch64-apple-darwin24/15/../../../../../../aarch64-apple-darwin24/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/finclude
+         /opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/include
+         /opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/include-fixed
+         /Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/include
+        End of search list.
+        COLLECT_GCC_OPTIONS='-v' '-c' '-o' 'CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.o' '-mmacosx-version-min=15.0.0'  '-nodefaultexport' '-mcpu=apple-m1' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_19064.dir/'
+         as -arch arm64 -v -mmacosx-version-min=15.0 -o CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.o /var/folders/8n/yvkbz28j3y1bs6ysnxhr5vhc0000gn/T//ccxe15gN.s
+        Apple clang version 17.0.0 (clang-1700.0.13.5)
+        Target: arm64-apple-darwin24.5.0
+        Thread model: posix
+        InstalledDir: /Library/Developer/CommandLineTools/usr/bin
+         "/Library/Developer/CommandLineTools/usr/bin/clang" -cc1as -triple arm64-apple-macosx15.0.0 -target-sdk-version=15.5 -filetype obj -main-file-name ccxe15gN.s -target-cpu apple-m1 -target-feature +zcm -target-feature +zcz -target-feature +v8.5a -target-feature +aes -target-feature +altnzcv -target-feature +ccdp -target-feature +complxnum -target-feature +crc -target-feature +dotprod -target-feature +fp-armv8 -target-feature +fp16fml -target-feature +fptoint -target-feature +fullfp16 -target-feature +jsconv -target-feature +lse -target-feature +neon -target-feature +pauth -target-feature +perfmon -target-feature +predres -target-feature +ras -target-feature +rcpc -target-feature +rdm -target-feature +sb -target-feature +sha2 -target-feature +sha3 -target-feature +specrestrict -target-feature +ssbs "-fdebug-compilation-dir=/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeScratch/TryCompile-5hVKRd" -dwarf-debug-producer "Apple clang version 17.0.0 (clang-1700.0.13.5)" -dwarf-version=5 -mrelocation-model pic -o CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.o /var/folders/8n/yvkbz28j3y1bs6ysnxhr5vhc0000gn/T//ccxe15gN.s
+        COMPILER_PATH=/opt/homebrew/Cellar/gcc/15.1.0/bin/../libexec/gcc/aarch64-apple-darwin24/15/:/opt/homebrew/Cellar/gcc/15.1.0/bin/../libexec/gcc/
+        LIBRARY_PATH=/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/:/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/:/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/../../../
+        COLLECT_GCC_OPTIONS='-v' '-c' '-o' 'CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.o' '-mmacosx-version-min=15.0.0'  '-nodefaultexport' '-mcpu=apple-m1' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.'
+        Linking Fortran executable cmTC_19064
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_19064.dir/link.txt --verbose=1
+        Driving: /opt/homebrew/bin/gfortran -v -Wl,-v CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.o -o cmTC_19064 -mmacosx-version-min=15.0.0 -asm_macosx_version_min=15.0 -nodefaultexport -l gfortran
+        Using built-in specs.
+        COLLECT_GCC=/opt/homebrew/bin/gfortran
+        COLLECT_LTO_WRAPPER=/opt/homebrew/Cellar/gcc/15.1.0/bin/../libexec/gcc/aarch64-apple-darwin24/15/lto-wrapper
+        Target: aarch64-apple-darwin24
+        Configured with: ../configure --prefix=/opt/homebrew/opt/gcc --libdir=/opt/homebrew/opt/gcc/lib/gcc/current --disable-nls --enable-checking=release --with-gcc-major-version-only --enable-languages=c,c++,objc,obj-c++,fortran --program-suffix=-15 --with-gmp=/opt/homebrew/opt/gmp --with-mpfr=/opt/homebrew/opt/mpfr --with-mpc=/opt/homebrew/opt/libmpc --with-isl=/opt/homebrew/opt/isl --with-zstd=/opt/homebrew/opt/zstd --with-pkgversion='Homebrew GCC 15.1.0' --with-bugurl=https://github.com/Homebrew/homebrew-core/issues --with-system-zlib --build=aarch64-apple-darwin24 --with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 15.1.0 (Homebrew GCC 15.1.0) 
+        Reading specs from /opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/../../../libgfortran.spec
+        rename spec lib to liborig
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_19064' '-mmacosx-version-min=15.0.0' '-asm_macosx_version_min=15.0' '-nodefaultexport' '-mcpu=apple-m1' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'cmTC_19064-'
+        COMPILER_PATH=/opt/homebrew/Cellar/gcc/15.1.0/bin/../libexec/gcc/aarch64-apple-darwin24/15/:/opt/homebrew/Cellar/gcc/15.1.0/bin/../libexec/gcc/
+        LIBRARY_PATH=/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/:/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/:/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/../../../
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_19064' '-mmacosx-version-min=15.0.0' '-asm_macosx_version_min=15.0' '-nodefaultexport' '-mcpu=apple-m1' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'cmTC_19064.'
+         /opt/homebrew/Cellar/gcc/15.1.0/bin/../libexec/gcc/aarch64-apple-darwin24/15/collect2 -demangle -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/ -dynamic -arch arm64 -macos_version_min 15.0.0 -o cmTC_19064 -L/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15 -L/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc -L/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/../../.. -lemutls_w -lheapt_w -v CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.o -lgfortran -lgcc -lquadmath -lSystem -no_compact_unwind -rpath @loader_path -rpath /opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15 -rpath /opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc -rpath /opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current
+        collect2 version 15.1.0
+        /usr/bin/ld -demangle -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/ -dynamic -arch arm64 -macos_version_min 15.0.0 -o cmTC_19064 -L/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15 -L/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc -L/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/../../.. -lemutls_w -lheapt_w -v CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.o -lgfortran -lgcc -lquadmath -lSystem -no_compact_unwind -rpath @loader_path -rpath /opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15 -rpath /opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc -rpath /opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current
+        @(#)PROGRAM:ld PROJECT:ld-1167.5
+        BUILD 01:45:05 Apr 30 2025
+        configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em
+        will use ld-classic for: armv6 armv7 armv7s i386 armv6m armv7k armv7m armv7em
+        LTO support using: LLVM version 17.0.0 (static support for 29, runtime is 29)
+        TAPI support using: Apple TAPI version 17.0.0 (tapi-1700.0.3.5)
+        Library search paths:
+        	/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15
+        	/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc
+        	/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current
+        	/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/lib
+        	/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/lib/swift
+        Framework search paths:
+        	/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/System/Library/Frameworks
+        /opt/homebrew/bin/gfortran  -v -Wl,-v CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.o -o cmTC_19064
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:122 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestFortranCompiler.cmake:20 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:16 (PROJECT)"
+    message: |
+      Effective list of requested architectures (possibly empty)  : ""
+      Effective list of architectures found in the ABI info binary: "arm64"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:191 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestFortranCompiler.cmake:20 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:16 (PROJECT)"
+    message: |
+      Parsed Fortran implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/finclude]
+          add: [/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/include]
+          add: [/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/include-fixed]
+          add: [/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/include]
+        end of search list found
+        collapse include dir [/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/finclude] ==> [/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15/finclude]
+        collapse include dir [/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/include] ==> [/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15/include]
+        collapse include dir [/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/include-fixed] ==> [/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15/include-fixed]
+        collapse include dir [/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/include] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/include]
+        implicit include dirs: [/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15/finclude;/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15/include;/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15/include-fixed;/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:227 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestFortranCompiler.cmake:20 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:16 (PROJECT)"
+    message: |
+      Parsed Fortran implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
+        ignore line: [Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeScratch/TryCompile-5hVKRd']
+        ignore line: []
+        ignore line: [Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_19064/fast]
+        ignore line: [/Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_19064.dir/build.make CMakeFiles/cmTC_19064.dir/build]
+        ignore line: [Building Fortran object CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.o]
+        ignore line: [/opt/homebrew/bin/gfortran   -v -Wl -v -c /opt/homebrew/share/cmake/Modules/CMakeFortranCompilerABI.F90 -o CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.o]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/opt/homebrew/bin/gfortran]
+        ignore line: [Target: aarch64-apple-darwin24]
+        ignore line: [Configured with: ../configure --prefix=/opt/homebrew/opt/gcc --libdir=/opt/homebrew/opt/gcc/lib/gcc/current --disable-nls --enable-checking=release --with-gcc-major-version-only --enable-languages=c c++ objc obj-c++ fortran --program-suffix=-15 --with-gmp=/opt/homebrew/opt/gmp --with-mpfr=/opt/homebrew/opt/mpfr --with-mpc=/opt/homebrew/opt/libmpc --with-isl=/opt/homebrew/opt/isl --with-zstd=/opt/homebrew/opt/zstd --with-pkgversion='Homebrew GCC 15.1.0' --with-bugurl=https://github.com/Homebrew/homebrew-core/issues --with-system-zlib --build=aarch64-apple-darwin24 --with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 15.1.0 (Homebrew GCC 15.1.0) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-c' '-o' 'CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.o' '-mmacosx-version-min=15.0.0' '-asm_macosx_version_min=15.0' '-nodefaultexport' '-mcpu=apple-m1' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_19064.dir/']
+        ignore line: [ /opt/homebrew/Cellar/gcc/15.1.0/bin/../libexec/gcc/aarch64-apple-darwin24/15/f951 /opt/homebrew/share/cmake/Modules/CMakeFortranCompilerABI.F90 -cpp=/var/folders/8n/yvkbz28j3y1bs6ysnxhr5vhc0000gn/T//ccBWJKSj.fii -quiet -v -iprefix /opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/ -D__DYNAMIC__ /opt/homebrew/share/cmake/Modules/CMakeFortranCompilerABI.F90 -fPIC -quiet -dumpdir CMakeFiles/cmTC_19064.dir/ -dumpbase CMakeFortranCompilerABI.F90.F90 -dumpbase-ext .F90 -mmacosx-version-min=15.0.0 -mcpu=apple-m1 -mlittle-endian -mabi=lp64 -version -fintrinsic-modules-path /opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/finclude -o /var/folders/8n/yvkbz28j3y1bs6ysnxhr5vhc0000gn/T//ccxe15gN.s]
+        ignore line: [GNU Fortran (Homebrew GCC 15.1.0) version 15.1.0 (aarch64-apple-darwin24)]
+        ignore line: [	compiled by GNU C version 15.1.0  GMP version 6.3.0  MPFR version 4.2.2  MPC version 1.3.1  isl version isl-0.27-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring nonexistent directory "/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/../../../../../../aarch64-apple-darwin24/include"]
+        ignore line: [ignoring duplicate directory "/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/../../../../lib/gcc/current/gcc/aarch64-apple-darwin24/15/include"]
+        ignore line: [ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/local/include"]
+        ignore line: [ignoring duplicate directory "/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/../../../../lib/gcc/current/gcc/aarch64-apple-darwin24/15/include-fixed"]
+        ignore line: [ignoring nonexistent directory "/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/../../../../lib/gcc/current/gcc/aarch64-apple-darwin24/15/../../../../../../aarch64-apple-darwin24/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/finclude]
+        ignore line: [ /opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/include]
+        ignore line: [ /opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/include-fixed]
+        ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/include]
+        ignore line: [End of search list.]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-c' '-o' 'CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.o' '-mmacosx-version-min=15.0.0'  '-nodefaultexport' '-mcpu=apple-m1' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_19064.dir/']
+        ignore line: [ as -arch arm64 -v -mmacosx-version-min=15.0 -o CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.o /var/folders/8n/yvkbz28j3y1bs6ysnxhr5vhc0000gn/T//ccxe15gN.s]
+        ignore line: [Apple clang version 17.0.0 (clang-1700.0.13.5)]
+        ignore line: [Target: arm64-apple-darwin24.5.0]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /Library/Developer/CommandLineTools/usr/bin]
+        ignore line: [ "/Library/Developer/CommandLineTools/usr/bin/clang" -cc1as -triple arm64-apple-macosx15.0.0 -target-sdk-version=15.5 -filetype obj -main-file-name ccxe15gN.s -target-cpu apple-m1 -target-feature +zcm -target-feature +zcz -target-feature +v8.5a -target-feature +aes -target-feature +altnzcv -target-feature +ccdp -target-feature +complxnum -target-feature +crc -target-feature +dotprod -target-feature +fp-armv8 -target-feature +fp16fml -target-feature +fptoint -target-feature +fullfp16 -target-feature +jsconv -target-feature +lse -target-feature +neon -target-feature +pauth -target-feature +perfmon -target-feature +predres -target-feature +ras -target-feature +rcpc -target-feature +rdm -target-feature +sb -target-feature +sha2 -target-feature +sha3 -target-feature +specrestrict -target-feature +ssbs "-fdebug-compilation-dir=/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeScratch/TryCompile-5hVKRd" -dwarf-debug-producer "Apple clang version 17.0.0 (clang-1700.0.13.5)" -dwarf-version=5 -mrelocation-model pic -o CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.o /var/folders/8n/yvkbz28j3y1bs6ysnxhr5vhc0000gn/T//ccxe15gN.s]
+        ignore line: [COMPILER_PATH=/opt/homebrew/Cellar/gcc/15.1.0/bin/../libexec/gcc/aarch64-apple-darwin24/15/:/opt/homebrew/Cellar/gcc/15.1.0/bin/../libexec/gcc/]
+        ignore line: [LIBRARY_PATH=/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/:/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/:/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/../../../]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-c' '-o' 'CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.o' '-mmacosx-version-min=15.0.0'  '-nodefaultexport' '-mcpu=apple-m1' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.']
+        ignore line: [Linking Fortran executable cmTC_19064]
+        ignore line: [/opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_19064.dir/link.txt --verbose=1]
+        ignore line: [Driving: /opt/homebrew/bin/gfortran -v -Wl -v CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.o -o cmTC_19064 -mmacosx-version-min=15.0.0 -asm_macosx_version_min=15.0 -nodefaultexport -l gfortran]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/opt/homebrew/bin/gfortran]
+        ignore line: [COLLECT_LTO_WRAPPER=/opt/homebrew/Cellar/gcc/15.1.0/bin/../libexec/gcc/aarch64-apple-darwin24/15/lto-wrapper]
+        ignore line: [Target: aarch64-apple-darwin24]
+        ignore line: [Configured with: ../configure --prefix=/opt/homebrew/opt/gcc --libdir=/opt/homebrew/opt/gcc/lib/gcc/current --disable-nls --enable-checking=release --with-gcc-major-version-only --enable-languages=c c++ objc obj-c++ fortran --program-suffix=-15 --with-gmp=/opt/homebrew/opt/gmp --with-mpfr=/opt/homebrew/opt/mpfr --with-mpc=/opt/homebrew/opt/libmpc --with-isl=/opt/homebrew/opt/isl --with-zstd=/opt/homebrew/opt/zstd --with-pkgversion='Homebrew GCC 15.1.0' --with-bugurl=https://github.com/Homebrew/homebrew-core/issues --with-system-zlib --build=aarch64-apple-darwin24 --with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 15.1.0 (Homebrew GCC 15.1.0) ]
+        ignore line: [Reading specs from /opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/../../../libgfortran.spec]
+        ignore line: [rename spec lib to liborig]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_19064' '-mmacosx-version-min=15.0.0' '-asm_macosx_version_min=15.0' '-nodefaultexport' '-mcpu=apple-m1' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'cmTC_19064-']
+        ignore line: [COMPILER_PATH=/opt/homebrew/Cellar/gcc/15.1.0/bin/../libexec/gcc/aarch64-apple-darwin24/15/:/opt/homebrew/Cellar/gcc/15.1.0/bin/../libexec/gcc/]
+        ignore line: [LIBRARY_PATH=/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/:/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/:/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/../../../]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_19064' '-mmacosx-version-min=15.0.0' '-asm_macosx_version_min=15.0' '-nodefaultexport' '-mcpu=apple-m1' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'cmTC_19064.']
+        link line: [ /opt/homebrew/Cellar/gcc/15.1.0/bin/../libexec/gcc/aarch64-apple-darwin24/15/collect2 -demangle -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/ -dynamic -arch arm64 -macos_version_min 15.0.0 -o cmTC_19064 -L/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15 -L/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc -L/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/../../.. -lemutls_w -lheapt_w -v CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.o -lgfortran -lgcc -lquadmath -lSystem -no_compact_unwind -rpath @loader_path -rpath /opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15 -rpath /opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc -rpath /opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current]
+          arg [/opt/homebrew/Cellar/gcc/15.1.0/bin/../libexec/gcc/aarch64-apple-darwin24/15/collect2] ==> ignore
+          arg [-demangle] ==> ignore
+          arg [-syslibroot] ==> ignore
+          arg [/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/] ==> ignore
+          arg [-dynamic] ==> ignore
+          arg [-arch] ==> ignore
+          arg [arm64] ==> ignore
+          arg [-macos_version_min] ==> ignore
+          arg [15.0.0] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_19064] ==> ignore
+          arg [-L/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15] ==> dir [/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15]
+          arg [-L/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc] ==> dir [/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc]
+          arg [-L/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/../../..] ==> dir [/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/../../..]
+          arg [-lemutls_w] ==> lib [emutls_w]
+          arg [-lheapt_w] ==> lib [heapt_w]
+          arg [-v] ==> ignore
+          arg [CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.o] ==> ignore
+          arg [-lgfortran] ==> lib [gfortran]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lquadmath] ==> lib [quadmath]
+          arg [-lSystem] ==> lib [System]
+          arg [-no_compact_unwind] ==> ignore
+          arg [-rpath] ==> ignore
+          arg [@loader_path] ==> ignore
+          arg [-rpath] ==> ignore
+          arg [/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15] ==> ignore
+          arg [-rpath] ==> ignore
+          arg [/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc] ==> ignore
+          arg [-rpath] ==> ignore
+          arg [/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current] ==> ignore
+        ignore line: [collect2 version 15.1.0]
+        ignore line: [/usr/bin/ld -demangle -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/ -dynamic -arch arm64 -macos_version_min 15.0.0 -o cmTC_19064 -L/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15 -L/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc -L/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/../../.. -lemutls_w -lheapt_w -v CMakeFiles/cmTC_19064.dir/CMakeFortranCompilerABI.F90.o -lgfortran -lgcc -lquadmath -lSystem -no_compact_unwind -rpath @loader_path -rpath /opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15 -rpath /opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc -rpath /opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current]
+        linker tool for 'Fortran': /usr/bin/ld
+        Library search paths: [;/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15;/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc;/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current;/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/lib;/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/lib/swift]
+        Framework search paths: [;/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/System/Library/Frameworks]
+        remove lib [System]
+        collapse library dir [/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15] ==> [/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15]
+        collapse library dir [/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc] ==> [/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc]
+        collapse library dir [/opt/homebrew/Cellar/gcc/15.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin24/15/../../..] ==> [/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current]
+        collapse library dir [/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15] ==> [/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15]
+        collapse library dir [/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc] ==> [/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc]
+        collapse library dir [/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current] ==> [/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current]
+        collapse library dir [/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/lib] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/lib]
+        collapse library dir [/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/lib/swift] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/lib/swift]
+        collapse framework dir [/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/System/Library/Frameworks] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/System/Library/Frameworks]
+        implicit libs: [emutls_w;heapt_w;gfortran;gcc;quadmath]
+        implicit objs: []
+        implicit dirs: [/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15;/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current/gcc;/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/current;/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/lib;/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/lib/swift]
+        implicit fwks: [/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/System/Library/Frameworks]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake:36 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:270 (cmake_determine_linker_id)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestFortranCompiler.cmake:20 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:16 (PROJECT)"
+    message: |
+      Running the Fortran compiler's linker: "/usr/bin/ld" "-v"
+      @(#)PROGRAM:ld PROJECT:ld-1167.5
+      BUILD 01:45:05 Apr 30 2025
+      configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em
+      will use ld-classic for: armv6 armv7 armv7s i386 armv6m armv7k armv7m armv7em
+      LTO support using: LLVM version 17.0.0 (static support for 29, runtime is 29)
+      TAPI support using: Apple TAPI version 17.0.0 (tapi-1700.0.3.5)
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:62 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: ""
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_d519c/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_d519c.dir/build.make CMakeFiles/cmTC_d519c.dir/build
+        Building Fortran object CMakeFiles/cmTC_d519c.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_d519c.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        Linking Fortran executable cmTC_d519c
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d519c.dir/link.txt --verbose=1
+        /opt/homebrew/bin/gfortran CMakeFiles/cmTC_d519c.dir/testFortranFlags.f90.o -o cmTC_d519c
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:68 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_8e60b/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_8e60b.dir/build.make CMakeFiles/cmTC_8e60b.dir/build
+        Building Fortran object CMakeFiles/cmTC_8e60b.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments    -fbounds-check -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_8e60b.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        Linking Fortran executable cmTC_8e60b
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8e60b.dir/link.txt --verbose=1
+        /opt/homebrew/bin/gfortran  -fd-lines-as-comments  CMakeFiles/cmTC_8e60b.dir/testFortranFlags.f90.o -o cmTC_8e60b
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:74 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_0392a/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_0392a.dir/build.make CMakeFiles/cmTC_0392a.dir/build
+        Building Fortran object CMakeFiles/cmTC_0392a.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check    -132 -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_0392a.dir/testFortranFlags.f90.o
+        gfortran: error: unrecognized command-line option '-132'
+        make[1]: *** [CMakeFiles/cmTC_0392a.dir/testFortranFlags.f90.o] Error 1
+        make: *** [cmTC_0392a/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:74 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_3ca66/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_3ca66.dir/build.make CMakeFiles/cmTC_3ca66.dir/build
+        Building Fortran object CMakeFiles/cmTC_3ca66.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check    -ffixed-line-length-none -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_3ca66.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        Linking Fortran executable cmTC_3ca66
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3ca66.dir/link.txt --verbose=1
+        /opt/homebrew/bin/gfortran  -fd-lines-as-comments -fbounds-check  CMakeFiles/cmTC_3ca66.dir/testFortranFlags.f90.o -o cmTC_3ca66
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:80 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_3350c/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_3350c.dir/build.make CMakeFiles/cmTC_3350c.dir/build
+        Building Fortran object CMakeFiles/cmTC_3350c.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none    -ffree-line-length-none -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_3350c.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        Linking Fortran executable cmTC_3350c
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3350c.dir/link.txt --verbose=1
+        /opt/homebrew/bin/gfortran  -fd-lines-as-comments -fbounds-check -ffixed-line-length-none  CMakeFiles/cmTC_3350c.dir/testFortranFlags.f90.o -o cmTC_3350c
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:85 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_1a08c/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_1a08c.dir/build.make CMakeFiles/cmTC_1a08c.dir/build
+        Building Fortran object CMakeFiles/cmTC_1a08c.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none    -finit-character=32 -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_1a08c.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        Linking Fortran executable cmTC_1a08c
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1a08c.dir/link.txt --verbose=1
+        /opt/homebrew/bin/gfortran  -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none  CMakeFiles/cmTC_1a08c.dir/testFortranFlags.f90.o -o cmTC_1a08c
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:90 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_742f4/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_742f4.dir/build.make CMakeFiles/cmTC_742f4.dir/build
+        Building Fortran object CMakeFiles/cmTC_742f4.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32    -noexternal -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_742f4.dir/testFortranFlags.f90.o
+        gfortran: error: unrecognized command-line option '-noexternal'
+        make[1]: *** [CMakeFiles/cmTC_742f4.dir/testFortranFlags.f90.o] Error 1
+        make: *** [cmTC_742f4/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:97 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_57e1b/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_57e1b.dir/build.make CMakeFiles/cmTC_57e1b.dir/build
+        Building Fortran object CMakeFiles/cmTC_57e1b.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32    /fpp -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_57e1b.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        gfortran: warning: /fpp: linker input file unused because linking not done
+        gfortran: error: /fpp: linker input file not found: No such file or directory
+        make[1]: *** [CMakeFiles/cmTC_57e1b.dir/testFortranFlags.f90.o] Error 1
+        make[1]: *** Deleting file `CMakeFiles/cmTC_57e1b.dir/testFortranFlags.f90.o'
+        make: *** [cmTC_57e1b/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:97 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_07a71/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_07a71.dir/build.make CMakeFiles/cmTC_07a71.dir/build
+        Building Fortran object CMakeFiles/cmTC_07a71.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32    -fpp -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_07a71.dir/testFortranFlags.f90.o
+        gfortran: error: unrecognized command-line option '-fpp'; did you mean '-cpp'?
+        make[1]: *** [CMakeFiles/cmTC_07a71.dir/testFortranFlags.f90.o] Error 1
+        make: *** [cmTC_07a71/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:97 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_56906/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_56906.dir/build.make CMakeFiles/cmTC_56906.dir/build
+        Building Fortran object CMakeFiles/cmTC_56906.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32    -cpp -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_56906.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        Linking Fortran executable cmTC_56906
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_56906.dir/link.txt --verbose=1
+        /opt/homebrew/bin/gfortran  -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32  CMakeFiles/cmTC_56906.dir/testFortranFlags.f90.o -o cmTC_56906
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:104 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_b4f7e/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_b4f7e.dir/build.make CMakeFiles/cmTC_b4f7e.dir/build
+        Building Fortran object CMakeFiles/cmTC_b4f7e.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp    /libs:static -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_b4f7e.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        gfortran: warning: /libs:static: linker input file unused because linking not done
+        gfortran: error: /libs:static: linker input file not found: No such file or directory
+        make[1]: *** [CMakeFiles/cmTC_b4f7e.dir/testFortranFlags.f90.o] Error 1
+        make[1]: *** Deleting file `CMakeFiles/cmTC_b4f7e.dir/testFortranFlags.f90.o'
+        make: *** [cmTC_b4f7e/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:109 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_ec697/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_ec697.dir/build.make CMakeFiles/cmTC_ec697.dir/build
+        Building Fortran object CMakeFiles/cmTC_ec697.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp    /threads -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_ec697.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        gfortran: warning: /threads: linker input file unused because linking not done
+        gfortran: error: /threads: linker input file not found: No such file or directory
+        make[1]: *** [CMakeFiles/cmTC_ec697.dir/testFortranFlags.f90.o] Error 1
+        make[1]: *** Deleting file `CMakeFiles/cmTC_ec697.dir/testFortranFlags.f90.o'
+        make: *** [cmTC_ec697/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:109 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_70257/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_70257.dir/build.make CMakeFiles/cmTC_70257.dir/build
+        Building Fortran object CMakeFiles/cmTC_70257.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp    -threads -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_70257.dir/testFortranFlags.f90.o
+        gfortran: error: unrecognized command-line option '-threads'; did you mean '-pthread'?
+        make[1]: *** [CMakeFiles/cmTC_70257.dir/testFortranFlags.f90.o] Error 1
+        make: *** [cmTC_70257/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:114 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_810cd/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_810cd.dir/build.make CMakeFiles/cmTC_810cd.dir/build
+        Building Fortran object CMakeFiles/cmTC_810cd.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp    /fpe:0 -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_810cd.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        gfortran: warning: /fpe:0: linker input file unused because linking not done
+        gfortran: error: /fpe:0: linker input file not found: No such file or directory
+        make[1]: *** [CMakeFiles/cmTC_810cd.dir/testFortranFlags.f90.o] Error 1
+        make[1]: *** Deleting file `CMakeFiles/cmTC_810cd.dir/testFortranFlags.f90.o'
+        make: *** [cmTC_810cd/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:114 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_e415d/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_e415d.dir/build.make CMakeFiles/cmTC_e415d.dir/build
+        Building Fortran object CMakeFiles/cmTC_e415d.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp    -fpe0 -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_e415d.dir/testFortranFlags.f90.o
+        gfortran: error: unrecognized command-line option '-fpe0'
+        make[1]: *** [CMakeFiles/cmTC_e415d.dir/testFortranFlags.f90.o] Error 1
+        make: *** [cmTC_e415d/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:114 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_0b3c6/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_0b3c6.dir/build.make CMakeFiles/cmTC_0b3c6.dir/build
+        Building Fortran object CMakeFiles/cmTC_0b3c6.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp    -ffpe-trap=invalid,zero,overflow -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_0b3c6.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        Linking Fortran executable cmTC_0b3c6
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0b3c6.dir/link.txt --verbose=1
+        /opt/homebrew/bin/gfortran  -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp  CMakeFiles/cmTC_0b3c6.dir/testFortranFlags.f90.o -o cmTC_0b3c6
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:121 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_17518/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_17518.dir/build.make CMakeFiles/cmTC_17518.dir/build
+        Building Fortran object CMakeFiles/cmTC_17518.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow    -mmacosx-version-min=10.10.0 -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_17518.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        Linking Fortran executable cmTC_17518
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_17518.dir/link.txt --verbose=1
+        /opt/homebrew/bin/gfortran  -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow  CMakeFiles/cmTC_17518.dir/testFortranFlags.f90.o -o cmTC_17518
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:158 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_5d028/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_5d028.dir/build.make CMakeFiles/cmTC_5d028.dir/build
+        Building Fortran object CMakeFiles/cmTC_5d028.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0    /Od -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_5d028.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        gfortran: warning: /Od: linker input file unused because linking not done
+        gfortran: error: /Od: linker input file not found: No such file or directory
+        make[1]: *** [CMakeFiles/cmTC_5d028.dir/testFortranFlags.f90.o] Error 1
+        make[1]: *** Deleting file `CMakeFiles/cmTC_5d028.dir/testFortranFlags.f90.o'
+        make: *** [cmTC_5d028/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:158 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_80b7b/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_80b7b.dir/build.make CMakeFiles/cmTC_80b7b.dir/build
+        Building Fortran object CMakeFiles/cmTC_80b7b.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0    -Og -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_80b7b.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        Linking Fortran executable cmTC_80b7b
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_80b7b.dir/link.txt --verbose=1
+        /opt/homebrew/bin/gfortran  -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0  CMakeFiles/cmTC_80b7b.dir/testFortranFlags.f90.o -o cmTC_80b7b
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:165 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_28786/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_28786.dir/build.make CMakeFiles/cmTC_28786.dir/build
+        Building Fortran object CMakeFiles/cmTC_28786.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0    /warn:all -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_28786.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        gfortran: warning: /warn:all: linker input file unused because linking not done
+        gfortran: error: /warn:all: linker input file not found: No such file or directory
+        make[1]: *** [CMakeFiles/cmTC_28786.dir/testFortranFlags.f90.o] Error 1
+        make[1]: *** Deleting file `CMakeFiles/cmTC_28786.dir/testFortranFlags.f90.o'
+        make: *** [cmTC_28786/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:165 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_a0210/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_a0210.dir/build.make CMakeFiles/cmTC_a0210.dir/build
+        Building Fortran object CMakeFiles/cmTC_a0210.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0    -warn all -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_a0210.dir/testFortranFlags.f90.o
+        gfortran: error: unrecognized command-line option '-warn'; did you mean '--warn-'?
+        make[1]: *** [CMakeFiles/cmTC_a0210.dir/testFortranFlags.f90.o] Error 1
+        make: *** [cmTC_a0210/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:165 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_ddfd9/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_ddfd9.dir/build.make CMakeFiles/cmTC_ddfd9.dir/build
+        Building Fortran object CMakeFiles/cmTC_ddfd9.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0    -Wall -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_ddfd9.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        Linking Fortran executable cmTC_ddfd9
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ddfd9.dir/link.txt --verbose=1
+        /opt/homebrew/bin/gfortran  -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0  CMakeFiles/cmTC_ddfd9.dir/testFortranFlags.f90.o -o cmTC_ddfd9
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:173 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_2a06a/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_2a06a.dir/build.make CMakeFiles/cmTC_2a06a.dir/build
+        Building Fortran object CMakeFiles/cmTC_2a06a.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0    /traceback -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_2a06a.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        gfortran: warning: /traceback: linker input file unused because linking not done
+        gfortran: error: /traceback: linker input file not found: No such file or directory
+        make[1]: *** [CMakeFiles/cmTC_2a06a.dir/testFortranFlags.f90.o] Error 1
+        make[1]: *** Deleting file `CMakeFiles/cmTC_2a06a.dir/testFortranFlags.f90.o'
+        make: *** [cmTC_2a06a/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:173 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_66f23/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_66f23.dir/build.make CMakeFiles/cmTC_66f23.dir/build
+        Building Fortran object CMakeFiles/cmTC_66f23.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0    -traceback -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_66f23.dir/testFortranFlags.f90.o
+        gfortran: error: unrecognized command-line option '-traceback'
+        make[1]: *** [CMakeFiles/cmTC_66f23.dir/testFortranFlags.f90.o] Error 1
+        make: *** [cmTC_66f23/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:173 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_1bd16/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_1bd16.dir/build.make CMakeFiles/cmTC_1bd16.dir/build
+        Building Fortran object CMakeFiles/cmTC_1bd16.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0    -fbacktrace -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_1bd16.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        Linking Fortran executable cmTC_1bd16
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1bd16.dir/link.txt --verbose=1
+        /opt/homebrew/bin/gfortran  -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0  CMakeFiles/cmTC_1bd16.dir/testFortranFlags.f90.o -o cmTC_1bd16
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:181 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_cac51/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_cac51.dir/build.make CMakeFiles/cmTC_cac51.dir/build
+        Building Fortran object CMakeFiles/cmTC_cac51.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0    /check:bounds -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_cac51.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        gfortran: warning: /check:bounds: linker input file unused because linking not done
+        gfortran: error: /check:bounds: linker input file not found: No such file or directory
+        make[1]: *** [CMakeFiles/cmTC_cac51.dir/testFortranFlags.f90.o] Error 1
+        make[1]: *** Deleting file `CMakeFiles/cmTC_cac51.dir/testFortranFlags.f90.o'
+        make: *** [cmTC_cac51/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:181 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_e84b8/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_e84b8.dir/build.make CMakeFiles/cmTC_e84b8.dir/build
+        Building Fortran object CMakeFiles/cmTC_e84b8.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0    -check bounds -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_e84b8.dir/testFortranFlags.f90.o
+        gfortran: error: unrecognized command-line option '-check'; did you mean '--check='?
+        make[1]: *** [CMakeFiles/cmTC_e84b8.dir/testFortranFlags.f90.o] Error 1
+        make: *** [cmTC_e84b8/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:181 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_e143f/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_e143f.dir/build.make CMakeFiles/cmTC_e143f.dir/build
+        Building Fortran object CMakeFiles/cmTC_e143f.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0    -fcheck=bounds -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_e143f.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        Linking Fortran executable cmTC_e143f
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e143f.dir/link.txt --verbose=1
+        /opt/homebrew/bin/gfortran  -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0  CMakeFiles/cmTC_e143f.dir/testFortranFlags.f90.o -o cmTC_e143f
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:194 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_74ce4/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_74ce4.dir/build.make CMakeFiles/cmTC_74ce4.dir/build
+        Building Fortran object CMakeFiles/cmTC_74ce4.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0    /O2 -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_74ce4.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        gfortran: warning: /O2: linker input file unused because linking not done
+        gfortran: error: /O2: linker input file not found: No such file or directory
+        make[1]: *** [CMakeFiles/cmTC_74ce4.dir/testFortranFlags.f90.o] Error 1
+        make[1]: *** Deleting file `CMakeFiles/cmTC_74ce4.dir/testFortranFlags.f90.o'
+        make: *** [cmTC_74ce4/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:194 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_ead86/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_ead86.dir/build.make CMakeFiles/cmTC_ead86.dir/build
+        Building Fortran object CMakeFiles/cmTC_ead86.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0    -O2 -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_ead86.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        Linking Fortran executable cmTC_ead86
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ead86.dir/link.txt --verbose=1
+        /opt/homebrew/bin/gfortran  -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0  CMakeFiles/cmTC_ead86.dir/testFortranFlags.f90.o -o cmTC_ead86
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:206 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_50b0b/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_50b0b.dir/build.make CMakeFiles/cmTC_50b0b.dir/build
+        Building Fortran object CMakeFiles/cmTC_50b0b.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0    /unroll -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_50b0b.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        gfortran: warning: /unroll: linker input file unused because linking not done
+        gfortran: error: /unroll: linker input file not found: No such file or directory
+        make[1]: *** [CMakeFiles/cmTC_50b0b.dir/testFortranFlags.f90.o] Error 1
+        make[1]: *** Deleting file `CMakeFiles/cmTC_50b0b.dir/testFortranFlags.f90.o'
+        make: *** [cmTC_50b0b/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:206 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_d3497/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_d3497.dir/build.make CMakeFiles/cmTC_d3497.dir/build
+        Building Fortran object CMakeFiles/cmTC_d3497.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0    -funroll-loops -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_d3497.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        Linking Fortran executable cmTC_d3497
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d3497.dir/link.txt --verbose=1
+        /opt/homebrew/bin/gfortran  -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0  CMakeFiles/cmTC_d3497.dir/testFortranFlags.f90.o -o cmTC_d3497
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:214 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_5b795/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_5b795.dir/build.make CMakeFiles/cmTC_5b795.dir/build
+        Building Fortran object CMakeFiles/cmTC_5b795.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0    /Qinline -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_5b795.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        gfortran: warning: /Qinline: linker input file unused because linking not done
+        gfortran: error: /Qinline: linker input file not found: No such file or directory
+        make[1]: *** [CMakeFiles/cmTC_5b795.dir/testFortranFlags.f90.o] Error 1
+        make[1]: *** Deleting file `CMakeFiles/cmTC_5b795.dir/testFortranFlags.f90.o'
+        make: *** [cmTC_5b795/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:214 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_6a873/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_6a873.dir/build.make CMakeFiles/cmTC_6a873.dir/build
+        Building Fortran object CMakeFiles/cmTC_6a873.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0    -inline -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_6a873.dir/testFortranFlags.f90.o
+        gfortran: error: unrecognized command-line option '-inline'; did you mean '-Winline'?
+        make[1]: *** [CMakeFiles/cmTC_6a873.dir/testFortranFlags.f90.o] Error 1
+        make: *** [cmTC_6a873/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/Modules/SetCompileFlag.cmake:83 (TRY_COMPILE)"
+      - "cmake/Modules/SetFortranFlags.cmake:214 (SET_COMPILE_FLAG)"
+      - "CMakeLists.txt:78 (INCLUDE)"
+    directories:
+      source: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+      binary: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_Fortran_FLAGS: " -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0"
+      CMAKE_MODULE_PATH: "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/\u6211\u7684\u6750\u6599 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/cmake/Modules/"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "FLAG_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_04363/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_04363.dir/build.make CMakeFiles/cmTC_04363.dir/build
+        Building Fortran object CMakeFiles/cmTC_04363.dir/testFortranFlags.f90.o
+        /opt/homebrew/bin/gfortran   -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0    -finline-functions -c "/Users/jameshan/Library/CloudStorage/Dropbox/Mac (5)/Downloads/我的材料 2024/my_research/2025/Claude sonnet 3.7  CROPGRO-Strawberry/dssat-csm-os-develop/build/CMakeFiles/CMakeTmp/testFortranFlags.f90" -o CMakeFiles/cmTC_04363.dir/testFortranFlags.f90.o
+        f951: Warning: '-fd-lines-as-comments' has no effect in free form
+        Linking Fortran executable cmTC_04363
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_04363.dir/link.txt --verbose=1
+        /opt/homebrew/bin/gfortran  -fd-lines-as-comments -fbounds-check -ffixed-line-length-none -ffree-line-length-none -finit-character=32 -cpp -ffpe-trap=invalid,zero,overflow -mmacosx-version-min=10.10.0  CMakeFiles/cmTC_04363.dir/testFortranFlags.f90.o -o cmTC_04363
+        
+      exitCode: 0
+...

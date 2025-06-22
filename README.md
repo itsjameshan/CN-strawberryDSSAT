@@ -5,6 +5,22 @@
 This repository contains a Python implementation of the CROPGRO-Strawberry crop model adapted from the DSSAT framework. The model simulates strawberry growth and development in response to daily weather conditions, soil properties and cultivar characteristics.
 本仓库包含了一个基于DSSAT框架改编的CROPGRO-草莓作物模型的Python实现。该模型可根据每日气象条件、土壤性质和品种特性，模拟草莓的生长和发育。
 
+## 🚀 Quick Start with Docker
+## 🚀 Docker快速开始
+
+For the easiest way to run DSSAT experiments, use our Docker setup guides:
+要以最简便的方式运行DSSAT实验，请使用我们的Docker设置指南：
+
+- **macOS Users**: [`DSSAT_Docker_Setup_Guide_MacOS.md`](DSSAT_Docker_Setup_Guide_MacOS.md)
+- **Windows Users (English)**: [`DSSAT_Docker_Setup_Guide_Windows.md`](DSSAT_Docker_Setup_Guide_Windows.md)  
+- **Windows Users (中文)**: [`DSSAT_Docker_Setup_Guide_Windows_Chinese.md`](DSSAT_Docker_Setup_Guide_Windows_Chinese.md)
+- **macOS用户**: [`DSSAT_Docker_Setup_Guide_MacOS.md`](DSSAT_Docker_Setup_Guide_MacOS.md)
+- **Windows用户 (英文)**: [`DSSAT_Docker_Setup_Guide_Windows.md`](DSSAT_Docker_Setup_Guide_Windows.md)
+- **Windows用户 (中文)**: [`DSSAT_Docker_Setup_Guide_Windows_Chinese.md`](DSSAT_Docker_Setup_Guide_Windows_Chinese.md)
+
+These guides provide complete step-by-step instructions for running strawberry simulations using Docker, eliminating the need for manual compilation.
+这些指南提供了使用Docker运行草莓仿真的完整分步说明，无需手动编译。
+
 ## Key Inputs
 ## 主要输入
 
@@ -143,6 +159,41 @@ python cropgro-strawberry-test1.py
 ## Running the original DSSAT code
 ## 运行原始DSSAT代码
 
+The repository includes multiple ways to run the original DSSAT Fortran code:
+本仓库提供了多种运行原始DSSAT Fortran代码的方式：
+
+### Method 1: Docker (Recommended / 推荐)
+### 方法1：Docker（推荐）
+
+For the easiest setup, use Docker to run DSSAT without needing to compile from source. This approach works consistently across macOS, Windows, and Linux.
+为了最简便的设置，可使用Docker运行DSSAT，无需从源码编译。此方法在macOS、Windows和Linux上都能稳定运行。
+
+**Setup Guides / 设置指南：**
+- **macOS**: See `DSSAT_Docker_Setup_Guide_MacOS.md` for complete step-by-step instructions
+- **Windows**: See `DSSAT_Docker_Setup_Guide_Windows.md` for English instructions
+- **Windows (中文)**: See `DSSAT_Docker_Setup_Guide_Windows_Chinese.md` for Chinese instructions with bilingual comments
+- **macOS**: 完整分步说明请参考 `DSSAT_Docker_Setup_Guide_MacOS.md`
+- **Windows**: 英文说明请参考 `DSSAT_Docker_Setup_Guide_Windows.md`
+- **Windows (中文)**: 中英文对照说明请参考 `DSSAT_Docker_Setup_Guide_Windows_Chinese.md`
+
+**Quick Docker Commands / 快速Docker命令：**
+
+```bash
+# Build Docker image / 构建Docker镜像
+cd dssat-docker-master
+docker build . -f local.Dockerfile -t dssat
+
+# Run single experiment / 运行单个实验
+cd ../dssat-csm-data-develop/Strawberry
+docker run --rm -v ${PWD}:/data -w /data dssat A UFBA1601.SRX
+
+# Run batch experiments / 运行批量实验
+cd ../dssat-csm-data-develop
+docker run --rm -v ${PWD}:/data -w /data dssat B StrawberryDocker.v48
+```
+
+### Method 2: Compile from Source / 方法2：从源码编译
+
 The repository also includes the full Fortran source of DSSAT in the `dssat-csm-os-develop` directory. Build it using CMake:
 本仓库还包含了DSSAT的完整Fortran源代码，位于 `dssat-csm-os-develop` 目录。可通过CMake进行编译：
 
@@ -180,16 +231,17 @@ file, and executes the model, writing results to `/usr/local/BatchFiles`:
 ./scripts/build_dssat_macos.sh
 ```
 
-### Building on Windows
-### 在Windows上编译
+### Building on Windows (Alternative to Docker)
+### 在Windows上编译（Docker的替代方案）
 
-Install CMake and a gfortran toolchain such as MinGW-w64. The Windows batch file
-performs the same actions as the macOS script: build, install, stage the
-strawberry data and run the simulation. Execute it from a Windows terminal:
-安装CMake和gfortran工具链（如MinGW-w64）。Windows批处理文件的作用与macOS脚本一致：编译、安装、准备草莓数据并运行模拟。在Windows终端中执行：
+**Note**: Docker is now the recommended approach for Windows users. See the Docker setup guides above for easier installation.
+**注意**：现在推荐Windows用户使用Docker方式。请参考上述Docker设置指南获得更简便的安装方法。
+
+If you prefer to compile from source, install CMake and a gfortran toolchain such as MinGW-w64. The Windows batch file performs the same actions as the macOS script: build, install, stage the strawberry data and run the simulation. Execute it from a Windows terminal:
+如果您希望从源码编译，请安装CMake和gfortran工具链（如MinGW-w64）。Windows批处理文件的作用与macOS脚本一致：编译、安装、准备草莓数据并运行模拟。在Windows终端中执行：
 
 ```cmd
-scriptsuild_dssat_windows.cmd
+scripts/build_dssat_windows.cmd
 ```
 
 `build_dssat_windows.cmd` is a Windows batch file that relies on the `cmd.exe`

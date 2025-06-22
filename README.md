@@ -11,9 +11,6 @@ This repository contains a Python implementation of the CROPGRO-Strawberry crop 
 For the easiest way to run DSSAT experiments, use our Docker setup guides:
 要以最简便的方式运行DSSAT实验，请使用我们的Docker设置指南：
 
-- **macOS Users**: [`DSSAT_Docker_Setup_Guide_MacOS.md`](DSSAT_Docker_Setup_Guide_MacOS.md)
-- **Windows Users (English)**: [`DSSAT_Docker_Setup_Guide_Windows.md`](DSSAT_Docker_Setup_Guide_Windows.md)  
-- **Windows Users (中文)**: [`DSSAT_Docker_Setup_Guide_Windows_Chinese.md`](DSSAT_Docker_Setup_Guide_Windows_Chinese.md)
 - **macOS用户**: [`DSSAT_Docker_Setup_Guide_MacOS.md`](DSSAT_Docker_Setup_Guide_MacOS.md)
 - **Windows用户 (英文)**: [`DSSAT_Docker_Setup_Guide_Windows.md`](DSSAT_Docker_Setup_Guide_Windows.md)
 - **Windows用户 (中文)**: [`DSSAT_Docker_Setup_Guide_Windows_Chinese.md`](DSSAT_Docker_Setup_Guide_Windows_Chinese.md)

@@ -1,0 +1,2 @@
+#!/bin/bash
+/Users/jameshan/dssat/dscsm048 A "$@"

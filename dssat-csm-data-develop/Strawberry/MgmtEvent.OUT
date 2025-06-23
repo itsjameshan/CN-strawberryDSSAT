@@ -1,0 +1,27 @@
+*MANAGEMENT OPERATIONS EVENT SUMMARY
+
+*DSSAT Cropping System Model Ver. 4.8.5.017 pre-release  JUN 12, 2025 18:04:53
+!---------------------------------------------------------------------------------------------
+@RUN Date........  DOY    DAS    DAP  CR  Stage         Operation       Quantities
+!---------------------------------------------------------------------------------------------
+   1 OCT  1, 2014  274      1      0  SR  14 Start Sim 
+   1 OCT  9, 2014  282      9      0  SR                Planting       
+   1 OCT  9, 2014  282      9      0  SR  15 Transplant
+   1 NOV  1, 2014  305     32     23  SR  05 First Flwr
+   1 NOV  7, 2014  311     38     29  SR  06 First Pod 
+   1 NOV 12, 2014  316     43     34  SR  08 First Seed
+   1 NOV 24, 2014  328     55     46  SR                Harvest            30. kg/ha
+   1 DEC  1, 2014  335     62     53  SR                Harvest            47. kg/ha
+   1 DEC  4, 2014  338     65     56  SR                Harvest            15. kg/ha
+   1 DEC  8, 2014  342     69     60  SR                Harvest            17. kg/ha
+   1 DEC 11, 2014  345     72     63  SR                Harvest            16. kg/ha
+   1 DEC 15, 2014  349     76     67  SR                Harvest            13. kg/ha
+   1 DEC 18, 2014  352     79     70  SR                Harvest            13. kg/ha
+   1 DEC 22, 2014  356     83     74  SR                Harvest            52. kg/ha
+   1 DEC 24, 2014  358     85     76  SR                Harvest            28. kg/ha
+   1 DEC 29, 2014  363     90     81  SR                Harvest            70. kg/ha
+   1 JAN  1, 2015  001     93     84  SR  16 Harvest   
+   1 JAN  1, 2015  001     93     84  SR                End simulation 
+                                             100.0 % yield harvested       52. kg/ha
+                                               0.0 % by-product harv        0. kg/ha
+ 

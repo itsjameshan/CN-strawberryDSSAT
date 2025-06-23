@@ -1,0 +1,20 @@
+*WARNING DETAIL FILE
+
+******************************************************************************
+
+*DSSAT Cropping System Model Ver. 4.8.5.017 pre-release  JUN 12, 2025 18:04:53
+
+*RUN   1        : Radiance                  CRGRO048 UFBA1401    1
+ MODEL          : CRGRO048 - Strawberry
+ EXPERIMENT     : UFBA1401 SR 2014 BALM STRAWBERRY VARIETY TRIAL
+ DATA PATH      :
+ TREATMENT  1   : Radiance                  CRGRO048
+  
+
+ SOILDYN  YEAR DOY = 2014 274
+ Soil photosynthesis factor (SLPF) = 0.95                                      
+
+ IPWTH   YEAR DOY = 2015   1
+ Error opening weather file.                                                   
+   UFBA1501.WTH                                                                
+ Simulation will end.                                                          

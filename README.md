@@ -31,7 +31,7 @@ These guides provide complete step-by-step instructions for running strawberry s
 - **Soil properties**
   - Maximum root depth (cm)
   - Field capacity (mm/m)
-  - Wilting point (mm/m)
+  - Wilting point (mm/m) 1
 - **土壤性质**
   - 最大根系深度（厘米）
   - 田间持水量（毫米/米）

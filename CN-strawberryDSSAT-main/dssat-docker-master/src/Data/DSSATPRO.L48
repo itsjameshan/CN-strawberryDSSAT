@@ -1,0 +1,179 @@
+*** *  DSSAT PROFILE LINUX* ***
+DDB // /Users/jameshan/dssat
+DTB // /Users/jameshan/dssat
+DTE // /Users/jameshan/dssat
+DTO // /Users/jameshan/dssat
+DAT // /Users/jameshan/dssat
+DPT // /Users/jameshan/dssat
+DIM // /Users/jameshan/dssat
+DTP // /Users/jameshan/dssat
+DPF // /Users/jameshan/dssat
+DFO // /Users/jameshan/dssat
+DIS // /Users/jameshan/dssat
+DDW // /Users/jameshan/dssat
+DWG // /Users/jameshan/dssat
+DWC // /Users/jameshan/dssat
+DDS // /Users/jameshan/dssat
+DTS // /Users/jameshan/dssat
+DDG // /Users/jameshan/dssat
+DCG // /Users/jameshan/dssat/TOOLS/GENCALC GENCALC2.EXE
+DGL // /Users/jameshan/dssat/TOOLS/GLUE GLUE.BAT
+DPM // /Users/jameshan/dssat
+DDE // /Users/jameshan/dssat
+TOG // /Users/jameshan/dssat/TOOLS/GBUILD GBUILD.EXE
+
+MAL // /Users/jameshan/dssat dscsm048 PRFRM048
+MBA // /Users/jameshan/dssat dscsm048 CSCER048
+MBH // /Users/jameshan/dssat dscsm048 PRFRM048
+MBM // /Users/jameshan/dssat dscsm048 PRFRM048
+MBN // /Users/jameshan/dssat dscsm048 CRGRO048
+MBR // /Users/jameshan/dssat dscsm048 PRFRM048
+MBS // /Users/jameshan/dssat dscsm048 BSCER048
+MCB // /Users/jameshan/dssat dscsm048 CRGRO048
+MCH // /Users/jameshan/dssat dscsm048 CRGRO048
+MCN // /Users/jameshan/dssat dscsm048 CRGRO048
+MCO // /Users/jameshan/dssat dscsm048 CRGRO048
+MCP // /Users/jameshan/dssat dscsm048 CRGRO048
+MCS // /Users/jameshan/dssat dscsm048 CSYCA048
+MFA // /Users/jameshan/dssat dscsm048 CRGRO048
+MFB // /Users/jameshan/dssat dscsm048 CRGRO048
+MGB // /Users/jameshan/dssat dscsm048 CRGRO048
+MGG // /Users/jameshan/dssat dscsm048 PRFRM048
+MLT // /Users/jameshan/dssat dscsm048 CRGRO048
+MML // /Users/jameshan/dssat dscsm048 MLCER048
+MMZ // /Users/jameshan/dssat dscsm048 MZCER048
+MNP // /Users/jameshan/dssat dscsm048 CRGRO048
+MPI // /Users/jameshan/dssat dscsm048 PIALO048
+MPN // /Users/jameshan/dssat dscsm048 CRGRO048
+MPP // /Users/jameshan/dssat dscsm048 CRGRO048
+MPR // /Users/jameshan/dssat dscsm048 CRGRO048
+MPT // /Users/jameshan/dssat dscsm048 PTSUB048
+MRI // /Users/jameshan/dssat dscsm048 RICER048
+MSB // /Users/jameshan/dssat dscsm048 CRGRO048
+MSC // /Users/jameshan/dssat dscsm048 SCCAN048
+MSF // /Users/jameshan/dssat dscsm048 CRGRO048
+MSG // /Users/jameshan/dssat dscsm048 SGCER048
+MSI // /Users/jameshan/dssat
+MSU // /Users/jameshan/dssat dscsm048 CRGRO048
+MSW // /Users/jameshan/dssat dscsm048 SWCER048
+MTF // /Users/jameshan/dssat dscsm048 TFAPS048
+MTM // /Users/jameshan/dssat dscsm048 CRGRO048
+MTN // /Users/jameshan/dssat dscsm048 TNARO048
+MTR // /Users/jameshan/dssat dscsm048 TRARO048
+MVB // /Users/jameshan/dssat dscsm048 CRGRO048
+MWH // /Users/jameshan/dssat dscsm048 CSCER048
+MOT // /Users/jameshan/dssat
+MU1 // /Users/jameshan/dssat
+MU2 // /Users/jameshan/dssat
+MIO // /Users/jameshan/dssat
+MLO // /Users/jameshan/dssat
+
+MGR // /Users/jameshan/dssat
+NSH // /Users/jameshan/dssat
+ASP // /Users/jameshan/dssat
+ASS // /Users/jameshan/dssat dscsm048
+ASA // /Users/jameshan/dssat VARAN2.EXE
+AGR // /Users/jameshan/dssat
+AQS // /Users/jameshan/dssat dscsm048
+AQA // /Users/jameshan/dssat SUSTAIN2.EXE
+ASX // /Users/jameshan/dssat
+APS // /Users/jameshan/dssat dscsm048
+APV // /Users/jameshan/dssat
+APM // /Users/jameshan/dssat
+APA // /Users/jameshan/dssat VARAN2.EXE
+APJ // /Users/jameshan/dssat
+APF // /Users/jameshan/dssat
+APP // /Users/jameshan/dssat
+APK // /Users/jameshan/dssat DISC9801.EXE
+TOE // /WINDOWS NOTEPAD.EXE
+TOS // /
+TOM // /
+STD // /Users/jameshan/dssat/StandardData
+WED // /Users/jameshan/dssat/Weather
+WGD // /Users/jameshan/dssat/Weather/Gen
+CLD // /Users/jameshan/dssat/Weather/Climate
+WMD // /Users/jameshan/dssat/Weather/Month
+SLD // /Users/jameshan/dssat/Soil
+CRD // /Users/jameshan/dssat/Genotype
+FID // /Users/jameshan/dssat/Background
+ALD // /Users/jameshan/dssat/Alfalfa
+GCD // /Users/jameshan/dssat/GCWork
+GUD // /Users/jameshan/dssat/GLWork
+BAD // /Users/jameshan/dssat/Barley
+BHD // /Users/jameshan/dssat/Bahia
+BMD // /Users/jameshan/dssat/Bermudagrass
+BND // /Users/jameshan/dssat/Drybean
+BRD // /Users/jameshan/dssat/Brachiaria
+BSD // /Users/jameshan/dssat/Sugarbeet
+CBD // /Users/jameshan/dssat/Cabbage
+CHD // /Users/jameshan/dssat/Chickpea
+CND // /Users/jameshan/dssat/Canola
+COD // /Users/jameshan/dssat/Cotton
+CPD // /Users/jameshan/dssat/Cowpea
+CSD // /Users/jameshan/dssat/Cassava
+FAD // /Users/jameshan/dssat/Fallow
+FBD // /Users/jameshan/dssat/Fababean
+GBD // /Users/jameshan/dssat/GreenBean
+GGD // /Users/jameshan/dssat/Guineagrass
+LTD // /Users/jameshan/dssat/Lentil
+MLD // /Users/jameshan/dssat/PearlMillet
+MZD // /Users/jameshan/dssat/Maize
+NPD // /Users/jameshan/dssat/Napier
+PED // /Users/jameshan/dssat/Pea
+PID // /Users/jameshan/dssat/Pineapple
+PND // /Users/jameshan/dssat/Peanut
+POD // /Users/jameshan/dssat/PerennialPeanut
+PPD // /Users/jameshan/dssat/Pigeonpea
+PRD // /Users/jameshan/dssat/BellPepper
+PTD // /Users/jameshan/dssat/Potato
+RID // /Users/jameshan/dssat/Rice
+SBD // /Users/jameshan/dssat/Soybean
+SCD // /Users/jameshan/dssat/Sugarcane
+SFD // /Users/jameshan/dssat/Safflower
+SGD // /Users/jameshan/dssat/Sorghum
+SID // /Users/jameshan/dssat
+SUD // /Users/jameshan/dssat/Sunflower
+SWD // /Users/jameshan/dssat/SweetCorn
+TFD // /Users/jameshan/dssat/Teff
+TMD // /Users/jameshan/dssat/Tomato
+TND // /Users/jameshan/dssat/Tanier
+TRD // /Users/jameshan/dssat/Taro
+VBD // /Users/jameshan/dssat/Velvetbean
+WHD // /Users/jameshan/dssat/Wheat
+U1D // /Users/jameshan/dssat/CROP1
+U2D // /Users/jameshan/dssat/CROP2
+OTD // /
+ASD // /Users/jameshan/dssat/Seasonal
+AQD // /Users/jameshan/dssat/Sequence
+APD // /Users/jameshan/dssat/Spatial
+PSD // /Users/jameshan/dssat/Pest
+ECD // /Users/jameshan/dssat/Economic
+TOD // /
+
+MQU // /Users/jameshan/dssat dscsm048 CRGRO048
+QUD // /Users/jameshan/dssat/Quinoa
+ACC // /Users/jameshan/dssat dscsm048
+CCD // /Users/jameshan/dssat/ClimateChange
+AYF // /Users/jameshan/dssat dscsm048
+YFD // /Users/jameshan/dssat/YieldForecast
+SRD // /Users/jameshan/dssat/Strawberry
+MSR // /Users/jameshan/dssat dscsm048 CRGRO048
+CID // /Users/jameshan/dssat/Chia
+MCI // /Users/jameshan/dssat dscsm048 CRGRO048
+MPE // /Users/jameshan/dssat dscsm048 CRGRO048
+MPO // /Users/jameshan/dssat dscsm048 PRFRM048
+MSS // /Users/jameshan/dssat dscsm048 CRGRO048
+SSD // /Users/jameshan/dssat/Sesame
+
+MBC // /Users/jameshan/dssat dscsm048 CRGRO048
+BCD // /Users/jameshan/dssat/Carinata
+MGY // /Users/jameshan/dssat dscsm048 CRGRO048
+GYD // /Users/jameshan/dssat/Guar
+MBG // /Users/jameshan/dssat dscsm048 CRGRO048
+BGD // /Users/jameshan/dssat/BambaraGroundnut
+MAM // /Users/jameshan/dssat dscsm048 CRGRO048
+AMD // /Users/jameshan/dssat/Amaranth
+MHM // /Users/jameshan/dssat dscsm048 CRGRO048
+HMD // /Users/jameshan/dssat/Hemp
+MRY // /Users/jameshan/dssat dscsm048 CSCER048
+RYD // /Users/jameshan/dssat/Rye

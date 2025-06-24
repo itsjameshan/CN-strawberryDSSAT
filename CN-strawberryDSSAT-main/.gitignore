@@ -1,0 +1,9 @@
+# macOS artifact files
+.DS_Store
+
+# Backup files
+~$*
+
+# Python bytecode and build outputs
+__pycache__/
+*.pyc

@@ -9,7 +9,8 @@ them fast when the optional ``numba`` dependency is available.
 
 # CROPGRO-Strawberry Model Implementation in Python
 # This is a simplified implementation of the CROPGRO model for strawberries
-
+import plotly.graph_objs as go
+from plotly.subplots import make_subplots
 import numpy as np
 import pandas as pd
 from datetime import datetime, timedelta
@@ -617,7 +618,60 @@ class CropgroStrawberry:
         # Convert results to DataFrame
         self.results_df = pd.DataFrame(self.results)
         return self.results_df
-    
+    def plotly_plot_results(self):
+        """用 plotly 绘制交互式动态图。"""
+        if not hasattr(self, 'results_df') or len(self.results_df) == 0:
+            print("No simulation results to plot. Run simulate_growth() first.")
+            return
+
+        df = self.results_df
+        stages = list(self.phenology_stages.keys())
+        stage_values = [stages.index(stage) for stage in df['stage']]
+
+        fig = make_subplots(
+            rows=3, cols=2,
+            subplot_titles=(
+                "植株生物量", "叶面积指数",
+                "果实数量", "匍匐茎和分蘖数",
+                "水分胁迫因子", "物候发育阶段"
+            )
+        )
+
+        # 1. 植株生物量
+        fig.add_trace(go.Scatter(x=df['dap'], y=df['biomass'], name='总生物量', mode='lines'), row=1, col=1)
+        fig.add_trace(go.Scatter(x=df['dap'], y=df['leaf_biomass'], name='叶生物量', mode='lines'), row=1, col=1)
+        fig.add_trace(go.Scatter(x=df['dap'], y=df['stem_biomass'], name='茎生物量', mode='lines'), row=1, col=1)
+        fig.add_trace(go.Scatter(x=df['dap'], y=df['root_biomass'], name='根生物量', mode='lines'), row=1, col=1)
+        fig.add_trace(go.Scatter(x=df['dap'], y=df['fruit_biomass'], name='果实生物量', mode='lines'), row=1, col=1)
+
+        # 2. 叶面积指数
+        fig.add_trace(go.Scatter(x=df['dap'], y=df['leaf_area_index'], name='叶面积指数', mode='lines', line=dict(color='green')), row=1, col=2)
+
+        # 3. 果实数量
+        fig.add_trace(go.Scatter(x=df['dap'], y=df['fruit_number'], name='果实数量', mode='lines', line=dict(color='magenta')), row=2, col=1)
+
+        # 4. 匍匐茎和分蘖数
+        fig.add_trace(go.Scatter(x=df['dap'], y=df['crown_number'], name='分蘖数', mode='lines', line=dict(color='blue')), row=2, col=2)
+        fig.add_trace(go.Scatter(x=df['dap'], y=df['runner_number'], name='匍匐茎数', mode='lines', line=dict(color='red')), row=2, col=2)
+
+        # 5. 水分胁迫因子
+        fig.add_trace(go.Scatter(x=df['dap'], y=df['water_stress'], name='水分胁迫', mode='lines', line=dict(color='red')), row=3, col=1)
+
+        # 6. 物候发育阶段
+        fig.add_trace(go.Scatter(x=df['dap'], y=stage_values, name='物候阶段', mode='lines', line=dict(color='blue')), row=3, col=2)
+        fig.update_yaxes(
+            tickvals=list(range(len(stages))),
+            ticktext=stages,
+            row=3, col=2
+        )
+
+        fig.update_layout(
+            height=900, width=1200,
+            title_text="CROPGRO-草莓模拟结果（多子图动态动画）",
+            showlegend=True
+        )
+        fig.show()
+        return fig
     def plot_results(self):
         """Plot key simulation results."""
         if not hasattr(self, 'results_df') or len(self.results_df) == 0:
@@ -689,6 +743,110 @@ class CropgroStrawberry:
         axs[2, 1].set_title('Phenological Development')
         
         plt.tight_layout()
+        return fig
+
+    def plotly_animate_all(self):
+        """生成所有六个子图随天数推进的动态动画效果（中文界面）"""
+        if not hasattr(self, 'results_df') or len(self.results_df) == 0:
+            print("没有可绘制的模拟结果，请先运行 simulate_growth()。")
+            return
+
+        df = self.results_df
+        stages = list(self.phenology_stages.keys())
+        stages_cn = [
+            "发芽", "出苗", "幼年期", "营养生长期", "花芽分化", "开花", "坐果", "果实发育", "果实成熟", "衰老"
+        ]
+        stage_values = [stages.index(stage) for stage in df['stage']]
+
+        # 初始帧（第1天）
+        fig = make_subplots(
+            rows=3, cols=2,
+            subplot_titles=(
+                "植株生物量", "叶面积指数",
+                "果实数量", "匍匐茎和分蘖数",
+                "水分胁迫因子", "物候发育阶段"
+            )
+        )
+        # 初始帧数据
+        k = 1
+        fig.add_trace(go.Scatter(x=df['dap'][:k], y=df['biomass'][:k], name='总生物量', mode='lines', line=dict(color='#1f77b4')), row=1, col=1)
+        fig.add_trace(go.Scatter(x=df['dap'][:k], y=df['leaf_biomass'][:k], name='叶生物量', mode='lines', line=dict(color='#2ca02c')), row=1, col=1)
+        fig.add_trace(go.Scatter(x=df['dap'][:k], y=df['stem_biomass'][:k], name='茎生物量', mode='lines', line=dict(color='#ff7f0e')), row=1, col=1)
+        fig.add_trace(go.Scatter(x=df['dap'][:k], y=df['root_biomass'][:k], name='根生物量', mode='lines', line=dict(color='#d62728')), row=1, col=1)
+        fig.add_trace(go.Scatter(x=df['dap'][:k], y=df['fruit_biomass'][:k], name='果实生物量', mode='lines', line=dict(color='#9467bd')), row=1, col=1)
+        fig.add_trace(go.Scatter(x=df['dap'][:k], y=df['leaf_area_index'][:k], name='叶面积指数', mode='lines', line=dict(color='green')), row=1, col=2)
+        fig.add_trace(go.Scatter(x=df['dap'][:k], y=df['fruit_number'][:k], name='果实数量', mode='lines', line=dict(color='magenta')), row=2, col=1)
+        fig.add_trace(go.Scatter(x=df['dap'][:k], y=df['crown_number'][:k], name='分蘖数', mode='lines', line=dict(color='blue')), row=2, col=2)
+        fig.add_trace(go.Scatter(x=df['dap'][:k], y=df['runner_number'][:k], name='匍匐茎数', mode='lines', line=dict(color='red')), row=2, col=2)
+        fig.add_trace(go.Scatter(x=df['dap'][:k], y=df['water_stress'][:k], name='水分胁迫', mode='lines', line=dict(color='red')), row=3, col=1)
+        fig.add_trace(go.Scatter(x=df['dap'][:k], y=stage_values[:k], name='物候阶段', mode='lines', line=dict(color='blue')), row=3, col=2)
+        fig.update_yaxes(
+            tickvals=list(range(len(stages_cn))),
+            ticktext=stages_cn,
+            row=3, col=2
+        )
+
+        # 动画帧
+        frames = []
+        for k in range(2, len(df)+1):
+            frames.append(go.Frame(
+                data=[
+                    go.Scatter(x=df['dap'][:k], y=df['biomass'][:k], mode='lines', line=dict(color='#1f77b4')),
+                    go.Scatter(x=df['dap'][:k], y=df['leaf_biomass'][:k], mode='lines', line=dict(color='#2ca02c')),
+                    go.Scatter(x=df['dap'][:k], y=df['stem_biomass'][:k], mode='lines', line=dict(color='#ff7f0e')),
+                    go.Scatter(x=df['dap'][:k], y=df['root_biomass'][:k], mode='lines', line=dict(color='#d62728')),
+                    go.Scatter(x=df['dap'][:k], y=df['fruit_biomass'][:k], mode='lines', line=dict(color='#9467bd')),
+                    go.Scatter(x=df['dap'][:k], y=df['leaf_area_index'][:k], mode='lines', line=dict(color='green')),
+                    go.Scatter(x=df['dap'][:k], y=df['fruit_number'][:k], mode='lines', line=dict(color='magenta')),
+                    go.Scatter(x=df['dap'][:k], y=df['crown_number'][:k], mode='lines', line=dict(color='blue')),
+                    go.Scatter(x=df['dap'][:k], y=df['runner_number'][:k], mode='lines', line=dict(color='red')),
+                    go.Scatter(x=df['dap'][:k], y=df['water_stress'][:k], mode='lines', line=dict(color='red')),
+                    go.Scatter(x=df['dap'][:k], y=stage_values[:k], mode='lines', line=dict(color='blue')),
+                ],
+                name=str(df['dap'][k-1])
+            ))
+
+        fig.frames = frames
+
+        # 滑块
+        sliders = [{
+            "steps": [
+                {
+                    "args": [[str(df['dap'][k-1])], {"frame": {"duration": 50, "redraw": True}, "mode": "immediate"}],
+                    "label": str(df['dap'][k-1]),
+                    "method": "animate"
+                }
+                for k in range(2, len(df)+1)
+            ],
+            "transition": {"duration": 0},
+            "x": 0.1,
+            "len": 0.9
+        }]
+
+        # 播放按钮
+        fig.update_layout(
+            height=900, width=1200,
+            title_text="CROPGRO-草莓模拟结果（多子图动态动画）",
+            showlegend=True,
+            xaxis_title="播种后天数",
+            updatemenus=[{
+                "type": "buttons",
+                "buttons": [
+                    {"label": "播放", "method": "animate", "args": [None, {"frame": {"duration": 50, "redraw": True}, "fromcurrent": True}]},
+                    {"label": "暂停", "method": "animate", "args": [[None], {"frame": {"duration": 0, "redraw": False}, "mode": "immediate"}]}
+                ],
+                "direction": "left",
+                "pad": {"r": 10, "t": 87},
+                "showactive": True,
+                "x": 0.1,
+                "xanchor": "right",
+                "y": 1.15,
+                "yanchor": "top"
+            }],
+            sliders=sliders
+        )
+        fig.show()
+        fig.write_html("strawberry_animation.html")
         return fig
 
 
@@ -771,6 +929,9 @@ def run_example_simulation():
     
     # Plot results
     fig = model.plot_results()
+    
+    # 运行动画多子图
+    model.plotly_animate_all()
     
     return model, results, fig
 

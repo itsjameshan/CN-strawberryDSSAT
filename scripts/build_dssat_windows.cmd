@@ -1,16 +1,31 @@
 @echo off
 rem Build, install, and run DSSAT-CSM with sample strawberry data using MinGW
 
-if not exist build mkdir build
-=======
 rem Build and install DSSAT-CSM using MinGW on Windows
-mkdir build 2>NUL
+if not exist build mkdir build
 
 cd build
 cmake .. -G "MinGW Makefiles"
-mingw32-make
-mingw32-make install
+if errorlevel 1 (
+    echo CMake configuration failed
+    exit /b 1
+)
 
+mingw32-make
+if errorlevel 1 (
+    echo Build failed
+    exit /b 1
+)
+
+mingw32-make install
+if errorlevel 1 (
+    echo Install failed
+    exit /b 1
+)
+
+cd ..
+
+echo DSSAT build completed successfully
 
 set DSSATDIR=C:\DSSAT48
 
@@ -23,6 +38,4 @@ copy "..\..\dssat-csm-os-develop\Data\BatchFiles\Strawberry.v48" "%DSSATDIR%\Bat
 
 cd "%DSSATDIR%\BatchFiles"
 ..\dscsm048.exe CRGRO048 B STRB.V48
-
-=======
 

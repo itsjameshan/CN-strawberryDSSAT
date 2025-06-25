@@ -11,7 +11,7 @@ from datetime import datetime
 import importlib.util
 import pathlib
 
-impl_path = pathlib.Path(__file__).resolve().parent / "cropgro-strawberry-implementation.py"
+impl_path = pathlib.Path(__file__).resolve().parent.parent / "cropgro-strawberry-implementation.py"
 spec = importlib.util.spec_from_file_location("cropgro_strawberry_implementation", impl_path)
 
 if spec is None:
@@ -150,8 +150,11 @@ def main():
     print("Python草莓模型验证系统")
     print("=" * 60)
     
+    # 获取项目根目录（脚本所在目录的父目录）
+    project_root = Path(__file__).resolve().parent.parent
+    
     # 查找草莓实验文件
-    strawberry_dir = Path("dssat-csm-data-develop/Strawberry")
+    strawberry_dir = project_root / "dssat-csm-data-develop/Strawberry"
     srx_files = list(strawberry_dir.glob("*.SRX"))
     
     if not srx_files:
@@ -163,11 +166,11 @@ def main():
         print(f"  - {f.name}")
     
     # 创建输出目录
-    output_dir = Path("python_model_outputs")
+    output_dir = project_root / "python_model_outputs"
     output_dir.mkdir(exist_ok=True)
     
     # 创建报告目录
-    report_dir = Path("python_validation_reports")
+    report_dir = project_root / "python_validation_reports"
     report_dir.mkdir(exist_ok=True)
     
     results_summary = []
@@ -187,7 +190,7 @@ def main():
             
             # 查找天气文件
             year = planting_date[:4]
-            weather_dir = Path("dssat-csm-data-develop/Weather")
+            weather_dir = project_root / "dssat-csm-data-develop/Weather"
             weather_files = list(weather_dir.glob(f"{wsta}{year[2:]}*.WTH"))
             
             if not weather_files:

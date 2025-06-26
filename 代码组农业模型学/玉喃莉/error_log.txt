@@ -1,0 +1,8 @@
+=== Setup Script Error Log ===
+Started at: 2025-06-24 11:28:53
+Script: enhanced_setup_script.sh
+Environment: linux-gnu
+===============================
+
+[2025-06-24 11:28:53] WARNING in step 'python_installation': Python 3 or pip not found. Attempting to install...
+[2025-06-24 11:29:42] ERROR in step 'python_installation': Failed to install python3 and python3-pip via apt

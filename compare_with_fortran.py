@@ -76,13 +76,20 @@ def read_wth_file(path: str) -> pd.DataFrame:  # read weather data from .WTH
         records.append(rec)  # store the day's data
     return pd.DataFrame(records)  # convert list to DataFrame
 
+def run_dssat(srx_path: str, dssat_dir: str):
+    """直接调用 DSSAT Fortran 可执行文件运行实验。"""
+    exe = os.path.abspath(os.path.join(dssat_dir, "bin", "dscsm048"))
+    if not os.path.exists(exe):
+        raise FileNotFoundError(f"dscsm048 not found at {exe}")
+    # 只传递模式A和实验文件名
+    subprocess.run([exe, "A", os.path.basename(srx_path)], cwd=os.path.dirname(srx_path), check=True)
 
-def run_dssat(srx_path: str, dssat_dir: str):  # invoke the DSSAT executable
-    """使用 Utilities/run_dssat 对指定的 SRX 文件运行 DSSAT。"""
-    util = os.path.abspath(os.path.join(dssat_dir, "Utilities", "run_dssat"))  # run_dssat 工具路径
-    if not os.path.exists(util):  # 确认该工具存在
-        raise FileNotFoundError(f"run_dssat not found at {util}")  # 如未找到则抛出异常
-    subprocess.run([util, os.path.basename(srx_path)], cwd=os.path.dirname(srx_path), check=True)  # 在实验目录下执行 run_dssat
+#def run_dssat(srx_path: str, dssat_dir: str):  # invoke the DSSAT executable
+#    """使用 Utilities/run_dssat 对指定的 SRX 文件运行 DSSAT。"""
+#    util = os.path.abspath(os.path.join(dssat_dir, "Utilities", "run_dssat"))  # run_dssat 工具路径
+#    if not os.path.exists(util):  # 确认该工具存在
+#        raise FileNotFoundError(f"run_dssat not found at {util}")  # 如未找到则抛出异常
+#    subprocess.run([util, os.path.basename(srx_path)], cwd=os.path.dirname(srx_path), check=True)  # 在实验目录下执行 run_dssat
 
 
 def read_fortran_output(exp_dir: str) -> pd.DataFrame:  # read DSSAT output files
@@ -143,6 +150,11 @@ def main():  # orchestrate the comparison
 
     py_df = run_python_model(wth_df, planting_date)  # 运行 Python 模型
 
+    # 保存 Python 模型输出为 CSV
+    py_df.to_csv("python_model_output.csv", index=False)
+    # 保存 DSSAT Fortran 输出为 CSV
+    fort_df.to_csv("dssat_fortran_output.csv", index=False)
+
     # Debug: Print column names to understand the mismatch
     print(f"Python model columns: {list(py_df.columns)}")
     print(f"DSSAT output columns: {list(fort_df.columns)}")
@@ -151,12 +163,39 @@ def main():  # orchestrate the comparison
     common_cols = [c for c in fort_df.columns if c in py_df.columns]
     print(f"Common columns: {common_cols}")
     
+    # 新增：将对比信息写入txt报告
+    with open("comparison_report.txt", "w", encoding="utf-8") as f:
+        f.write("Python model columns:\n" + str(list(py_df.columns)) + "\n")
+        f.write("DSSAT output columns:\n" + str(list(fort_df.columns)) + "\n")
+        f.write("Common columns:\n" + str(common_cols) + "\n")
+        f.write(f"Python model shape: {py_df.shape}\n")
+        f.write(f"DSSAT output shape: {fort_df.shape}\n")
+
+    # 追加DSSAT原始输出片段（如有），提前到return之前
+    plantgro_path = os.path.join(exp_dir, "PlantGro.OUT")
+    if os.path.exists(plantgro_path):
+        with open(plantgro_path, encoding="utf-8") as f:
+            lines = f.readlines()
+        i = 0
+        while i < len(lines):
+            if lines[i].lstrip().startswith("RUN"):
+                with open("comparison_report.txt", "a", encoding="utf-8") as out:
+                    out.write("\n--- DSSAT PlantGro.OUT (RUN section) ---\n")
+                    for l in lines[i:i+11]:  # 表头+10行数据
+                        out.write(l)
+                i += 11
+            else:
+                i += 1
+
     if not common_cols:
         print("No exact column matches found. Attempting basic comparison...")
-        # If no common columns, just compare basic statistics
         print(f"Python model shape: {py_df.shape}")
         print(f"DSSAT output shape: {fort_df.shape}")
         print("Models ran successfully but have different output formats")
+        # 追加结论到报告
+        with open("comparison_report.txt", "a", encoding="utf-8") as f:
+            f.write("No exact column matches found. Attempting basic comparison...\n")
+            f.write("Models ran successfully but have different output formats\n")
         return
     
     # Compare only the common columns with matching lengths
@@ -164,8 +203,15 @@ def main():  # orchestrate the comparison
     fort_subset = fort_df[common_cols].head(min_len)
     py_subset = py_df[common_cols].head(min_len)
     
-    pdt.assert_frame_equal(fort_subset, py_subset, check_dtype=False)  # 验证输出一致
-    print(f"Python model output matches DSSAT output for {len(common_cols)} common columns")  # 通知用户输出一致
+    try:
+        pdt.assert_frame_equal(fort_subset, py_subset, check_dtype=False)  # 验证输出一致
+        print(f"Python model output matches DSSAT output for {len(common_cols)} common columns")  # 通知用户输出一致
+        with open("comparison_report.txt", "a", encoding="utf-8") as f:
+            f.write(f"Python model output matches DSSAT output for {len(common_cols)} common columns\n")
+    except AssertionError as e:
+        print("Output mismatch detected:\n", e)
+        with open("comparison_report.txt", "a", encoding="utf-8") as f:
+            f.write("Output mismatch detected:\n" + str(e) + "\n")
 
 
 if __name__ == "__main__":  # 作为主程序时运行

@@ -69,17 +69,32 @@ def read_wth_file(path: str) -> pd.DataFrame:
         records.append(rec)  # store this day's data
     return pd.DataFrame(records)  # assemble DataFrame
 
-
 def run_dssat(srx_path: str, dssat_dir: str):
     """Run the official DSSAT model using the helper utility."""
-    util = Path(dssat_dir).resolve() / "Utilities" / "run_dssat"  # absolute path to DSSAT runner
-    if not util.exists():  # validate existence
-        raise FileNotFoundError(f"run_dssat not found at {util}")
+    dssat_exe = Path(dssat_dir).resolve() / "bin" / "dscsm048"
+    if not dssat_exe.exists():
+        raise FileNotFoundError(f"DSSAT executable not found at {dssat_exe}")
+    
+    # 切换到实验目录并运行DSSAT
+    exp_dir = os.path.dirname(srx_path)
+    srx_file = os.path.basename(srx_path)
+    
     subprocess.run(
-        [str(util), os.path.basename(srx_path)],  # call run_dssat with SRX file
-        cwd=os.path.dirname(srx_path),  # run in experiment directory
-        check=True,  # raise an error if the process fails
+        [str(dssat_exe), "A", srx_file],
+        cwd=exp_dir,
+        check=True,
     )
+    
+#def run_dssat(srx_path: str, dssat_dir: str):
+#    """Run the official DSSAT model using the helper utility."""
+#    util = Path(dssat_dir).resolve() / "Utilities" / "run_dssat"  # absolute path to DSSAT runner
+#    if not util.exists():  # validate existence
+#        raise FileNotFoundError(f"run_dssat not found at {util}")
+#    subprocess.run(
+#        [str(util), os.path.basename(srx_path)],  # call run_dssat with SRX file
+#        cwd=os.path.dirname(srx_path),  # run in experiment directory
+#        check=True,  # raise an error if the process fails
+#    )
 
 
 def read_fortran_output(exp_dir: str) -> pd.DataFrame:

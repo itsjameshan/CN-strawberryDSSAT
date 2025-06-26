@@ -1,0 +1,10 @@
+Python model columns:
+['date', 'dap', 'stage', 'thermal_time', 'biomass', 'leaf_area_index', 'root_depth', 'fruit_number', 'fruit_biomass', 'leaf_biomass', 'stem_biomass', 'root_biomass', 'crown_number', 'runner_number', 'water_stress', 'daylength', 'photosynthesis', 'transpiration']
+DSSAT output columns:
+['@YEAR', 'DOY', 'DAS', 'DAP', 'L#SD', 'GSTD', 'LAID', 'LWAD', 'SWAD', 'GWAD', 'RWAD', 'VWAD', 'CWAD', 'G#AD', 'GWGD', 'HIAD', 'PWAD', 'P#AD', 'WSPD', 'WSGD', 'NSTD', 'PST1A', 'PST2A', 'KSTD', 'EWSD', 'LN%D', 'SH%D', 'HIPD', 'PWDD', 'PWTD', 'SLAD', 'CHTD', 'CWID', 'NWAD', 'RDPD', 'RLAD', 'RL1D', 'RL2D', 'RL3D', 'RL4D', 'RL5D', 'RL6D', 'RL7D', 'RL8D', 'RL9D', 'SNW0C', 'SNW1C']
+Common columns:
+[]
+Python model shape: (365, 18)
+DSSAT output shape: (351, 47)
+No exact column matches found. Attempting basic comparison...
+Models ran successfully but have different output formats

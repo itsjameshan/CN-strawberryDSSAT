@@ -1,0 +1,49 @@
+`run_original_dssat.py` 这个脚本的作用是**帮助用户在本地自动运行原版DSSAT Fortran草莓模型**，并可选地将输出文件复制到指定目录，方便后续分析或对比。
+
+---
+
+## 主要功能和用途
+
+### 1. **自动运行DSSAT Fortran模型**
+- 通过命令行调用DSSAT的可执行文件（如 `dscsm048`），在指定的实验目录下运行草莓实验（.SRX文件）。
+
+### 2. **支持自定义DSSAT安装目录**
+- 可以通过 `--dssat-dir` 参数指定DSSAT的安装路径（默认 `dssat-csm-os-develop`）。
+
+### 3. **支持输出文件集中管理**
+- 可以通过 `--output-dir` 参数指定一个输出目录，自动将实验结果（如 `summary.csv`、`PlantGro.OUT`）复制到该目录，便于后续分析和归档。
+
+### 4. **兼容性好**
+- 适用于Linux/Mac/Windows（只要DSSAT可执行文件和依赖文件齐全）。
+
+---
+
+## 典型用法
+
+在命令行运行：
+```bash
+python run_original_dssat.py dssat-csm-data-develop/Strawberry/UFBA1401.SRX
+```
+或指定输出目录：
+```bash
+python run_original_dssat.py dssat-csm-data-develop/Strawberry/UFBA1401.SRX --output-dir my_dssat_results
+```
+或指定DSSAT安装目录：
+```bash
+python run_original_dssat.py dssat-csm-data-develop/Strawberry/UFBA1401.SRX --dssat-dir /path/to/dssat
+```
+
+---
+
+## 适用场景
+
+- **模型对比**：需要获得DSSAT原版输出，与Python模型结果进行对比分析。
+- **批量实验**：自动化运行多个实验，集中管理输出文件。
+- **科研/教学**：快速复现DSSAT官方结果，便于教学演示或论文验证。
+- **数据归档**：将DSSAT输出集中保存，便于后续查找和分析。
+
+---
+
+## 总结
+
+**run_original_dssat.py** 是一个DSSAT Fortran模型的自动化运行脚本，极大简化了DSSAT实验的执行和结果管理流程，是模型对比、科研分析和自动化实验的实用工具。

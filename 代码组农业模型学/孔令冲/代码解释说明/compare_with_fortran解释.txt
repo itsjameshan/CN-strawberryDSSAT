@@ -1,0 +1,26 @@
+compare_with_fortran.py文件的代码，这个脚本最后会生成以下几个文件：
+
+主要输出文件：
+
+1. `python_model_output.csv` - Python草莓模型的输出结果
+   - 包含Python版本模拟的草莓生长数据
+
+2. **`dssat_fortran_output.csv`** - DSSAT Fortran模型的输出结果  
+   - 包含原始DSSAT Fortran版本模拟的草莓生长数据
+
+3. `comparison_report.txt` - 详细的比较报告
+   - Python模型的列名
+   - DSSAT输出的列名
+   - 两个模型共有的列名
+   - 数据形状信息（行数和列数）
+   - 比较结果（是否匹配）
+   - 如果有不匹配，会显示具体的差异
+   - DSSAT PlantGro.OUT文件的RUN部分内容（前10行数据）
+控制台输出：
+- Python模型和DSSAT输出的列名信息
+- 共有列的信息
+- 比较结果的状态信息
+
+主要功能：
+这个脚本的核心目的是比较Python版本的草莓生长模型与原始DSSAT Fortran版本的结果是否一致，通过生成这些文件来帮助您分析两个模型的输出差异，验证Python实现的正确性。
+如果您想查看具体的比较结果，可以运行脚本后查看生成的 `comparison_report.txt` 文件。

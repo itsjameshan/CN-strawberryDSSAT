@@ -1,0 +1,339 @@
+#!/usr/bin/env python3
+"""运行Python草莓模型验证，跳过DSSAT构建"""
+
+import os
+import sys
+import pandas as pd
+from pathlib import Path
+from datetime import datetime
+
+# 导入草莓模型实现
+import importlib.util
+import pathlib
+
+impl_path = pathlib.Path(__file__).resolve().parent.parent / "cropgro-strawberry-implementation.py"
+spec = importlib.util.spec_from_file_location("cropgro_strawberry_implementation", impl_path)
+
+if spec is None:
+    raise ImportError(f"无法加载模块: {impl_path}")
+
+impl_module = importlib.util.module_from_spec(spec)
+if spec.loader is None:
+    raise ImportError(f"无法获取模块加载器: {impl_path}")
+
+spec.loader.exec_module(impl_module)
+CropgroStrawberry = impl_module.CropgroStrawberry
+
+
+def parse_dssat_date(code: str) -> str:
+    """将 DSSAT YYDDD 日期码转换为 YYYY-MM-DD 字符串。"""
+    year = 2000 + int(code[:2])
+    doy = int(code[2:])
+    return datetime.strptime(f"{year} {doy}", "%Y %j").strftime("%Y-%m-%d")
+
+
+def parse_srx_file(path: str):
+    """从 SRX 文件中提取种植日期和气象站代码。"""
+    planting_code = None
+    wsta = None
+    with open(path) as f:
+        lines = f.readlines()
+    for i, line in enumerate(lines):
+        if line.startswith("@L ID_FIELD"):
+            if i + 1 < len(lines):
+                parts = lines[i + 1].split()
+                if len(parts) >= 3:
+                    wsta = parts[2]
+        if line.startswith("@P PDATE"):
+            if i + 1 < len(lines):
+                parts = lines[i + 1].split()
+                if len(parts) >= 2:
+                    planting_code = parts[1]
+    planting_date = parse_dssat_date(planting_code) if planting_code else None
+    return planting_date, wsta
+
+
+def read_wth_file(path: str) -> pd.DataFrame:
+    """将 DSSAT .WTH 文件解析为 DataFrame。"""
+    with open(path) as f:
+        lines = f.readlines()
+    start = next(i for i, l in enumerate(lines) if l.startswith("@DATE"))
+    header = lines[start].split()
+    indices = {h: idx for idx, h in enumerate(header)}
+    records = []
+    for line in lines[start + 1 :]:
+        if not line.strip() or line.startswith("*"):
+            continue
+        parts = line.split()
+        code = parts[0]
+        date = parse_dssat_date(code)
+        rec = {
+            "date": date,
+            "tmax": float(parts[indices["TMAX"]]),
+            "tmin": float(parts[indices["TMIN"]]),
+            "solar_radiation": float(parts[indices["SRAD"]]),
+            "rainfall": float(parts[indices["RAIN"]]) if "RAIN" in indices and len(parts) > indices["RAIN"] else 0.0,
+            "rh": float(parts[indices["RHUM"]]) if "RHUM" in indices and len(parts) > indices["RHUM"] else 70.0,
+            "wind_speed": float(parts[indices["WIND"]]) if "WIND" in indices and len(parts) > indices["WIND"] else 2.0,
+        }
+        records.append(rec)
+    return pd.DataFrame(records)
+
+
+def run_python_model(wth_df: pd.DataFrame, planting_date: str):
+    """使用Python模型模拟生长。"""
+    soil = {"max_root_depth": 50.0, "field_capacity": 200.0, "wilting_point": 50.0}
+    cultivar = {
+        "name": "Generic",
+        "tbase": 4.0,
+        "topt": 22.0,
+        "tmax_th": 35.0,
+        "rue": 2.5,
+        "k_light": 0.6,
+        "sla": 0.02,
+        "potential_fruits_per_crown": 10.0,
+    }
+    model = CropgroStrawberry(40.0, planting_date, soil, cultivar)
+    return model.simulate_growth(wth_df)
+
+
+def generate_validation_report(py_df: pd.DataFrame, experiment_name: str, report_dir: Path):
+    """生成Python模型的验证报告。"""
+    report_path = report_dir / f"{experiment_name}_python_validation.txt"
+    
+    with open(report_path, 'w', encoding='utf-8') as f:
+        f.write(f"Python草莓模型验证报告\n")
+        f.write(f"实验: {experiment_name}\n")
+        f.write(f"生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        f.write("=" * 60 + "\n\n")
+        
+        f.write(f"模拟参数:\n")
+        f.write(f"  纬度: 40.0°\n")
+        f.write(f"  土壤最大根深: 50.0 cm\n")
+        f.write(f"  田间持水量: 200.0 mm\n")
+        f.write(f"  萎蔫点: 50.0 mm\n")
+        f.write(f"  基本温度: 4.0°C\n")
+        f.write(f"  最适温度: 22.0°C\n")
+        f.write(f"  最大温度阈值: 35.0°C\n")
+        f.write(f"  辐射利用效率: 2.5 g/MJ\n")
+        f.write(f"  光截断系数: 0.6\n")
+        f.write(f"  比叶面积: 0.02 m²/g\n")
+        f.write(f"  单株潜在果实数: 10.0\n\n")
+        
+        f.write(f"模拟结果:\n")
+        f.write(f"  模拟天数: {len(py_df)} 天\n")
+        f.write(f"  最终生物量: {py_df['biomass'].iloc[-1]:.2f} g/plant\n")
+        f.write(f"  最终叶面积指数: {py_df['leaf_area_index'].iloc[-1]:.2f}\n")
+        f.write(f"  最终果实数: {py_df['fruit_number'].iloc[-1]:.2f}\n")
+        f.write(f"  最终阶段: {py_df['stage'].iloc[-1]}\n")
+        f.write(f"  累积热时间: {py_df['thermal_time'].iloc[-1]:.1f} 度日\n\n")
+        
+        f.write(f"时间序列统计:\n")
+        f.write(f"  生物量 - 均值: {py_df['biomass'].mean():.3f}, 最大值: {py_df['biomass'].max():.3f}\n")
+        f.write(f"  叶面积指数 - 均值: {py_df['leaf_area_index'].mean():.3f}, 最大值: {py_df['leaf_area_index'].max():.3f}\n")
+        f.write(f"  果实数 - 均值: {py_df['fruit_number'].mean():.3f}, 最大值: {py_df['fruit_number'].max():.3f}\n")
+        f.write(f"  光合作用 - 均值: {py_df['photosynthesis'].mean():.3f}, 最大值: {py_df['photosynthesis'].max():.3f}\n")
+        f.write(f"  蒸腾作用 - 均值: {py_df['transpiration'].mean():.3f}, 最大值: {py_df['transpiration'].max():.3f}\n\n")
+        
+        f.write(f"物候期进展:\n")
+        stages = py_df['stage'].unique()
+        for stage in stages:
+            first_day = py_df[py_df['stage'] == stage]['dap'].iloc[0]
+            f.write(f"  {stage}: 第 {first_day} 天\n")
+        
+        f.write(f"\n每日详细数据 (前10天和后10天):\n")
+        f.write("=" * 60 + "\n")
+        
+        # 显示前10天的数据
+        f.write(f"\n前10天数据:\n")
+        f.write("-" * 40 + "\n")
+        f.write(f"{'日期':<12} {'DAP':<4} {'阶段':<15} {'生物量':<8} {'LAI':<6} {'果实数':<6} {'光合':<6} {'蒸腾':<6}\n")
+        f.write("-" * 80 + "\n")
+        for i in range(min(10, len(py_df))):
+            row = py_df.iloc[i]
+            f.write(f"{row['date']:<12} {row['dap']:<4} {row['stage']:<15} {row['biomass']:<8.2f} {row['leaf_area_index']:<6.2f} {row['fruit_number']:<6.1f} {row['photosynthesis']:<6.2f} {row['transpiration']:<6.2f}\n")
+        
+        # 显示后10天的数据
+        if len(py_df) > 10:
+            f.write(f"\n后10天数据:\n")
+            f.write("-" * 40 + "\n")
+            f.write(f"{'日期':<12} {'DAP':<4} {'阶段':<15} {'生物量':<8} {'LAI':<6} {'果实数':<6} {'光合':<6} {'蒸腾':<6}\n")
+            f.write("-" * 80 + "\n")
+            for i in range(max(0, len(py_df)-10), len(py_df)):
+                row = py_df.iloc[i]
+                f.write(f"{row['date']:<12} {row['dap']:<4} {row['stage']:<15} {row['biomass']:<8.2f} {row['leaf_area_index']:<6.2f} {row['fruit_number']:<6.1f} {row['photosynthesis']:<6.2f} {row['transpiration']:<6.2f}\n")
+        
+        # 显示关键发育节点的数据
+        f.write(f"\n关键发育节点数据:\n")
+        f.write("=" * 60 + "\n")
+        for stage in stages:
+            stage_data = py_df[py_df['stage'] == stage]
+            if len(stage_data) > 0:
+                first_day = stage_data.iloc[0]
+                last_day = stage_data.iloc[-1]
+                f.write(f"\n{stage}阶段:\n")
+                f.write(f"  开始: 第{first_day['dap']}天 ({first_day['date']}) - 生物量: {first_day['biomass']:.2f}g, LAI: {first_day['leaf_area_index']:.2f}\n")
+                f.write(f"  结束: 第{last_day['dap']}天 ({last_day['date']}) - 生物量: {last_day['biomass']:.2f}g, LAI: {last_day['leaf_area_index']:.2f}\n")
+                f.write(f"  阶段持续: {last_day['dap'] - first_day['dap'] + 1} 天\n")
+    
+    return report_path
+
+
+def main():
+    """主函数：运行Python草莓模型验证。"""
+    print("=" * 60)
+    print("Python草莓模型验证系统")
+    print("=" * 60)
+    
+    # 获取项目根目录（脚本所在目录的父目录）
+    project_root = Path(__file__).resolve().parent.parent
+    
+    # 查找草莓实验文件
+    strawberry_dir = project_root / "dssat-csm-data-develop/Strawberry"
+    srx_files = list(strawberry_dir.glob("*.SRX"))
+    
+    if not srx_files:
+        print("未找到草莓实验文件 (.SRX)")
+        return
+    
+    print(f"找到 {len(srx_files)} 个草莓实验文件:")
+    for f in srx_files:
+        print(f"  - {f.name}")
+    
+    # 创建输出目录
+    output_dir = project_root / "python_model_outputs"
+    output_dir.mkdir(exist_ok=True)
+    
+    # 创建报告目录
+    report_dir = project_root / "python_validation_reports"
+    report_dir.mkdir(exist_ok=True)
+    
+    results_summary = []
+    all_daily_data = []  # 存储所有实验的每日数据
+    
+    for srx_file in srx_files:
+        print(f"\n处理实验: {srx_file.name}")
+        
+        try:
+            # 解析SRX文件
+            planting_date, wsta = parse_srx_file(str(srx_file))
+            if planting_date is None or wsta is None:
+                print(f"  跳过 {srx_file.name}: 无法解析SRX文件")
+                continue
+            
+            print(f"  种植日期: {planting_date}")
+            print(f"  气象站: {wsta}")
+            
+            # 查找天气文件
+            year = planting_date[:4]
+            weather_dir = project_root / "dssat-csm-data-develop/Weather"
+            weather_files = list(weather_dir.glob(f"{wsta}{year[2:]}*.WTH"))
+            
+            if not weather_files:
+                print(f"  跳过 {srx_file.name}: 未找到天气文件")
+                continue
+            
+            wth_file = weather_files[0]
+            print(f"  天气文件: {wth_file.name}")
+            
+            # 读取天气数据
+            wth_df = read_wth_file(str(wth_file))
+            print(f"  天气数据: {len(wth_df)} 天")
+            
+            # 运行Python模型
+            results = run_python_model(wth_df, planting_date)
+            
+            # 保存结果
+            output_file = output_dir / f"{srx_file.stem}_python_results.csv"
+            results.to_csv(output_file, index=False)
+            
+            # 生成每日数据摘要
+            daily_summary_file = output_dir / f"{srx_file.stem}_daily_summary.csv"
+            # 选择关键列进行每日摘要
+            daily_summary = results[['date', 'dap', 'stage', 'thermal_time', 'biomass', 
+                                   'leaf_area_index', 'root_depth', 'fruit_number', 
+                                   'fruit_biomass', 'leaf_biomass', 'stem_biomass', 
+                                   'root_biomass', 'crown_number', 'runner_number',
+                                   'water_stress', 'daylength', 'photosynthesis', 'transpiration']].copy()
+            daily_summary.to_csv(daily_summary_file, index=False)
+            
+            # 生成验证报告
+            report_file = generate_validation_report(results, srx_file.stem, report_dir)
+            
+            print(f"  模拟完成: {len(results)} 天")
+            print(f"  最终生物量: {results['biomass'].iloc[-1]:.2f} g/plant")
+            print(f"  最终叶面积指数: {results['leaf_area_index'].iloc[-1]:.2f}")
+            print(f"  最终果实数: {results['fruit_number'].iloc[-1]:.2f}")
+            print(f"  结果保存到: {output_file}")
+            print(f"  每日摘要保存到: {daily_summary_file}")
+            print(f"  报告保存到: {report_file}")
+            
+            # 记录结果摘要
+            results_summary.append({
+                'experiment': srx_file.stem,
+                'days': len(results),
+                'final_biomass': results['biomass'].iloc[-1],
+                'final_lai': results['leaf_area_index'].iloc[-1],
+                'final_fruits': results['fruit_number'].iloc[-1],
+                'final_stage': results['stage'].iloc[-1],
+                'max_biomass': results['biomass'].max(),
+                'max_lai': results['leaf_area_index'].max(),
+                'max_fruits': results['fruit_number'].max(),
+                'total_thermal_time': results['thermal_time'].iloc[-1]
+            })
+            
+            # 存储每日数据
+            all_daily_data.append((srx_file.stem, daily_summary))
+            
+        except Exception as e:
+            print(f"  处理 {srx_file.name} 时出错: {e}")
+    
+    # 生成总体摘要报告
+    summary_file = report_dir / "validation_summary.txt"
+    with open(summary_file, 'w', encoding='utf-8') as f:
+        f.write("Python草莓模型验证摘要\n")
+        f.write("=" * 40 + "\n\n")
+        f.write(f"验证时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        f.write(f"成功验证实验数: {len(results_summary)}\n\n")
+        
+        f.write("各实验结果:\n")
+        f.write("-" * 40 + "\n")
+        for result in results_summary:
+            f.write(f"{result['experiment']}:\n")
+            f.write(f"  模拟天数: {result['days']}\n")
+            f.write(f"  最终生物量: {result['final_biomass']:.2f} g/plant\n")
+            f.write(f"  最终叶面积指数: {result['final_lai']:.2f}\n")
+            f.write(f"  最终果实数: {result['final_fruits']:.2f}\n")
+            f.write(f"  最终阶段: {result['final_stage']}\n")
+            f.write(f"  最大生物量: {result['max_biomass']:.2f} g/plant\n")
+            f.write(f"  最大叶面积指数: {result['max_lai']:.2f}\n")
+            f.write(f"  最大果实数: {result['max_fruits']:.2f}\n")
+            f.write(f"  总累积热时间: {result['total_thermal_time']:.1f} 度日\n\n")
+    
+    print(f"\n所有验证完成！")
+    print(f"结果保存在: {output_dir}")
+    print(f"报告保存在: {report_dir}")
+    print(f"摘要报告: {summary_file}")
+    
+    # 生成所有实验的每日数据汇总
+    if all_daily_data:
+        combined_daily_file = output_dir / "all_experiments_daily_data.csv"
+        combined_data = []
+        
+        for experiment_name, daily_df in all_daily_data:
+            # 添加实验名称列
+            daily_df_copy = daily_df.copy()
+            daily_df_copy['experiment'] = experiment_name
+            combined_data.append(daily_df_copy)
+        
+        if combined_data:
+            combined_df = pd.concat(combined_data, ignore_index=True)
+            # 重新排列列顺序，将experiment列放在前面
+            cols = ['experiment'] + [col for col in combined_df.columns if col != 'experiment']
+            combined_df = combined_df[cols]
+            combined_df.to_csv(combined_daily_file, index=False)
+            print(f"所有实验每日数据汇总: {combined_daily_file}")
+
+
+if __name__ == "__main__":
+    main() 

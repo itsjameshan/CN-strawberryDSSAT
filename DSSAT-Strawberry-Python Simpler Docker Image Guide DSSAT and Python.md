@@ -1,20 +1,22 @@
 # DSSAT-Strawberry-Python Docker Image Guide
-#Build image first
+##Build image first
+
 docker build . -f dssat-docker-master/Dockerfile.minimal-python -t dssat-strawberry-python-numba2
-  Overview
+
+- Overview
 
   This guide documents the dssat-strawberry-python-numba2 Docker image that
   combines DSSAT (Decision Support System for Agrotechnology Transfer)
   with Python environment for running strawberry crop simulations and
   analysis.
 
-  Image Information
+- Image Information
 
   - Image Name: dssat-strawberry-python-numba2
   - Image ID: 0efbd830c067
   - Tag: latest
 
-  Involved Scripts and Files
+-Involved Scripts and Files
 
   1. Docker Configuration Files
 

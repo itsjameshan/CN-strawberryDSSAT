@@ -8,7 +8,6 @@ This repository contains a Python implementation of the CROPGRO-Strawberry crop 
 ## 🌐 Web Interface
 ## 🌐 网页界面
 
-Visit our interactive web interface: **https://cnstrawberrydssat.netlify.app/**
 访问我们的交互式网页界面：**https://cnstrawberrydssat.netlify.app/**
 
 The web interface provides:

@@ -1,0 +1,16 @@
+$BATCH(STRAWBERRY)
+!
+! Directory    : /data/Strawberry
+! Command Line : /app/dssat/dscsm048 CRGRO048 B StrawberryAllTreatments.v48
+! Crop         : Strawberry
+! Experiment   : All Strawberry Experiments with All Treatments
+! ExpNo        : 1-7
+!
+@FILEX                                       TRTNO     RP     SQ     OP     CO
+/Strawberry/UFBA1401.SRX                       1      1      0      1      0
+/Strawberry/UFBA1601.SRX                       1      1      0      1      0
+/Strawberry/UFBA1601.SRX                       2      1      0      1      0
+/Strawberry/UFBA1701.SRX                       1      1      0      1      0
+/Strawberry/UFBA1701.SRX                       2      1      0      1      0
+/Strawberry/UFWM1401.SRX                       1      1      0      1      0
+/Strawberry/UFWM1401.SRX                       2      1      0      1      0

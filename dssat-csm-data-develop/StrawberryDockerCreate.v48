@@ -1,0 +1,9 @@
+$BATCH(STRAWBERRY)
+!
+! Docker-compatible Strawberry batch file
+! Directory    : C:\DSSAT48\Strawberry
+! Command Line : C:\DSSAT48\DSCSM048.EXE CRGRO048 B DSSBatch.v48
+! Crop         : Strawberry
+! Experiment   : UFWM1401.SRX
+! ExpNo        : 1
+! Debug        : C:\DSSAT48\DSCSM048.EXE CRGRO048 

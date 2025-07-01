@@ -1,0 +1,29 @@
+*WARNING DETAIL FILE
+
+******************************************************************************
+
+*DSSAT Cropping System Model Ver. 4.8.5.017 pre-release  JUN 28, 2025 04:27:17
+
+*RUN   1        : Radiance                  CRGRO048 UFWM1401    1
+ MODEL          : CRGRO048 - Strawberry
+ EXPERIMENT     : UFWM1401 SR 2014 WIMAUMA STRAWBERRY GROWTH AND YIELD ANALYSIS
+ DATA PATH      :
+ TREATMENT  1   : Radiance                  CRGRO048
+  
+
+ SOILDYN  YEAR DOY = 2014 274
+ Soil photosynthesis factor (SLPF) = 0.95                                      
+
+******************************************************************************
+
+*DSSAT Cropping System Model Ver. 4.8.5.017 pre-release  JUN 28, 2025 04:27:19
+
+*RUN   2        : Sensation                 CRGRO048 UFWM1401    2
+ MODEL          : CRGRO048 - Strawberry
+ EXPERIMENT     : UFWM1401 SR 2014 WIMAUMA STRAWBERRY GROWTH AND YIELD ANALYSIS
+ DATA PATH      :
+ TREATMENT  2   : Sensation                 CRGRO048
+  
+
+ SOILDYN  YEAR DOY = 2014 274
+ Soil photosynthesis factor (SLPF) = 0.95                                      

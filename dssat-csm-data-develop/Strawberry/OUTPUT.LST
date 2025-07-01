@@ -1,0 +1,19 @@
+*Output file list
+
+@FILENAME          DESCRIPTION
+ETPhot.OUT         Daily evapotranspiration output file              
+MgmtOps.OUT        Daily management operations output file           
+PlantC.OUT         Daily plant carbon output file                    
+PlantGro.OUT       Daily plant growth output file                    
+PlantN.OUT         Daily plant nitrogen output file                  
+SoilOrg.OUT        Daily soil carbon output file                     
+Weather.OUT        Daily weather output file                         
+FreshWt.OUT        Daily fresh fruit weight                          
+Evaluate.OUT       Evaluation output file (simulated vs. measured)   
+MgmtEvent.OUT      Management event output file                      
+OVERVIEW.OUT       Seasonal overview output file                     
+SoilCBal.OUT       Seasonal soil carbon balance                      
+SoilCBalSum.OUT    Soil C balance summary                            
+Summary.OUT        Seasonal summary output file                      
+INFO.OUT           Information output file                           
+WARNING.OUT        Warning messages                                  

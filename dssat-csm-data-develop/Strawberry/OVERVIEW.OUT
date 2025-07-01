@@ -1,0 +1,209 @@
+*SIMULATION OVERVIEW FILE
+
+*DSSAT Cropping System Model Ver. 4.8.5.017 pre-release  JUN 28, 2025 04:27:17
+
+*RUN   1        : Radiance                  CRGRO048 UFWM1401    1
+ MODEL          : CRGRO048 - Strawberry
+ EXPERIMENT     : UFWM1401 SR 2014 WIMAUMA STRAWBERRY GROWTH AND YIELD ANALYSIS
+ DATA PATH      :
+ TREATMENT  1   : Radiance                  CRGRO048
+
+
+ CROP           : Strawberry       CULTIVAR : Radiance         ECOTYPE :SR0001
+ STARTING DATE  : OCT  1 2014
+ PLANTING DATE  : OCT  9 2014      PLANTS/m2 :     4.3    ROW SPACING : 121.cm
+ HARVEST DATE   : NOV 23 2014
+ WEATHER        : UFWM   2014
+ SOIL           : UFGA010700     TEXTURE : -99   - Candler
+ WATER BALANCE  : NOT SIMULATED ; NO H2O-STRESS
+ IRRIGATION     :
+ NITROGEN BAL.  : NOT SIMULATED ; NO N-STRESS
+ N-FERTILIZER   :
+ RESIDUE/MANURE :
+ ENVIRONM. OPT. : DAYL=    0.00  SRAD=    0.00  TMAX=    0.00  TMIN=    0.00
+                  RAIN=    0.00  CO2 =    0.00  DEW =    0.00  WIND=    0.00
+ SIMULATION OPT : WATER   :N  NITROGEN:N  N-FIX:N  PHOSPH :N  PESTS  :N
+                  PHOTO   :L  ET      :R  INFIL:S  HYDROL :R  SOM    :G
+                  CO2 399ppm  NSWIT   :1  EVAP :R  SOIL   :2  STEMP  :D
+ MANAGEMENT OPT : PLANTING:R  IRRIG   :R  FERT :R  RESIDUE:R  HARVEST:R
+                  WEATHER :M  TILLAGE :N
+
+*SUMMARY OF SOIL AND GENETIC INPUT PARAMETERS
+
+ Strawberry       CULTIVAR: SR0001-Radiance           ECOTYPE: SR0001
+ CSDVAR :12.33  PPSEN  : 0.00  EMG-FLW:26.00  FLW-FSD: 8.20  FSD-PHM :110.00
+ WTPSD  :0.005  SDPDVR :185.0  SDFDUR :11.70  PODDUR :45.00  XFRUIT  :  0.96
+ THRESH : 20.0  SDPRO  :0.300  SDLIP   : 0.050
+
+
+*SIMULATED CROP AND SOIL STATUS AT MAIN DEVELOPMENT STAGES
+
+ RUN NO.     1     Radiance                
+
+        CROP GROWTH     BIOMASS         LEAF   CROP N     STRESS      STRESS                                           
+   DATE  AGE STAGE        kg/ha    LAI   NUM  kg/ha  %   H2O  Nitr Phos1 Phos2  RSTG                                   
+ ------  --- ----------   -----  -----  ----  ---  ---  ----  ----  ----  ----  ----                                   
+  1 OCT    0 Start Sim        0   0.00   0.0    0  0.0  0.00  0.00  0.00  0.00     0
+  9 OCT    0 Transplant     123   0.07   4.6    4  3.6  0.00  0.00  0.00  0.00     0
+ 31 OCT   22 First Flwr     315   0.18  12.2   10  3.3  0.00  0.00  0.00  0.00     1
+  5 NOV   27 First Pod      413   0.25  13.6   14  3.3  0.00  0.00  0.00  0.00     2
+ 10 NOV   32 First Pod      512   0.34  15.2   17  3.3  0.00  0.00  0.00  0.00     5
+ 10 NOV   32 First Seed     512   0.34  15.2   17  3.3  0.00  0.00  0.00  0.00     5
+ 19 MAR  161 End Msnode    2906   1.71  37.1  100  3.5  0.00  0.00  0.00  0.00     5
+ 28 MAR  170 Harvest       3107   1.68  37.1  106  3.4  0.00  0.00  0.00  0.00     5
+
+
+*MAIN GROWTH AND DEVELOPMENT VARIABLES
+
+@     VARIABLE                                         SIMULATED     MEASURED
+      --------                                         ---------     --------
+      Anthesis day (dap)                                      22          -99
+      First pod day (dap)                                     32          -99
+      First seed day (dap)                                    32          -99
+      Physiological maturity day (dap)                       -99          -99
+      Yield at harvest maturity (kg [dm]/ha)                  68          -99
+      Pod/Ear/Panicle weight at maturity (kg [dm]/ha)        185          -99
+      Tops weight at anthesis (kg [dm]/ha)                   315          -99
+      Biomass at maturity (total crop minus roots) (kg[d    3107          -99
+      By-product produced (stalk) at maturity (kg[dm]/ha    3040          -99
+      Number at maturity (no/m2)                            4079          -99
+      Unit wt at maturity (g [dm]/unit)                   0.0017          -99
+      Number at maturity (no/unit)                        185.00          -99
+      Harvest index at maturity                            0.022          -99
+      Threshing % at maturity                              36.94          -99
+      Leaf area index, maximum                              1.84          -99
+      Leaf number per stem at maturity                     37.14          -99
+      Canopy height (m)                                     0.23          -99
+      Tops N at anthesis (kg/ha)                              10          -99
+      Tops N at maturity (kg/ha)                             106          -99
+      Stem N at maturity (kg/ha)                              34          -99
+      Grain N at maturity (kg/ha)                              3          -99
+      Grain N at maturity (%)                               4.60          -99
+      Grain oil at maturity (%)                             3.72          -99
+
+
+*ENVIRONMENTAL AND STRESS FACTORS
+
+ |-----Development Phase------|--------------------------------------Environment--------------------------------------|-----------------Stress-----------------|
+                              |---------------Average--------------|-----Cumulative-----|--------Count of days--------|          (0=Min, 1=Max Stress)         |
+                         Time  Temp  Temp  Temp Solar Photop                Evapo    Pot TMIN TMIN TMAX TMAX TMAX RAIN|----Water----|---Nitrogen--|-Phosphorus-|
+                         Span   Max   Min  Mean   Rad  [day]    CO2   Rain  Trans     ET   <    <    >    >    >    >   Photo         Photo         Photo
+                         days     C     C     C MJ/m2     hr    ppm     mm     mm    mm   0 C  2 C 30 C 32 C 34 C  0mm  synth Growth  synth Growth  synth Growth
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ First Flower-First Seed   10  22.5  10.9  16.7  14.4  10.80  399.3   12.7    0.0    0.0    0    0    0    0    0    3  0.000  0.000  0.000  0.000  0.000  0.000
+ First Seed - Phys. Mat.  138  22.3  11.2  16.8  13.2  10.81  399.7  385.8    0.0    0.0    1    1    0    0    0   32  0.000  0.000  0.000  0.000  0.000  0.000
+   
+ Planting to Harvest      171  23.0  11.7  17.4  13.8  10.86  399.6  441.7    0.0    0.0    1    1    0    0    0   38  0.000  0.000  0.000  0.000  0.000  0.000
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------
+
+                Strawberry YIELD :      185 kg/ha    [Dry weight] 
+
+**************************************************************************************************************
+
+*DSSAT Cropping System Model Ver. 4.8.5.017 pre-release  JUN 28, 2025 04:27:19
+
+*RUN   2        : Sensation                 CRGRO048 UFWM1401    2
+ MODEL          : CRGRO048 - Strawberry
+ EXPERIMENT     : UFWM1401 SR 2014 WIMAUMA STRAWBERRY GROWTH AND YIELD ANALYSIS
+ DATA PATH      :
+ TREATMENT  2   : Sensation                 CRGRO048
+
+
+ CROP           : Strawberry       CULTIVAR : Sensation        ECOTYPE :SR0002
+ STARTING DATE  : OCT  1 2014
+ PLANTING DATE  : OCT  9 2014      PLANTS/m2 :     4.3    ROW SPACING : 121.cm
+ HARVEST DATE   : NOV 23 2014
+ WEATHER        : UFWM   2014
+ SOIL           : UFGA010700     TEXTURE : -99   - Candler
+ WATER BALANCE  : NOT SIMULATED ; NO H2O-STRESS
+ IRRIGATION     :
+ NITROGEN BAL.  : NOT SIMULATED ; NO N-STRESS
+ N-FERTILIZER   :
+ RESIDUE/MANURE :
+ ENVIRONM. OPT. : DAYL=    0.00  SRAD=    0.00  TMAX=    0.00  TMIN=    0.00
+                  RAIN=    0.00  CO2 =    0.00  DEW =    0.00  WIND=    0.00
+ SIMULATION OPT : WATER   :N  NITROGEN:N  N-FIX:N  PHOSPH :N  PESTS  :N
+                  PHOTO   :L  ET      :R  INFIL:S  HYDROL :R  SOM    :G
+                  CO2 399ppm  NSWIT   :1  EVAP :R  SOIL   :2  STEMP  :D
+ MANAGEMENT OPT : PLANTING:R  IRRIG   :R  FERT :R  RESIDUE:R  HARVEST:R
+                  WEATHER :M  TILLAGE :N
+
+*SUMMARY OF SOIL AND GENETIC INPUT PARAMETERS
+
+ Strawberry       CULTIVAR: SR0002-Sensation          ECOTYPE: SR0002
+ CSDVAR :12.33  PPSEN  : 0.00  EMG-FLW:27.00  FLW-FSD: 8.40  FSD-PHM : 91.50
+ WTPSD  :0.005  SDPDVR :180.0  SDFDUR :13.30  PODDUR :42.40  XFRUIT  :  0.95
+ THRESH : 20.0  SDPRO  :0.300  SDLIP   : 0.050
+
+
+*SIMULATED CROP AND SOIL STATUS AT MAIN DEVELOPMENT STAGES
+
+ RUN NO.     2     Sensation               
+
+        CROP GROWTH     BIOMASS         LEAF   CROP N     STRESS      STRESS                                           
+   DATE  AGE STAGE        kg/ha    LAI   NUM  kg/ha  %   H2O  Nitr Phos1 Phos2  RSTG                                   
+ ------  --- ----------   -----  -----  ----  ---  ---  ----  ----  ----  ----  ----                                   
+  1 OCT    0 Start Sim        0   0.00   0.0    0  0.0  0.00  0.00  0.00  0.00     0
+  9 OCT    0 Transplant     123   0.07   4.6    4  3.6  0.00  0.00  0.00  0.00     0
+  1 NOV   23 First Flwr     352   0.20  12.5   12  3.3  0.00  0.00  0.00  0.00     1
+ 10 NOV   32 First Pod      546   0.36  15.2   18  3.4  0.00  0.00  0.00  0.00     2
+ 12 NOV   34 First Pod      613   0.41  15.8   21  3.4  0.00  0.00  0.00  0.00     5
+ 12 NOV   34 First Seed     613   0.41  15.8   21  3.4  0.00  0.00  0.00  0.00     5
+  6 FEB  120 End Msnode    2608   1.68  32.3  106  4.1  0.00  0.00  0.00  0.00     5
+ 21 MAR  163 End Pod       2960   1.59  32.3  115  3.9  0.00  0.00  0.00  0.00     5
+ 22 MAR  164 Phys. Mat     3089   1.58  32.3  119  3.8  0.00  0.00  0.00  0.00     8
+ 22 MAR  164 Harv. Mat     3089   1.58  32.3  119  3.8  0.00  0.00  0.00  0.00     8
+ 28 MAR  170 Harvest       2717   1.48  32.3  104  3.8  0.00  0.00  0.00  0.00     8
+
+
+*MAIN GROWTH AND DEVELOPMENT VARIABLES
+
+@     VARIABLE                                         SIMULATED     MEASURED
+      --------                                         ---------     --------
+      Anthesis day (dap)                                      23          -99
+      First pod day (dap)                                     34          -99
+      First seed day (dap)                                    34          -99
+      Physiological maturity day (dap)                       164          -99
+      Harvest maturity day (dap)                             164          -99
+      Yield at harvest maturity (kg [dm]/ha)                 114          -99
+      Pod/Ear/Panicle weight at maturity (kg [dm]/ha)        116          -99
+      Tops weight at anthesis (kg [dm]/ha)                   352          -99
+      Biomass at maturity (total crop minus roots) (kg[d    2717          -99
+      By-product produced (stalk) at maturity (kg[dm]/ha    2600          -99
+      Number at maturity (no/m2)                            4012          -99
+      Unit wt at maturity (g [dm]/unit)                   0.0028          -99
+      Number at maturity (no/unit)                        180.00          -99
+      Harvest index at maturity                            0.042          -99
+      Threshing % at maturity                              97.97          -99
+      Leaf area index, maximum                              1.82          -99
+      Leaf number per stem at maturity                     32.35          -99
+      Canopy height (m)                                     0.24          -99
+      Tops N at anthesis (kg/ha)                              12          -99
+      Tops N at maturity (kg/ha)                             104          -99
+      Stem N at maturity (kg/ha)                              30          -99
+      Grain N at maturity (kg/ha)                              5          -99
+      Grain N at maturity (%)                               4.61          -99
+      Grain oil at maturity (%)                             3.55          -99
+
+
+*ENVIRONMENTAL AND STRESS FACTORS
+
+ |-----Development Phase------|--------------------------------------Environment--------------------------------------|-----------------Stress-----------------|
+                              |---------------Average--------------|-----Cumulative-----|--------Count of days--------|          (0=Min, 1=Max Stress)         |
+                         Time  Temp  Temp  Temp Solar Photop                Evapo    Pot TMIN TMIN TMAX TMAX TMAX RAIN|----Water----|---Nitrogen--|-Phosphorus-|
+                         Span   Max   Min  Mean   Rad  [day]    CO2   Rain  Trans     ET   <    <    >    >    >    >   Photo         Photo         Photo
+                         days     C     C     C MJ/m2     hr    ppm     mm     mm    mm   0 C  2 C 30 C 32 C 34 C  0mm  synth Growth  synth Growth  synth Growth
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ First Flower-First Seed   11  23.3  11.2  17.2  14.6  10.76  399.3   12.7    0.0    0.0    0    0    0    0    0    3  0.000  0.000  0.000  0.000  0.000  0.000
+ First Seed - Phys. Mat.  130  22.2  11.1  16.6  13.0  10.75  399.7  368.6    0.0    0.0    1    1    0    0    0   29  0.000  0.000  0.000  0.000  0.000  0.000
+   
+ Planting to Harvest      171  23.0  11.7  17.4  13.8  10.86  399.6  441.7    0.0    0.0    1    1    0    0    0   38  0.000  0.000  0.000  0.000  0.000  0.000
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------
+
+                Strawberry YIELD :      116 kg/ha    [Dry weight] 
+
+**************************************************************************************************************

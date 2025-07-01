@@ -1,0 +1,266 @@
+# Comprehensive DSSAT + Python Environment Dockerfile
+# This Dockerfile combines DSSAT Fortran compilation with Python environment setup
+# including all functionality from improved_setup_script.sh
+
+# Stage 1: Build DSSAT from source  
+FROM m.daocloud.io/docker.io/library/ubuntu:22.04 AS dssat-builder
+
+# Set environment variables to avoid interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=UTC
+
+# Configure Ubuntu mirrors BEFORE apt-get update
+RUN sed -i 's|http://archive.ubuntu.com/ubuntu/|https://mirrors.tuna.tsinghua.edu.cn/ubuntu/|g' /etc/apt/sources.list && \
+    sed -i 's|http://security.ubuntu.com/ubuntu/|https://mirrors.tuna.tsinghua.edu.cn/ubuntu/|g' /etc/apt/sources.list && \
+    apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    gfortran \
+    git \
+    ca-certificates \
+    wget \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy DSSAT source code
+COPY dssat-csm-os-develop /dssat-csm-os
+
+# Build DSSAT with enhanced Fortran flags for compatibility
+WORKDIR /dssat-csm-os
+RUN mkdir -p build
+WORKDIR /dssat-csm-os/build
+
+# Configure and build DSSAT with compatibility flags
+RUN cmake -DCMAKE_INSTALL_PREFIX=/app/dssat \
+          -DCMAKE_Fortran_FLAGS="-fallow-argument-mismatch -std=legacy -w -fno-range-check -ffixed-form -ffixed-line-length-none" \
+          -DCMAKE_BUILD_TYPE=Release \
+          .. && \
+    make -j$(nproc) && \
+    make install
+
+# Stage 2: Create comprehensive Python + DSSAT environment
+FROM m.daocloud.io/docker.io/library/ubuntu:22.04
+
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=UTC
+ENV PYTHONUNBUFFERED=1
+ENV PIP_NO_CACHE_DIR=1
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# Create working directory
+WORKDIR /app
+
+# Configure Ubuntu mirrors BEFORE apt-get update
+RUN sed -i 's|http://archive.ubuntu.com/ubuntu/|https://mirrors.tuna.tsinghua.edu.cn/ubuntu/|g' /etc/apt/sources.list && \
+    sed -i 's|http://security.ubuntu.com/ubuntu/|https://mirrors.tuna.tsinghua.edu.cn/ubuntu/|g' /etc/apt/sources.list && \
+    apt-get update && apt-get install -y \
+    build-essential \
+    gfortran \
+    libopenblas-dev \
+    liblapack-dev \
+    libhdf5-dev \
+    pkg-config \
+    git \
+    wget \
+    curl \
+    vim \
+    less \
+    htop \
+    python3 \
+    python3-pip \
+    python3-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy DSSAT binaries and utilities from builder stage
+COPY --from=dssat-builder /app/dssat /app/dssat
+
+# Create bulletproof pip configuration using multiple mirrors
+RUN mkdir -p /root/.pip && \
+    echo '[global]' > /root/.pip/pip.conf && \
+    echo 'index-url = https://pypi.org/simple/' >> /root/.pip/pip.conf && \
+    echo 'extra-index-url = ' >> /root/.pip/pip.conf && \
+    echo '    https://pypi.tuna.tsinghua.edu.cn/simple/' >> /root/.pip/pip.conf && \
+    echo '    https://mirrors.aliyun.com/pypi/simple/' >> /root/.pip/pip.conf && \
+    echo '    https://pypi.douban.com/simple/' >> /root/.pip/pip.conf && \
+    echo '    https://pypi.mirrors.ustc.edu.cn/simple/' >> /root/.pip/pip.conf && \
+    echo 'trusted-host = ' >> /root/.pip/pip.conf && \
+    echo '    pypi.org' >> /root/.pip/pip.conf && \
+    echo '    pypi.python.org' >> /root/.pip/pip.conf && \
+    echo '    files.pythonhosted.org' >> /root/.pip/pip.conf && \
+    echo '    pypi.tuna.tsinghua.edu.cn' >> /root/.pip/pip.conf && \
+    echo '    mirrors.aliyun.com' >> /root/.pip/pip.conf && \
+    echo '    pypi.douban.com' >> /root/.pip/pip.conf && \
+    echo '    pypi.mirrors.ustc.edu.cn' >> /root/.pip/pip.conf && \
+    echo 'timeout = 300' >> /root/.pip/pip.conf && \
+    echo 'retries = 10' >> /root/.pip/pip.conf
+
+# Create symlink for python and upgrade pip with retry logic
+RUN ln -sf /usr/bin/python3 /usr/bin/python && \
+    for i in 1 2 3; do \
+        python3 -m pip install --upgrade pip setuptools wheel && break || sleep 10; \
+    done
+
+# Install Python packages in optimized order (dependencies first) with retry logic
+# Core scientific computing packages
+RUN for i in 1 2 3; do \
+        python3 -m pip install --no-cache-dir numpy>=1.19.0 scipy>=1.7.0 && break || sleep 10; \
+    done
+
+# Data manipulation and visualization
+RUN for i in 1 2 3; do \
+        python3 -m pip install --no-cache-dir pandas>=1.3.0 matplotlib>=3.3.0 seaborn>=0.11.0 plotly>=5.0.0 && break || sleep 10; \
+    done
+
+# Performance optimization
+RUN for i in 1 2 3; do \
+        python3 -m pip install --no-cache-dir numba>=0.56.0 && break || sleep 10; \
+    done
+
+# Data handling and I/O
+RUN for i in 1 2 3; do \
+        python3 -m pip install --no-cache-dir openpyxl>=3.0.0 xlrd>=2.0.0 && break || sleep 10; \
+    done
+
+# Development and analysis tools
+RUN for i in 1 2 3; do \
+        python3 -m pip install --no-cache-dir jupyter>=1.0.0 ipython>=7.0.0 pytest>=6.0.0 black>=21.0.0 flake8>=3.9.0 && break || sleep 10; \
+    done
+
+# Copy project files
+COPY . /app/project
+
+# Copy DSSAT data files to the appropriate location
+COPY dssat-csm-data-develop /app/dssat-data
+
+# Create symlinks for easy access to DSSAT data
+RUN mkdir -p /app/dssat/data && \
+    ln -sf /app/dssat-data/* /app/dssat/data/ 2>/dev/null || true
+
+# Create directory structure for DSSAT operations
+RUN mkdir -p /app/dssat/BatchFiles && \
+    mkdir -p /app/dssat/Strawberry
+
+# Copy strawberry data files to DSSAT directory
+RUN if [ -d "/app/dssat-data/Strawberry" ]; then \
+        cp -r /app/dssat-data/Strawberry/* /app/dssat/Strawberry/ 2>/dev/null || true; \
+    fi
+
+# Copy weather files to strawberry directory
+RUN if [ -d "/app/dssat-data/Weather" ]; then \
+        cp /app/dssat-data/Weather/*.WTH /app/dssat/Strawberry/ 2>/dev/null || true; \
+    fi
+
+# Create DSSAT batch file for strawberry simulations
+RUN echo '$BATCH(STRAWBERRY)' > /app/dssat/BatchFiles/STRB.V48 && \
+    echo '@FILEX' >> /app/dssat/BatchFiles/STRB.V48 && \
+    echo '              TRTNO     RP     SQ     OP     CO' >> /app/dssat/BatchFiles/STRB.V48 && \
+    echo '../Strawberry/UFBA1401.SRX           1      1      0      1      0' >> /app/dssat/BatchFiles/STRB.V48 && \
+    echo '../Strawberry/UFBA1601.SRX           1      1      0      1      0' >> /app/dssat/BatchFiles/STRB.V48 && \
+    echo '../Strawberry/UFBA1601.SRX           2      1      0      1      0' >> /app/dssat/BatchFiles/STRB.V48 && \
+    echo '../Strawberry/UFBA1701.SRX           1      1      0      1      0' >> /app/dssat/BatchFiles/STRB.V48 && \
+    echo '../Strawberry/UFBA1701.SRX           2      1      0      1      0' >> /app/dssat/BatchFiles/STRB.V48 && \
+    echo '../Strawberry/UFWM1401.SRX           1      1      0      1      0' >> /app/dssat/BatchFiles/STRB.V48 && \
+    echo '../Strawberry/UFWM1401.SRX           2      1      0      1      0' >> /app/dssat/BatchFiles/STRB.V48
+
+# Create DSSAT configuration file
+RUN echo '*DSSAT 4.8 CONFIGURATION FILE' > /app/dssat/DSSATPRO.L48 && \
+    echo '! Default settings for DSSAT' >> /app/dssat/DSSATPRO.L48 && \
+    echo '' >> /app/dssat/DSSATPRO.L48 && \
+    echo '$BATCH(STRAWBERRY)' >> /app/dssat/DSSATPRO.L48
+
+# Create convenience scripts
+RUN echo '#!/bin/bash' > /app/run_python_model.sh && \
+    echo 'cd /app/project' >> /app/run_python_model.sh && \
+    echo 'python cropgro-strawberry-implementation.py "$@"' >> /app/run_python_model.sh && \
+    chmod +x /app/run_python_model.sh
+
+RUN echo '#!/bin/bash' > /app/run_python_tests.sh && \
+    echo 'cd /app/project' >> /app/run_python_tests.sh && \
+    echo 'python cropgro-strawberry-test1.py' >> /app/run_python_tests.sh && \
+    chmod +x /app/run_python_tests.sh
+
+RUN echo '#!/bin/bash' > /app/run_dssat_batch.sh && \
+    echo 'cd /app/dssat/BatchFiles' >> /app/run_dssat_batch.sh && \
+    echo '../dscsm048 CRGRO048 B STRB.V48' >> /app/run_dssat_batch.sh && \
+    chmod +x /app/run_dssat_batch.sh
+
+RUN echo '#!/bin/bash' > /app/run_dssat_single.sh && \
+    echo 'cd /app/dssat/Strawberry' >> /app/run_dssat_single.sh && \
+    echo 'if [ $# -eq 0 ]; then' >> /app/run_dssat_single.sh && \
+    echo '    echo "Usage: /app/run_dssat_single.sh <experiment_file.SRX>"' >> /app/run_dssat_single.sh && \
+    echo '    echo "Available experiments:"' >> /app/run_dssat_single.sh && \
+    echo '    ls *.SRX 2>/dev/null || echo "No SRX files found"' >> /app/run_dssat_single.sh && \
+    echo '    exit 1' >> /app/run_dssat_single.sh && \
+    echo 'fi' >> /app/run_dssat_single.sh && \
+    echo '../dscsm048 CRGRO048 A "$1"' >> /app/run_dssat_single.sh && \
+    chmod +x /app/run_dssat_single.sh
+
+RUN echo '#!/bin/bash' > /app/compare_models.sh && \
+    echo 'cd /app/project' >> /app/compare_models.sh && \
+    echo 'if [ $# -eq 0 ]; then' >> /app/compare_models.sh && \
+    echo '    echo "Usage: /app/compare_models.sh <experiment_file.SRX>"' >> /app/compare_models.sh && \
+    echo '    exit 1' >> /app/compare_models.sh && \
+    echo 'fi' >> /app/compare_models.sh && \
+    echo 'python compare_with_fortran.py "$1" --dssat-dir /app/dssat' >> /app/compare_models.sh && \
+    chmod +x /app/compare_models.sh
+
+RUN echo '#!/bin/bash' > /app/validate_models.sh && \
+    echo 'cd /app/project' >> /app/validate_models.sh && \
+    echo 'if [ $# -eq 0 ]; then' >> /app/validate_models.sh && \
+    echo '    echo "Usage: /app/validate_models.sh <experiment_file.SRX> [tolerance]"' >> /app/validate_models.sh && \
+    echo '    exit 1' >> /app/validate_models.sh && \
+    echo 'fi' >> /app/validate_models.sh && \
+    echo 'TOLERANCE=${2:-1.0}' >> /app/validate_models.sh && \
+    echo 'python validate_models.py "$1" --dssat-dir /app/dssat --tolerance "$TOLERANCE"' >> /app/validate_models.sh && \
+    chmod +x /app/validate_models.sh
+
+RUN echo '#!/bin/bash' > /app/start_jupyter.sh && \
+    echo 'cd /app/project' >> /app/start_jupyter.sh && \
+    echo 'jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token="" --NotebookApp.password=""' >> /app/start_jupyter.sh && \
+    chmod +x /app/start_jupyter.sh
+
+# Create comprehensive help script
+RUN echo '#!/bin/bash' > /app/help.sh && \
+    echo 'echo "============================================"' >> /app/help.sh && \
+    echo 'echo "DSSAT + Python Strawberry Model Container"' >> /app/help.sh && \
+    echo 'echo "草莓DSSAT+Python模型容器"' >> /app/help.sh && \
+    echo 'echo "============================================"' >> /app/help.sh && \
+    echo 'echo ""' >> /app/help.sh && \
+    echo 'echo "Available Commands / 可用命令:"' >> /app/help.sh && \
+    echo 'echo ""' >> /app/help.sh && \
+    echo 'echo "Python Model / Python模型:"' >> /app/help.sh && \
+    echo 'echo "  /app/run_python_model.sh     - Run Python strawberry model"' >> /app/help.sh && \
+    echo 'echo "  /app/run_python_tests.sh     - Run Python model tests"' >> /app/help.sh && \
+    echo 'echo "  /app/start_jupyter.sh        - Start Jupyter notebook server"' >> /app/help.sh && \
+    echo 'echo ""' >> /app/help.sh && \
+    echo 'echo "DSSAT Fortran Model / DSSAT Fortran模型:"' >> /app/help.sh && \
+    echo 'echo "  /app/run_dssat_batch.sh      - Run DSSAT batch experiments"' >> /app/help.sh && \
+    echo 'echo "  /app/run_dssat_single.sh <file.SRX> - Run single DSSAT experiment"' >> /app/help.sh && \
+    echo 'echo ""' >> /app/help.sh && \
+    echo 'echo "Model Comparison / 模型对比:"' >> /app/help.sh && \
+    echo 'echo "  /app/compare_models.sh <file.SRX>   - Compare Python vs DSSAT"' >> /app/help.sh && \
+    echo 'echo "  /app/validate_models.sh <file.SRX>  - Validate model accuracy"' >> /app/help.sh && \
+    echo 'echo ""' >> /app/help.sh && \
+    echo 'echo "System Information / 系统信息:"' >> /app/help.sh && \
+    echo 'echo "  Python version: $(python --version)"' >> /app/help.sh && \
+    echo 'echo "  DSSAT location: /app/dssat/dscsm048"' >> /app/help.sh && \
+    echo 'echo "  Project files: /app/project/"' >> /app/help.sh && \
+    echo 'echo "  Data files: /app/dssat/Strawberry/"' >> /app/help.sh && \
+    echo 'echo ""' >> /app/help.sh && \
+    echo 'echo "Examples / 示例:"' >> /app/help.sh && \
+    echo 'echo "  /app/run_dssat_single.sh UFBA1601.SRX"' >> /app/help.sh && \
+    echo 'echo "  /app/compare_models.sh /app/dssat/Strawberry/UFBA1601.SRX"' >> /app/help.sh && \
+    echo 'echo "  /app/validate_models.sh /app/dssat/Strawberry/UFBA1601.SRX 1.0"' >> /app/help.sh && \
+    echo 'echo ""' >> /app/help.sh && \
+    echo 'echo "============================================"' >> /app/help.sh && \
+    chmod +x /app/help.sh
+
+# Set PATH to include DSSAT and convenience scripts
+ENV PATH="/app:/app/dssat:$PATH"
+
+# Set working directory
+WORKDIR /app/project
+
+# Default command shows help
+CMD ["/app/help.sh"]

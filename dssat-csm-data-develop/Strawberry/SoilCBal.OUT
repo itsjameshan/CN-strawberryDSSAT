@@ -1,0 +1,67 @@
+*Soil Carbon Balance
+
+*DSSAT Cropping System Model Ver. 4.8.5.017 pre-release  JUN 28, 2025 04:27:17
+
+*RUN   1        : Radiance                  CRGRO048 UFWM1401    1
+ MODEL          : CRGRO048 - Strawberry
+ EXPERIMENT     : UFWM1401 SR 2014 WIMAUMA STRAWBERRY GROWTH AND YIELD ANALYSIS
+ DATA PATH      :
+ TREATMENT  1   : Radiance                  CRGRO048
+  
+
+! SOIL C BALANCE                                  Initial               Final
+! all units in kg[C]/ha                          Year/DOY            Year/DOY
+!                                                2014-273            2014-273
+! SOIL & SURFACE ORGANIC C
+!   Soil Organic C                               25593.00            25470.55
+!   Surface Organic C                                0.00                0.00
+!   Soil Litter C                                    0.00              611.22
+!   Surface Litter C                                 0.00              758.13
+!   Soil methane C stored                            0.00                0.00
+!                                                --------            --------
+! TOTAL C in Soil and Surface Layers             25593.00            26839.89
+
+! ADDITIONS & REMOVALS:                         Additions            Removals
+!   Harvest residues from prev crop                  0.00
+!   Organic matter applications                      0.00
+!   Senesced plant tissue                         1369.35
+!   CO2-C losses                                                       122.45
+!   CH4-C losses                                                         0.00
+
+! SOIL C BALANCE
+!   =      FinalC -    InitialC - Additions +  Removals
+!   =    26839.89 -    25593.00 -   1369.35 +    122.45 =              -0.000
+
+
+*DSSAT Cropping System Model Ver. 4.8.5.017 pre-release  JUN 28, 2025 04:27:19
+
+*RUN   2        : Sensation                 CRGRO048 UFWM1401    2
+ MODEL          : CRGRO048 - Strawberry
+ EXPERIMENT     : UFWM1401 SR 2014 WIMAUMA STRAWBERRY GROWTH AND YIELD ANALYSIS
+ DATA PATH      :
+ TREATMENT  2   : Sensation                 CRGRO048
+  
+
+! SOIL C BALANCE                                  Initial               Final
+! all units in kg[C]/ha                          Year/DOY            Year/DOY
+!                                                2014-273            2014-273
+! SOIL & SURFACE ORGANIC C
+!   Soil Organic C                               25593.00            25470.55
+!   Surface Organic C                                0.00                0.00
+!   Soil Litter C                                    0.00              631.12
+!   Surface Litter C                                 0.00              763.78
+!   Soil methane C stored                            0.00                0.00
+!                                                --------            --------
+! TOTAL C in Soil and Surface Layers             25593.00            26865.45
+
+! ADDITIONS & REMOVALS:                         Additions            Removals
+!   Harvest residues from prev crop                  0.00
+!   Organic matter applications                      0.00
+!   Senesced plant tissue                         1394.91
+!   CO2-C losses                                                       122.45
+!   CH4-C losses                                                         0.00
+
+! SOIL C BALANCE
+!   =      FinalC -    InitialC - Additions +  Removals
+!   =    26865.45 -    25593.00 -   1394.91 +    122.45 =              -0.000
+

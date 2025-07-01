@@ -1,0 +1,71 @@
+# Extend existing DSSAT image with minimal Python environment
+FROM debian:stable-slim AS dssat-base
+
+# Install build dependencies for DSSAT
+RUN apt-get update && \
+    apt-get install -y \
+    ca-certificates \
+    gfortran \
+    cmake \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy DSSAT source code
+ADD dssat-docker-master/src /dssat-csm-os
+
+# Build DSSAT
+WORKDIR /dssat-csm-os
+RUN rm -rf build && mkdir build
+WORKDIR /dssat-csm-os/build
+RUN cmake -DCMAKE_INSTALL_PREFIX=/app/dssat .. && \
+    make && \
+    make install
+
+# Final stage with Python
+FROM debian:stable-slim
+
+# Install minimal Python and runtime dependencies
+RUN apt-get update && \
+    apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-venv \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy DSSAT executable from build stage
+COPY --from=dssat-base /app/dssat /app/dssat/
+
+# Create virtual environment and install Python packages
+WORKDIR /app
+COPY requirements.txt /app/requirements.txt
+RUN python3 -m venv venv && \
+    . venv/bin/activate && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copy Python scripts
+COPY *.py /app/
+
+# Set up environment
+ENV PATH="/app/dssat:/app/venv/bin:$PATH"
+ENV VIRTUAL_ENV="/app/venv"
+
+# 修复DSSAT路径问题 - 创建符号链接和run_dssat脚本（在正确位置）
+RUN mkdir -p /usr/local && ln -sf /app/dssat/dscsm048 /usr/local/dscsm048
+
+# 创建启动脚本
+RUN echo '#!/bin/bash' > /app/init.sh && \
+    echo 'mkdir -p /data/dssat-csm-os-develop/Utilities' >> /app/init.sh && \
+    echo 'cat > /data/dssat-csm-os-develop/Utilities/run_dssat << "SCRIPT"' >> /app/init.sh && \
+    echo '#!/bin/bash' >> /app/init.sh && \
+    echo '/app/dssat/dscsm048 "$@"' >> /app/init.sh && \
+    echo 'SCRIPT' >> /app/init.sh && \
+    echo 'chmod +x /data/dssat-csm-os-develop/Utilities/run_dssat' >> /app/init.sh && \
+    echo 'source /app/venv/bin/activate' >> /app/init.sh && \
+    echo 'exec "$@"' >> /app/init.sh && \
+    chmod +x /app/init.sh
+
+# Set working directory for data
+WORKDIR /data
+
+# 使用启动脚本作为入口点
+ENTRYPOINT ["/app/init.sh"]
+CMD ["python3"]

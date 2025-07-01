@@ -1,0 +1,24 @@
+# Simple approach: Extend the official Python image with DSSAT
+FROM python:3.11-slim
+
+# Install system dependencies needed for DSSAT and Python packages
+RUN apt-get update && apt-get install -y \
+    curl \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create working directory
+WORKDIR /app
+
+# Copy Python requirements and install dependencies
+COPY requirements.txt /app/
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy Python scripts
+COPY *.py /app/
+
+# Set working directory for data
+WORKDIR /data
+
+# Default command
+CMD ["python3"]

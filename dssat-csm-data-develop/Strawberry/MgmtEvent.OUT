@@ -1,0 +1,107 @@
+*MANAGEMENT OPERATIONS EVENT SUMMARY
+
+*DSSAT Cropping System Model Ver. 4.8.5.017 pre-release  JUN 28, 2025 04:27:17
+!---------------------------------------------------------------------------------------------
+@RUN Date........  DOY    DAS    DAP  CR  Stage         Operation       Quantities
+!---------------------------------------------------------------------------------------------
+   1 OCT  1, 2014  274      1      0  SR  14 Start Sim 
+   1 OCT  9, 2014  282      9      0  SR                Planting       
+   1 OCT  9, 2014  282      9      0  SR  15 Transplant
+   1 OCT 31, 2014  304     31     22  SR  05 First Flwr
+   1 NOV  5, 2014  309     36     27  SR  06 First Pod 
+   1 NOV 10, 2014  314     41     32  SR  08 First Seed
+   1 NOV 24, 2014  328     55     46  SR                Harvest            38. kg/ha
+   1 DEC  1, 2014  335     62     53  SR                Harvest            27. kg/ha
+   1 DEC  4, 2014  338     65     56  SR                Harvest            15. kg/ha
+   1 DEC  8, 2014  342     69     60  SR                Harvest            33. kg/ha
+   1 DEC 11, 2014  345     72     63  SR                Harvest            16. kg/ha
+   1 DEC 15, 2014  349     76     67  SR                Harvest            15. kg/ha
+   1 DEC 18, 2014  352     79     70  SR                Harvest            19. kg/ha
+   1 DEC 21, 2014  355     82     73  SR                Harvest            48. kg/ha
+   1 DEC 24, 2014  358     85     76  SR                Harvest            58. kg/ha
+   1 DEC 29, 2014  363     90     81  SR                Harvest            84. kg/ha
+   1 JAN  2, 2015  002     94     85  SR                Harvest           150. kg/ha
+   1 JAN  5, 2015  005     97     88  SR                Harvest            96. kg/ha
+   1 JAN  8, 2015  008    100     91  SR                Harvest            77. kg/ha
+   1 JAN 12, 2015  012    104     95  SR                Harvest           133. kg/ha
+   1 JAN 15, 2015  015    107     98  SR                Harvest            91. kg/ha
+   1 JAN 19, 2015  019    111    102  SR                Harvest           104. kg/ha
+   1 JAN 22, 2015  022    114    105  SR                Harvest           116. kg/ha
+   1 JAN 26, 2015  026    118    109  SR                Harvest           136. kg/ha
+   1 JAN 29, 2015  029    121    112  SR                Harvest            56. kg/ha
+   1 FEB  2, 2015  033    125    116  SR                Harvest           193. kg/ha
+   1 FEB  5, 2015  036    128    119  SR                Harvest           137. kg/ha
+   1 FEB  9, 2015  040    132    123  SR                Harvest           182. kg/ha
+   1 FEB 12, 2015  043    135    126  SR                Harvest           169. kg/ha
+   1 FEB 16, 2015  047    139    130  SR                Harvest           154. kg/ha
+   1 FEB 19, 2015  050    142    133  SR                Harvest           123. kg/ha
+   1 FEB 23, 2015  054    146    137  SR                Harvest           258. kg/ha
+   1 FEB 26, 2015  057    149    140  SR                Harvest           293. kg/ha
+   1 MAR  2, 2015  061    153    144  SR                Harvest           330. kg/ha
+   1 MAR  5, 2015  064    156    147  SR                Harvest           314. kg/ha
+   1 MAR  9, 2015  068    160    151  SR                Harvest           285. kg/ha
+   1 MAR 12, 2015  071    163    154  SR                Harvest           137. kg/ha
+   1 MAR 16, 2015  075    167    158  SR                Harvest           314. kg/ha
+   1 MAR 19, 2015  078    170    161  SR  12 End Msnode
+   1 MAR 19, 2015  078    170    161  SR                Harvest           260. kg/ha
+   1 MAR 23, 2015  082    174    165  SR                Harvest           397. kg/ha
+   1 MAR 26, 2015  085    177    168  SR                Harvest           231. kg/ha
+   1 MAR 28, 2015  087    179    170  SR  16 Harvest   
+   1 MAR 28, 2015  087    179    170  SR                End simulation 
+                                             100.0 % yield harvested      185. kg/ha
+                                               0.0 % by-product harv        0. kg/ha
+ 
+
+*DSSAT Cropping System Model Ver. 4.8.5.017 pre-release  JUN 28, 2025 04:27:19
+!---------------------------------------------------------------------------------------------
+@RUN Date........  DOY    DAS    DAP  CR  Stage         Operation       Quantities
+!---------------------------------------------------------------------------------------------
+   2 OCT  1, 2014  274      1      0  SR  14 Start Sim 
+   2 OCT  9, 2014  282      9      0  SR                Planting       
+   2 OCT  9, 2014  282      9      0  SR  15 Transplant
+   2 NOV  1, 2014  305     32     23  SR  05 First Flwr
+   2 NOV 10, 2014  314     41     32  SR  06 First Pod 
+   2 NOV 12, 2014  316     43     34  SR  08 First Seed
+   2 NOV 24, 2014  328     55     46  SR                Harvest             7. kg/ha
+   2 DEC  1, 2014  335     62     53  SR                Harvest            80. kg/ha
+   2 DEC  4, 2014  338     65     56  SR                Harvest            19. kg/ha
+   2 DEC  8, 2014  342     69     60  SR                Harvest            44. kg/ha
+   2 DEC 11, 2014  345     72     63  SR                Harvest            14. kg/ha
+   2 DEC 15, 2014  349     76     67  SR                Harvest            15. kg/ha
+   2 DEC 18, 2014  352     79     70  SR                Harvest            27. kg/ha
+   2 DEC 21, 2014  355     82     73  SR                Harvest            24. kg/ha
+   2 DEC 24, 2014  358     85     76  SR                Harvest            52. kg/ha
+   2 DEC 29, 2014  363     90     81  SR                Harvest            79. kg/ha
+   2 JAN  2, 2015  002     94     85  SR                Harvest           104. kg/ha
+   2 JAN  5, 2015  005     97     88  SR                Harvest           131. kg/ha
+   2 JAN  8, 2015  008    100     91  SR                Harvest           101. kg/ha
+   2 JAN 12, 2015  012    104     95  SR                Harvest           106. kg/ha
+   2 JAN 15, 2015  015    107     98  SR                Harvest           124. kg/ha
+   2 JAN 19, 2015  019    111    102  SR                Harvest           169. kg/ha
+   2 JAN 22, 2015  022    114    105  SR                Harvest           137. kg/ha
+   2 JAN 26, 2015  026    118    109  SR                Harvest            88. kg/ha
+   2 JAN 29, 2015  029    121    112  SR                Harvest             0. kg/ha
+   2 FEB  2, 2015  033    125    116  SR                Harvest           250. kg/ha
+   2 FEB  5, 2015  036    128    119  SR                Harvest           256. kg/ha
+   2 FEB  6, 2015  037    129    120  SR  12 End Msnode
+   2 FEB  9, 2015  040    132    123  SR                Harvest           252. kg/ha
+   2 FEB 12, 2015  043    135    126  SR                Harvest           141. kg/ha
+   2 FEB 16, 2015  047    139    130  SR                Harvest           231. kg/ha
+   2 FEB 19, 2015  050    142    133  SR                Harvest           154. kg/ha
+   2 FEB 23, 2015  054    146    137  SR                Harvest           295. kg/ha
+   2 FEB 26, 2015  057    149    140  SR                Harvest           395. kg/ha
+   2 MAR  2, 2015  061    153    144  SR                Harvest           419. kg/ha
+   2 MAR  5, 2015  064    156    147  SR                Harvest           319. kg/ha
+   2 MAR  9, 2015  068    160    151  SR                Harvest           102. kg/ha
+   2 MAR 12, 2015  071    163    154  SR                Harvest           186. kg/ha
+   2 MAR 16, 2015  075    167    158  SR                Harvest           368. kg/ha
+   2 MAR 19, 2015  078    170    161  SR                Harvest           442. kg/ha
+   2 MAR 21, 2015  080    172    163  SR  09 End Pod   
+   2 MAR 22, 2015  081    173    164  SR  11 Harv. Mat 
+   2 MAR 23, 2015  082    174    165  SR                Harvest           428. kg/ha
+   2 MAR 26, 2015  085    177    168  SR                Harvest           277. kg/ha
+   2 MAR 28, 2015  087    179    170  SR  16 Harvest   
+   2 MAR 28, 2015  087    179    170  SR                End simulation 
+                                             100.0 % yield harvested      116. kg/ha
+                                               0.0 % by-product harv        0. kg/ha
+ 

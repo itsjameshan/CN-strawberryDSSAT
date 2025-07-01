@@ -1,0 +1,116 @@
+*EXP.DETAILS: UFWM1401SR 2014 WIMAUMA STRAWBERRY GROWTH AND YIELD ANALYSIS TRIAL     
+
+*FILES
+@N  EXP.DATA    AFILE        ADIR
+  1 EXP         UFWM1401.SRA /data/Strawberry/                                                               
+@N  SPECIES     SPFILE       SPDIR
+  1 SPE         SRGRO048.SPE ///app/dssat/Genotype/                                                          
+@N  ECOTYPE     EFILE        EDIR
+  1 ECO         SRGRO048.ECO ///app/dssat/Genotype/                                                          
+@N  CULTIVAR    CFILE        CDIR
+  1 CUL         SRGRO048.CUL ///app/dssat/Genotype/                                                          
+@N  SOIL        SFILE        SDIR
+  1 SOIL        SOIL.SOL     /data/Strawberry/                                                               
+@N  WEATHER     WFILE        WDIR
+  1 WEATH       UFWM1401.WTH /data/Strawberry/                                                               
+
+*SIMULATION CONTROL
+@N  GENERAL     NYERS NREPS START   SDATE RSEED SNAME.................... MODEL...
+  1 GE              1     1     S 2014274  2150 DEFAULT SIMULATION CONTR  CRGRO048
+@N  OPTIONS     WATER NITRO SYMBI PHOSP POTAS DISES  CHEM  TILL   CO2
+  1 OP              N     N     N     N     N     N     N     N     M
+@N  METHODS     WTHER INCON LIGHT EVAPO INFIL PHOTO HYDRO NSWIT SOMDY MESEV MESOL METMP MEGHG
+  1 ME              M     M     E     R     S     L     R     1     G     R     2     D     0
+@N  MANAGEMENT  PLANT IRRIG FERTI RESID HARVS
+  1 MA              R     R     R     R     R
+@N  OUTPUTS     FNAME OVVEW SUMRY FROPT GROUT CAOUT WAOUT NIOUT MIOUT DIOUT  LONG CHOUT OPOUT
+  1 OU              N     Y     Y     1     Y     Y     Y     Y     Y     N     Y     N     Y
+
+!AUTOMATIC MANAGEM
+@N  PLANTING      PFRST   PLAST PH2OL PH2OU PH2OD PSTMX PSTMN
+  1 PL              -99     -99   40.  100.   30.   40.   10.
+@N  IRRIGATION  IMDEP ITHRL ITHRU IROFF IMETH IRAMT IREFF
+  1 IR            30.   80.  100. GS000 IR004  10.0 1.000
+@N  NITROGEN    NMDEP NMTHR NAMNT NCODE NAOFF
+  1 NI            30.   50.   25. FE001 GS000
+@N  RESIDUES    RIPCN RTIME RIDEP
+  1 RE           100.     1   20.
+@N  HARVEST     HFRST   HLAST HPCNP HRCNR
+  1 HA              0     -99  100.    0.
+
+*TREATMENTS
+@N   R O C TNAME....................  CU  FL  SA  IC  MP  MI  MF  MR  MC  MT  ME  MH  SM
+  2  1 1 0 Sensation                   2   1   0   0   1   0   0   0   0   0   0   1   1
+
+*CULTIVARS
+@C  CR INGENO CNAME
+  2 SR SR0002 Sensation       
+
+*FIELDS
+@L  ID_FIELD WSTA....  FLSA  FLOB  FLDT  FLDD  FLDS  FLST SLTX   SLDP ID_SOIL    PMALB  PMWD
+  1 UFWM0001 UFWM1401   0.0  -99. DR000  -99.  100.   -99 -99    -99. UFGA010700-99.00 -99.0
+@L             XCRD            YCRD      ELEV              AREA  SLEN  FLWR  SLAS PRMGT
+  1       -99.00000       -99.00000    -99.00               1.0  100.   1.0 -99.0   -99   -99
+
+*PLANTING DETAILS
+@P    PDATE   EDATE  PPOP  PPOE  PLME  PLDS  PLRS  PLRD  PLDP  PLWT  PAGE  PENV  PLPH  SPRL
+  1 2014282     -99   4.3   4.3     T     R  121.   90.  10.0  176.   30.  20.0   1.0 -99.0
+
+*IRRIGATION
+@I   IEFF  IDEP  ITHR  IEPT  IOFF  IAME  IAMT
+  0 1.000    0.    0.    0. GS000 IR001   0.0
+@I    IDATE  IROP IRVAL
+
+*FERTILIZERS
+@F    FDATE  FMCD  FACD  FDEP  FAMN  FAMP  FAMK  FAMC  FAMO  FOCD
+
+*RESIDUES
+@R    RDATE  RCOD  RAMT  RESN  RESP  RESK  RINP  RDEP  RMET
+
+*CHEMICALS
+@C    CDATE CHCOD CHAMT  CHME CHDEP   CHT
+
+*TILLAGE
+@T    TDATE TIMPL  TDEP
+
+*ENVIRONMENT
+@E    ODATE  EDAY  ERAD  EMAX  EMIN ERAIN  ECO2  EDEW EWIND
+
+*HARVEST
+@H    HDATE  HSTG  HCOM HSIZE   HPC  HBPC
+  1 2014327 GS000   -99   -99  100.    0.
+  1 2014334 GS000   -99   -99  100.    0.
+  1 2014337 GS000   -99   -99  100.    0.
+  1 2014341 GS000   -99   -99  100.    0.
+  1 2014344 GS000   -99   -99  100.    0.
+  1 2014348 GS000   -99   -99  100.    0.
+  1 2014351 GS000   -99   -99  100.    0.
+  1 2014354 GS000   -99   -99  100.    0.
+  1 2014357 GS000   -99   -99  100.    0.
+  1 2014362 GS000   -99   -99  100.    0.
+  1 2015001 GS000   -99   -99  100.    0.
+  1 2015004 GS000   -99   -99  100.    0.
+  1 2015007 GS000   -99   -99  100.    0.
+  1 2015011 GS000   -99   -99  100.    0.
+  1 2015014 GS000   -99   -99  100.    0.
+  1 2015018 GS000   -99   -99  100.    0.
+  1 2015021 GS000   -99   -99  100.    0.
+  1 2015025 GS000   -99   -99  100.    0.
+  1 2015028 GS000   -99   -99  100.    0.
+  1 2015032 GS000   -99   -99  100.    0.
+  1 2015035 GS000   -99   -99  100.    0.
+  1 2015039 GS000   -99   -99  100.    0.
+  1 2015042 GS000   -99   -99  100.    0.
+  1 2015046 GS000   -99   -99  100.    0.
+  1 2015049 GS000   -99   -99  100.    0.
+  1 2015053 GS000   -99   -99  100.    0.
+  1 2015056 GS000   -99   -99  100.    0.
+  1 2015060 GS000   -99   -99  100.    0.
+  1 2015063 GS000   -99   -99  100.    0.
+  1 2015067 GS000   -99   -99  100.    0.
+  1 2015070 GS000   -99   -99  100.    0.
+  1 2015074 GS000   -99   -99  100.    0.
+  1 2015077 GS000   -99   -99  100.    0.
+  1 2015081 GS000   -99   -99  100.    0.
+  1 2015084 GS000   -99   -99  100.    0.
+  1 2015087 GS000   -99   -99  100.    0.

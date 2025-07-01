@@ -1,0 +1,16 @@
+# Netlify redirects file
+
+# Redirect main Chinese homepage to index
+/主页.html /index.html 200
+
+# Handle other Chinese filenames - serve them directly  
+/发布A.html /发布A.html 200
+/发布A动态.html /发布A动态.html 200  
+/研发A.html /研发A.html 200
+/研发B.html /研发B.html 200
+
+# Handle Chinese image folder and files
+/模型图片/* /模型图片/:splat 200
+
+# Handle 404 errors by serving index.html
+/* /index.html 404 

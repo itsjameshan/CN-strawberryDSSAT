@@ -5,6 +5,24 @@
 This repository contains a Python implementation of the CROPGRO-Strawberry crop model adapted from the DSSAT framework. The model simulates strawberry growth and development in response to daily weather conditions, soil properties and cultivar characteristics.
 本仓库包含了一个基于DSSAT框架改编的CROPGRO-草莓作物模型的Python实现。该模型可根据每日气象条件、土壤性质和品种特性，模拟草莓的生长和发育。
 
+## 🌐 Web Interface
+## 🌐 网页界面
+
+Visit our interactive web interface: **https://cnstrawberrydssat.netlify.app/**
+访问我们的交互式网页界面：**https://cnstrawberrydssat.netlify.app/**
+
+The web interface provides:
+网页界面提供：
+- 📊 Interactive visualization of simulation results
+- 🔧 Easy parameter adjustment without coding
+- 📈 Real-time plotting of growth curves
+- 💾 Export functionality for data and charts
+
+- 📊 仿真结果的交互式可视化
+- 🔧 无需编程即可轻松调整参数
+- 📈 生长曲线的实时绘图
+- 💾 数据和图表的导出功能
+
 ## 🚀 Quick Start with Docker
 ## 🚀 Docker快速开始
 

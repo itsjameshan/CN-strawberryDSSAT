@@ -274,12 +274,12 @@ environment (e.g., a VM or Wine).
 ## Comparing with the Fortran DSSAT model
 ## 与Fortran DSSAT模型对比
 
-To verify the Python implementation against the official Fortran code, use `compare_with_fortran.py` or `validate_models.py`. The scripts require a compiled DSSAT installation containing `Utilities/run_dssat`.
-要验证Python实现与官方Fortran代码的一致性，可使用 `compare_with_fortran.py` 或 `validate_models.py`。此脚本需要已编译好的DSSAT，并包含 `Utilities/run_dssat`。
+To verify the Python implementation against the official Fortran code, use `enhanced_compare_with_fortran.py` or `validate_models.py`. The scripts require a compiled DSSAT installation containing `Utilities/run_dssat`.
+要验证Python实现与官方Fortran代码的一致性，可使用 `enhanced_compare_with_fortran.py` 或 `validate_models.py`。此脚本需要已编译好的DSSAT，并包含 `Utilities/run_dssat`。
 
 ```bash
 
-python compare_with_fortran.py dssat-csm-data-develop/Strawberry/UFBA1401.SRX --dssat-dir dssat-csm-os-develop
+python enhanced_compare_with_fortran.py dssat-csm-data-develop/Strawberry/UFBA1401.SRX --dssat-dir dssat-csm-os-develop
 ```
 
 ## Automated validation

@@ -1,3 +1,0 @@
-[33m884a5d5[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m Update the README.md file to update the new docker and non-docker run for DSSAT and Python version dssat.
-[33ma1452b2[m Add latest simple docker run instruction with DSSAT and Python version , also the mechanism of how to run DSSAt without docker.
-[33m7d55715[m Add latest simple docker run instruction with DSSAT and Python version , also the mechanism of how to run DSSAt without docker.

@@ -40,7 +40,7 @@ numba
 
 1. **cropgro-strawberry-implementation.py** - 主要的CROPGRO-Strawberry模型Python实现
 2. **cropgro-strawberry-test1.py** - 草莓模型的测试脚本
-3. **compare_with_fortran.py** - Python和Fortran版本之间的比较工具
+3. **enhanced_compare_with_fortran.py** - Python和Fortran版本之间的比较工具
 4. **run_original_dssat.py** - 运行原始DSSAT草莓模型的辅助脚本
 5. **validate_models.py** - 验证Python模型与DSSAT对比的验证脚本
 6. **run_all_comparisons.py** - 多种场景的批量比较运行器

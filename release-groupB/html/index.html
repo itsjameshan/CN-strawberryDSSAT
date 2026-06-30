@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智慧草莓大棚 - 多组成果整合平台</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #2980b9;
+            --primary-light: #42a5f5;
+            --primary-dark: #1e6091;
+            --secondary-color: #2c3e50;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --bg-color: #f5f7fa;
+            --card-bg: #ffffff;
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --border-color: #e8ecf0;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        [data-theme="dark"] {
+            --bg-color: #1a1a2e;
+            --card-bg: #16213e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0aec0;
+            --border-color: #2d3748;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", "PingFang SC", sans-serif;
+        }
+        body {
+            background: var(--bg-color);
+            color: var(--text-primary);
+            transition: var(--transition);
+            min-height: 100vh;
+        }
+        nav {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            padding: 18px 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+        nav a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+        nav a.active {
+            background: var(--primary-light);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(66, 165, 245, 0.4);
+        }
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+        .page-block {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.4s ease forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .page-block.show {
+            display: block;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            transition: var(--transition);
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        h1 {
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        h2 {
+            color: var(--text-primary);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        h3 {
+            color: var(--text-primary);
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        .tip {
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin: 8px 0;
+        }
+        .sensor-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-right: 8px;
+        }
+        .sensor-unit {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-left: 8px;
+        }
+        .status-normal {
+            background: rgba(39, 174, 96, 0.1);
+            color: var(--success-color);
+        }
+        .status-warning {
+            background: rgba(243, 156, 18, 0.1);
+            color: var(--warning-color);
+        }
+        .status-danger {
+            background: rgba(231, 76, 60, 0.1);
+            color: var(--danger-color);
+        }
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: var(--transition);
+        }
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        .refresh-info {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .countdown {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        .chart-container {
+            height: 280px;
+            position: relative;
+        }
+        .video-box {
+            width: 100%;
+            height: 400px;
+            background: #000;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .video-box iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .feature-item {
+            background: rgba(41, 128, 185, 0.1);
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        .feature-item:hover {
+            background: rgba(41, 128, 185, 0.15);
+        }
+        .feature-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: var(--transition);
+        }
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.1);
+        }
+        .table-container {
+            overflow-x: auto;
+            margin-top: 16px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th {
+            background: rgba(41, 128, 185, 0.05);
+            font-weight: 600;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+            color: white;
+            border: none;
+        }
+        .stat-card h3 {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        .stat-value {
+            font-size: 42px;
+            font-weight: 700;
+        }
+        .stat-unit {
+            font-size: 16px;
+            opacity: 0.8;
+        }
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            h1 {
+                font-size: 22px;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-links">
+            <a data-target="home" class="active">首页总览</a>
+            <a data-target="groupB">发布组B</a>
+            <a data-target="modelGroup">模型小组</a>
+            <a data-target="agriGroup">农业参数小组</a>
+            <a data-target="chartGroup">可视化小组</a>
+            <a data-target="videoPage">项目演示视频</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle">🌙 深色模式</button>
+    </nav>
+
+    <div class="container">
+        <div id="home" class="page-block show">
+            <h1>智慧草莓大棚综合项目</h1>
+            <p class="tip">🍓 多组成果整合平台 - 实时监控、智能预测、数据可视化</p>
+            
+            <div class="grid">
+                <div class="stat-card">
+                    <h3>当前大棚数量</h3>
+                    <div class="stat-value">3</div>
+                    <div class="stat-unit">个监测点</div>
+                </div>
+                <div class="stat-card">
+                    <h3>实时监测指标</h3>
+                    <div class="stat-value">4</div>
+                    <div class="stat-unit">项环境参数</div>
+                </div>
+                <div class="stat-card">
+                    <h3>数据更新频率</h3>
+                    <div class="stat-value">30</div>
+                    <div class="stat-unit">秒自动刷新</div>
+                </div>
+                <div class="stat-card">
+                    <h3>预计产量</h3>
+                    <div class="stat-value">12.5</div>
+                    <div class="stat-unit">吨/季</div>
+                </div>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <h2>🌐 发布组B</h2>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">负责：网页框架开发、页面交互设计、Netlify线上部署</p>
+                    <button class="btn" onclick="switchPage('groupB')">查看本组成果</button>
+                </div>
+                <div class="card">
+                    <h2>🧠 模型小组</h2>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">负责：DSSAT草莓预测运算、真实传感器数据接入</p>
+                    <button class="btn" onclick="switchPage('modelGroup')">查看模型成果</button>
+                </div>
+                <div class="card">
+                    <h2>🌱 农业参数小组</h2>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">负责：草莓种植标准参数、田间种植规范制定</p>
+                    <button class="btn" onclick="switchPage('agriGroup')">查看农业资料</button>
+                </div>
+                <div class="card">
+                    <h2>📊 可视化小组</h2>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">负责：图表展示、数据可视化、大屏监控展示</p>
+                    <button class="btn" onclick="switchPage('chartGroup')">查看可视化图表</button>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 24px;">
+                <h2>🎯 项目快速入口</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">📡</div>
+                        <div style="font-weight: 600;">实时监控</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">查看大棚环境数据</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📈</div>
+                        <div style="font-weight: 600;">趋势分析</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">历史数据图表</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🎬</div>
+                        <div style="font-weight: 600;">项目演示</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">观看视频介绍</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">⚙️</div>
+                        <div style="font-weight: 600;">参数配置</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">设置种植参数</div>
+                    </div>
+                </div>
+                <button class="btn" style="margin-top: 20px;" onclick="switchPage('videoPage')">🎬 观看项目演示视频</button>
+            </div>
+        </div>
+
+        <div id="groupB" class="page-block">
+            <h1>发布组 B - 智慧大棚网页框架</h1>
+            <p class="tip">本组职责：前端页面开发、动态交互实现、外网部署</p>
+
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>🌡️ 一号大棚实时监测</h2>
+                        <button class="btn" id="refreshBtn">🔄 刷新数据</button>
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span>环境温度</span>
+                            <span class="status-badge" id="tempStatus">正常</span>
+                        </div>
+                        <span class="sensor-value" id="tempText">23.6</span>
+                        <span class="sensor-unit">℃</span>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span>空气湿度</span>
+                            <span class="status-badge" id="humStatus">正常</span>
+                        </div>
+                        <span class="sensor-value" id="humText">71</span>
+                        <span class="sensor-unit">%RH</span>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span>二氧化碳浓度</span>
+                            <span class="status-badge" id="co2Status">正常</span>
+                        </div>
+                        <span class="sensor-value" id="co2Text">645</span>
+                        <span class="sensor-unit">ppm</span>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span>光照强度</span>
+                            <span class="status-badge" id="lightStatus">正常</span>
+                        </div>
+                        <span class="sensor-value" id="lightText">32600</span>
+                        <span class="sensor-unit">lux</span>
+                    </div>
+
+                    <div class="refresh-info">
+                        <span>⏱️ 自动刷新倒计时：</span>
+                        <span class="countdown" id="countdown">30</span>
+                        <span>秒</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>📋 页面框架说明</h2>
+                    <ul style="padding-left: 24px; line-height: 2; color: var(--text-secondary);">
+                        <li>多小组导航切换功能</li>
+                        <li>模拟数据动态交互按钮</li>
+                        <li>30秒自动刷新机制</li>
+                        <li>阈值状态告警徽章</li>
+                        <li>深色/浅色主题切换</li>
+                        <li>预留视频、图表、文档位置</li>
+                        <li>适配Netlify外网部署</li>
+                    </ul>
+                    <div style="margin-top: 20px; padding: 16px; background: rgba(41, 128, 185, 0.05); border-radius: 8px;">
+                        <h3 style="font-size: 14px;">🌐 部署信息</h3>
+                        <p style="font-size: 13px; color: var(--text-secondary);">支持Netlify一键部署，静态页面无需后端</p>
+                        <p style="font-size: 13px; color: var(--text-secondary);">部署配置文件：netlify.toml</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 24px;">
+                <h2>⚙️ 草莓种植参数配置</h2>
+                <div class="grid" style="margin-top: 0;">
+                    <div class="form-group">
+                        <label>草莓品种</label>
+                        <select>
+                            <option>红颜草莓</option>
+                            <option>章姬草莓</option>
+                            <option>奶油草莓</option>
+                            <option>丰香草莓</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>预期种植周期(天)</label>
+                        <input type="number" value="90" min="60" max="150">
+                    </div>
+                    <div class="form-group">
+                        <label>目标产量(kg)</label>
+                        <input type="number" value="5000" min="1000" max="20000">
+                    </div>
+                    <div class="form-group">
+                        <label>适宜温度范围(℃)</label>
+                        <input type="text" value="18-28" readonly>
+                    </div>
+                </div>
+                <button class="btn" style="margin-top: 16px;">💾 保存配置</button>
+                <p class="tip">以上参数仅为示例，农业小组后续提供标准参数</p>
+            </div>
+        </div>
+
+        <div id="modelGroup" class="page-block">
+            <h1>🧠 模型小组 - DSSAT草莓预测模型</h1>
+            <p class="tip">下方为模型预测计算模块，等待模型组上传真实计算逻辑与结果</p>
+
+            <div class="grid">
+                <div class="card">
+                    <h2>📊 产量预测计算模块</h2>
+                    <div class="form-group">
+                        <label>当前生长周期(天)</label>
+                        <input type="number" value="45" min="1" max="150">
+                    </div>
+                    <div class="form-group">
+                        <label>平均温度(℃)</label>
+                        <input type="number" value="23.5" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label>平均湿度(%RH)</label>
+                        <input type="number" value="70" min="30" max="100">
+                    </div>
+                    <button class="btn" id="predictBtn">🔮 计算预测产量</button>
+                    
+                    <div id="predictResult" style="margin-top: 20px; padding: 16px; background: rgba(39, 174, 96, 0.1); border-radius: 8px; display: none;">
+                        <h3 style="color: var(--success-color);">预测结果</h3>
+                        <p>预计产量：<strong>12,500 kg</strong></p>
+                        <p>预测准确率：<strong>89.5%</strong></p>
+                        <p style="font-size: 12px; color: var(--text-secondary); margin-top: 8px;">【模拟数据，后续接入真实DSSAT模型计算结果】</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>📈 预测趋势图表</h2>
+                    <div class="chart-container">
+                        <canvas id="predictChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 24px;">
+                <h2>📚 模型输入输出接口说明</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>参数名称</th>
+                                <th>输入/输出</th>
+                                <th>数据类型</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>环境温度</td>
+                                <td>输入</td>
+                                <td>Float</td>
+                                <td>大棚内实时温度(℃)</td>
+                            </tr>
+                            <tr>
+                                <td>空气湿度</td>
+                                <td>输入</td>
+                                <td>Float</td>
+                                <td>大棚内相对湿度(%RH)</td>
+                            </tr>
+                            <tr>
+                                <td>CO2浓度</td>
+                                <td>输入</td>
+                                <td>Integer</td>
+                                <td>二氧化碳浓度(ppm)</td>
+                            </tr>
+                            <tr>
+                                <td>光照强度</td>
+                                <td>输入</td>
+                                <td>Integer</td>
+                                <td>光照强度(lux)</td>
+                            </tr>
+                            <tr>
+                                <td>预测产量</td>
+                                <td>输出</td>
+                                <td>Float</td>
+                                <td>预计草莓产量(kg)</td>
+                            </tr>
+                            <tr>
+                                <td>成熟时间</td>
+                                <td>输出</td>
+                                <td>Integer</td>
+                                <td>预计成熟天数(天)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="agriGroup" class="page-block">
+            <h1>🌱 农业参数小组 - 草莓种植标准参数</h1>
+            <p class="tip">下方为草莓品种参数库，等待农业组完善种植标准、品种资料</p>
+
+            <div class="grid">
+                <div class="card">
+                    <h2>🍓 草莓品种参数库</h2>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>品种名称</th>
+                                    <th>适宜温度(℃)</th>
+                                    <th>适宜湿度(%RH)</th>
+                                    <th>种植周期(天)</th>
+                                    <th>亩产量(kg)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>红颜草莓</td>
+                                    <td>18-25</td>
+                                    <td>60-80</td>
+                                    <td>90-110</td>
+                                    <td>2000-3000</td>
+                                </tr>
+                                <tr>
+                                    <td>章姬草莓</td>
+                                    <td>15-23</td>
+                                    <td>65-85</td>
+                                    <td>85-105</td>
+                                    <td>1500-2500</td>
+                                </tr>
+                                <tr>
+                                    <td>奶油草莓</td>
+                                    <td>17-26</td>
+                                    <td>60-75</td>
+                                    <td>95-120</td>
+                                    <td>1800-2800</td>
+                                </tr>
+                                <tr>
+                                    <td>丰香草莓</td>
+                                    <td>16-24</td>
+                                    <td>65-80</td>
+                                    <td>80-100</td>
+                                    <td>1600-2400</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>📋 田间种植规范</h2>
+                    <ul style="padding-left: 24px; line-height: 2; color: var(--text-secondary);">
+                        <li>定植密度：8000-10000株/亩</li>
+                        <li>行距：25-30厘米</li>
+                        <li>株距：15-20厘米</li>
+                        <li>施肥周期：10-15天/次</li>
+                        <li>灌溉方式：滴灌/微喷</li>
+                        <li>病虫害防治：生物防治为主</li>
+                    </ul>
+                    
+                    <div style="margin-top: 20px; padding: 16px; background: rgba(243, 156, 18, 0.1); border-radius: 8px;">
+                        <h3 style="color: var(--warning-color); font-size: 14px;">⚠ 注意事项</h3>
+                        <p style="font-size: 13px; color: var(--text-secondary);">温度超过30℃时需通风降温，低于10℃时需加温保温。湿度超过85%易引发灰霉病，需及时除湿。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 24px;">
+                <h2>🌿 土壤参数标准</h2>
+                <div class="grid" style="margin-top: 0;">
+                    <div class="form-group">
+                        <label>土壤pH值</label>
+                        <input type="text" value="5.5-6.5" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>土壤有机质含量</label>
+                        <input type="text" value="≥2.0%" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>土壤含盐量</label>
+                        <input type="text" value="≤0.15%" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>土壤湿度</label>
+                        <input type="text" value="60-70%" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="chartGroup" class="page-block">
+            <h1>📊 可视化小组 - 数据图表展示</h1>
+            <p class="tip">下方为环境数据趋势图表，展示24小时模拟监测数据</p>
+
+            <div class="grid">
+                <div class="card">
+                    <h2>🌡️ 温度变化趋势</h2>
+                    <div class="chart-container">
+                        <canvas id="tempChart"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>💧 湿度变化趋势</h2>
+                    <div class="chart-container">
+                        <canvas id="humChart"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>💨 CO2浓度变化趋势</h2>
+                    <div class="chart-container">
+                        <canvas id="co2Chart"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>☀️ 光照强度变化趋势</h2>
+                    <div class="chart-container">
+                        <canvas id="lightChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 24px;">
+                <h2>📈 多参数综合对比</h2>
+                <div class="chart-container" style="height: 350px;">
+                    <canvas id="combinedChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div id="videoPage" class="page-block">
+            <h1>🎬 项目演示视频</h1>
+            <p class="tip">当前为视频占位，后续可以替换本地视频/在线视频链接</p>
+
+            <div class="video-box">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+            </div>
+
+            <div class="grid" style="margin-top: 24px;">
+                <div class="card">
+                    <h2>📝 视频说明</h2>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">本视频展示智慧草莓大棚监控系统的核心功能，包括实时环境监测、数据可视化、智能预测等模块。</p>
+                </div>
+                <div class="card">
+                    <h2>🔗 视频链接</h2>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">可以在这里添加视频下载链接或其他平台的视频地址。</p>
+                    <button class="btn-outline" style="margin-top: 12px;">📥 下载视频</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const navLinks = document.querySelectorAll("nav a");
+        const pages = document.querySelectorAll(".page-block");
+        
+        function switchPage(targetId) {
+            pages.forEach(p => p.classList.remove("show"));
+            document.getElementById(targetId).classList.add("show");
+            navLinks.forEach(link => {
+                link.classList.remove("active");
+                if (link.dataset.target === targetId) link.classList.add("active");
+            });
+        }
+        
+        navLinks.forEach(link => {
+            link.onclick = () => switchPage(link.dataset.target);
+        });
+
+        const themeToggle = document.getElementById("themeToggle");
+        const html = document.documentElement;
+        
+        themeToggle.onclick = () => {
+            const currentTheme = html.getAttribute("data-theme") || "light";
+            if (currentTheme === "light") {
+                html.setAttribute("data-theme", "dark");
+                themeToggle.textContent = "☀️ 浅色模式";
+            } else {
+                html.setAttribute("data-theme", "light");
+                themeToggle.textContent = "🌙 深色模式";
+            }
+        };
+
+        function getFakeData() {
+            return {
+                temp: (18 + Math.random() * 12).toFixed(1),
+                humidity: (50 + Math.random() * 35).toFixed(0),
+                co2: (400 + Math.random() * 600).toFixed(0),
+                light: (10000 + Math.random() * 40000).toFixed(0)
+            };
+        }
+
+        function updateStatus(id, value, thresholds) {
+            const badge = document.getElementById(id);
+            let status = "normal";
+            let text = "正常";
+            
+            if (value < thresholds.min || value > thresholds.max) {
+                status = "danger";
+                text = "危险";
+            } else if (value < thresholds.min + (thresholds.max - thresholds.min) * 0.2 || 
+                       value > thresholds.max - (thresholds.max - thresholds.min) * 0.2) {
+                status = "warning";
+                text = "警告";
+            }
+            
+            badge.className = `status-badge status-${status}`;
+            badge.textContent = text;
+        }
+
+        function updateData() {
+            const data = getFakeData();
+            document.getElementById("tempText").innerText = data.temp;
+            document.getElementById("humText").innerText = data.humidity;
+            document.getElementById("co2Text").innerText = data.co2;
+            document.getElementById("lightText").innerText = data.light;
+            
+            updateStatus("tempStatus", parseFloat(data.temp), { min: 18, max: 28 });
+            updateStatus("humStatus", parseInt(data.humidity), { min: 50, max: 85 });
+            updateStatus("co2Status", parseInt(data.co2), { min: 400, max: 1000 });
+            updateStatus("lightStatus", parseInt(data.light), { min: 10000, max: 50000 });
+        }
+
+        document.getElementById("refreshBtn").addEventListener("click", () => {
+            updateData();
+            countdown = 30;
+        });
+
+        let countdown = 30;
+        setInterval(() => {
+            countdown--;
+            const countdownEl = document.getElementById("countdown");
+            if (countdownEl) {
+                countdownEl.innerText = countdown;
+            }
+            if (countdown <= 0) {
+                updateData();
+                countdown = 30;
+            }
+        }, 1000);
+
+        document.getElementById("predictBtn").addEventListener("click", () => {
+            document.getElementById("predictResult").style.display = "block";
+        });
+
+        function generateTimeLabels() {
+            const labels = [];
+            for (let i = 24; i >= 0; i--) {
+                const hour = (new Date().getHours() - i + 24) % 24;
+                labels.push(`${hour.toString().padStart(2, '0')}:00`);
+            }
+            return labels;
+        }
+
+        function generateTrendData(base, variance, count = 25) {
+            return Array.from({ length: count }, () => 
+                parseFloat((base + (Math.random() - 0.5) * variance * 2).toFixed(1))
+            );
+        }
+
+        const ctxTemp = document.getElementById("tempChart").getContext("2d");
+        new Chart(ctxTemp, {
+            type: "line",
+            data: {
+                labels: generateTimeLabels(),
+                datasets: [{
+                    label: "温度 (℃)",
+                    data: generateTrendData(23, 5),
+                    borderColor: "#e74c3c",
+                    backgroundColor: "rgba(231, 76, 60, 0.1)",
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true }
+                },
+                scales: {
+                    y: { beginAtZero: false }
+                }
+            }
+        });
+
+        const ctxHum = document.getElementById("humChart").getContext("2d");
+        new Chart(ctxHum, {
+            type: "line",
+            data: {
+                labels: generateTimeLabels(),
+                datasets: [{
+                    label: "湿度 (%RH)",
+                    data: generateTrendData(70, 15),
+                    borderColor: "#3498db",
+                    backgroundColor: "rgba(52, 152, 219, 0.1)",
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true }
+                },
+                scales: {
+                    y: { beginAtZero: false }
+                }
+            }
+        });
+
+        const ctxCo2 = document.getElementById("co2Chart").getContext("2d");
+        new Chart(ctxCo2, {
+            type: "line",
+            data: {
+                labels: generateTimeLabels(),
+                datasets: [{
+                    label: "CO2 (ppm)",
+                    data: generateTrendData(650, 200),
+                    borderColor: "#9b59b6",
+                    backgroundColor: "rgba(155, 89, 182, 0.1)",
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true }
+                },
+                scales: {
+                    y: { beginAtZero: false }
+                }
+            }
+        });
+
+        const ctxLight = document.getElementById("lightChart").getContext("2d");
+        new Chart(ctxLight, {
+            type: "line",
+            data: {
+                labels: generateTimeLabels(),
+                datasets: [{
+                    label: "光照 (lux)",
+                    data: generateTrendData(30000, 15000),
+                    borderColor: "#f39c12",
+                    backgroundColor: "rgba(243, 156, 18, 0.1)",
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true }
+                },
+                scales: {
+                    y: { beginAtZero: false }
+                }
+            }
+        });
+
+        const ctxCombined = document.getElementById("combinedChart").getContext("2d");
+        new Chart(ctxCombined, {
+            type: "line",
+            data: {
+                labels: generateTimeLabels(),
+                datasets: [
+                    {
+                        label: "温度 (℃)",
+                        data: generateTrendData(23, 5),
+                        borderColor: "#e74c3c",
+                        backgroundColor: "rgba(231, 76, 60, 0.1)",
+                        fill: false,
+                        tension: 0.4,
+                        pointRadius: 2,
+                        yAxisID: "y"
+                    },
+                    {
+                        label: "湿度 (%RH)",
+                        data: generateTrendData(70, 15),
+                        borderColor: "#3498db",
+                        backgroundColor: "rgba(52, 152, 219, 0.1)",
+                        fill: false,
+                        tension: 0.4,
+                        pointRadius: 2,
+                        yAxisID: "y1"
+                    },
+                    {
+                        label: "CO2 (ppm)",
+                        data: generateTrendData(650, 200),
+                        borderColor: "#9b59b6",
+                        backgroundColor: "rgba(155, 89, 182, 0.1)",
+                        fill: false,
+                        tension: 0.4,
+                        pointRadius: 2,
+                        yAxisID: "y2"
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true }
+                },
+                scales: {
+                    y: { type: "linear", display: true, position: "left", title: { display: true, text: "温度" } },
+                    y1: { type: "linear", display: true, position: "right", title: { display: true, text: "湿度" }, grid: { drawOnChartArea: false } },
+                    y2: { type: "linear", display: false, position: "right" }
+                }
+            }
+        });
+
+        const ctxPredict = document.getElementById("predictChart").getContext("2d");
+        new Chart(ctxPredict, {
+            type: "bar",
+            data: {
+                labels: ["第30天", "第45天", "第60天", "第75天", "第90天"],
+                datasets: [{
+                    label: "预测产量 (kg)",
+                    data: [3000, 5500, 8000, 10500, 12500],
+                    backgroundColor: ["#27ae60", "#2ecc71", "#3498db", "#9b59b6", "#f39c12"],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

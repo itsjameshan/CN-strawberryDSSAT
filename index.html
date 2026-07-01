@@ -3,584 +3,1066 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>草莓大棚农业模型</title>
-    <!-- 引入Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 引入Font Awesome -->
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    
-    <!-- 配置Tailwind自定义颜色和字体 -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#1E5128', // 昆明学院主色调-绿色
-                        secondary: '#4E9F3D', // 辅助绿色
-                        accent: '#D8E9A8', // 点缀色
-                        dark: '#191A19', // 深色
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                    },
-                }
+    <title>智慧草莓大棚 - 多组成果整合平台</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #2980b9;
+            --primary-light: #42a5f5;
+            --primary-dark: #1e6091;
+            --secondary-color: #2c3e50;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --bg-color: #f5f7fa;
+            --card-bg: #ffffff;
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --border-color: #e8ecf0;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        [data-theme="dark"] {
+            --bg-color: #1a1a2e;
+            --card-bg: #16213e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0aec0;
+            --border-color: #2d3748;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", "PingFang SC", sans-serif;
+        }
+        body {
+            background: var(--bg-color);
+            color: var(--text-primary);
+            transition: var(--transition);
+            min-height: 100vh;
+        }
+        nav {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            padding: 18px 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+        nav a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+        nav a.active {
+            background: var(--primary-light);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(66, 165, 245, 0.4);
+        }
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+        .page-block {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.4s ease forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
-    </script>
-    
-    <!-- 自定义工具类 -->
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .content-auto {
-                content-visibility: auto;
+        .page-block.show {
+            display: block;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            transition: var(--transition);
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        h1 {
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        h2 {
+            color: var(--text-primary);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        h3 {
+            color: var(--text-primary);
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        .tip {
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin: 8px 0;
+        }
+        .sensor-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-right: 8px;
+        }
+        .sensor-unit {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-left: 8px;
+        }
+        .status-normal {
+            background: rgba(39, 174, 96, 0.1);
+            color: var(--success-color);
+        }
+        .status-warning {
+            background: rgba(243, 156, 18, 0.1);
+            color: var(--warning-color);
+        }
+        .status-danger {
+            background: rgba(231, 76, 60, 0.1);
+            color: var(--danger-color);
+        }
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: var(--transition);
+        }
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        .refresh-info {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .countdown {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        .chart-container {
+            height: 280px;
+            position: relative;
+        }
+        .video-box {
+            width: 100%;
+            height: 400px;
+            background: #000;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .video-box iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .feature-item {
+            background: rgba(41, 128, 185, 0.1);
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        .feature-item:hover {
+            background: rgba(41, 128, 185, 0.15);
+        }
+        .feature-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: var(--transition);
+        }
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.1);
+        }
+        .table-container {
+            overflow-x: auto;
+            margin-top: 16px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th {
+            background: rgba(41, 128, 185, 0.05);
+            font-weight: 600;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+            color: white;
+            border: none;
+        }
+        .stat-card h3 {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        .stat-value {
+            font-size: 42px;
+            font-weight: 700;
+        }
+        .stat-unit {
+            font-size: 16px;
+            opacity: 0.8;
+        }
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
             }
-            .text-shadow {
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            h1 {
+                font-size: 22px;
             }
-            .hover-scale {
-                transition: transform 0.3s ease;
-            }
-            .hover-scale:hover {
-                transform: scale(1.05);
+            .grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
-<body class="bg-gray-50 font-sans">
-    <!-- 导航栏 -->
-    <header class="bg-primary text-white shadow-lg fixed w-full z-50 transition-all duration-300" id="navbar">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <i class="fa fa-leaf text-accent text-2xl"></i>
-                <h1 class="text-xl md:text-2xl font-bold">草莓大棚农业模型</h1>
-            </div>
-            <nav class="hidden md:flex space-x-8">
-                <a href="#" class="hover:text-accent transition-colors duration-300">首页</a>
-                <a href="#live" class="hover:text-accent transition-colors duration-300">视频</a>
-                <a href="#about" class="hover:text-accent transition-colors duration-300">关于实训</a>
-                <a href="#groups" class="hover:text-accent transition-colors duration-300">实训组别</a>
-            </nav>
-            <button class="md:hidden text-2xl" id="menuBtn">
-                <i class="fa fa-bars"></i>
-            </button>
+<body>
+    <nav>
+        <div class="nav-links">
+            <a data-target="home" class="active">首页总览</a>
+            <a data-target="groupB">发布组B</a>
+            <a data-target="modelGroup">模型小组</a>
+            <a data-target="agriGroup">农业参数小组</a>
+            <a data-target="chartGroup">可视化小组</a>
+            <a data-target="videoPage">项目演示视频</a>
         </div>
+        <button class="theme-toggle" id="themeToggle">🌙 深色模式</button>
+    </nav>
 
-        <!-- 移动端菜单 -->
-        <div class="md:hidden hidden bg-primary/95 backdrop-blur-md" id="mobileMenu">
-            <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
-                <a href="#" class="py-2 border-b border-gray-700 hover:text-accent transition-colors duration-300">首页</a>
-                <a href="#live" class="py-2 hover:text-accent transition-colors duration-300">视频</a>
-                <a href="#about" class="py-2 hover:text-accent transition-colors duration-300">关于实训</a>
-                <a href="#groups" class="py-2 border-b border-gray-700 hover:text-accent transition-colors duration-300">实训组别</a>
-            </div>
-        </div>
-    </header>
-
-    <!-- 英雄区域 -->
-    <section class="relative h-screen flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <!-- 可替换背景图 -->
-            <img src="%E6%A8%A1%E5%9E%8B%E5%9B%BE%E7%89%87/%E8%8D%89%E8%8E%931.jpg" alt="农业实训背景" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-dark/50"></div>
-        </div>
-        <div class="container mx-auto px-4 z-10 text-center">
-            <h2 class="text-[clamp(2rem,5vw,4rem)] font-bold text-white mb-6 text-shadow">
-                草莓智慧大棚农业模型
-            </h2>
-            <p class="text-[clamp(1rem,2vw,1.5rem)] text-white/90 mb-10 max-w-3xl mx-auto">
-                展示农业模型学实训成果，探索现代农业科技发展
-            </p>
-            <a href="#live" class="inline-block bg-secondary hover:bg-secondary/80 text-white font-medium py-3 px-8 rounded-lg shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-                成果展示 <i class="fa fa-arrow-down ml-2"></i>
-            </a>
-        </div>
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <a href="#groups" class="text-white text-4xl opacity-80 hover:opacity-100 transition-opacity duration-300">
-                <i class="fa fa-angle-down"></i>
-            </a>
-        </div>
-    </section>
-
-    <section id="live" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>班级视频</title>
-                <style>
-                    /* 主标题样式，较大字号和下边距 */
-                    .header h1 {
-                        font-size: 2.5rem;
-                        margin-bottom: 10px;
-                        font-weight: 300;
-                    }
+    <div class="container">
+        <div id="home" class="page-block show">
+            <h1>智慧草莓大棚综合项目</h1>
+            <p class="tip">🍓 多组成果整合平台 - 实时监控、智能预测、数据可视化</p>
             
-                    /* 副标题样式，稍小字号和透明度 */
-                    .header p {
-                        font-size: 1.1rem;
-                        opacity: 0.9;
-                    }
-            
-                    /* 视频展示区外边距 */
-                    .video-section {
-                        padding: 40px;
-                    }
-            
-                    /* 视频播放器外部容器，居中、圆角、阴影 */
-                    .video-container {
-                        position: relative;
-                        width: 100%;
-                        max-width: 800px;
-                        margin: 0 auto;
-                        border-radius: 15px;
-                        overflow: hidden;
-                        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-                    }
-            
-                    /* 视频播放器本身，宽度100%，圆角 */
-                    .video-player {
-                        width: 100%;
-                        height: auto;
-                        display: block;
-                        border-radius: 15px;
-                    }
-            
-                    /* 视频信息区，标题和描述居中显示 */
-                    .video-info {
-                        margin-top: 30px;
-                        text-align: center;
-                    }
-            
-                    /* 视频标题样式 */
-                    .video-title {
-                        font-size: 1.8rem;
-                        color: #333;
-                        margin-bottom: 15px;
-                        font-weight: 600;
-                    }
-            
-                    /* 视频描述样式 */
-                    .video-description {
-                        font-size: 1.1rem;
-                        color: #666;
-                        line-height: 1.6;
-                        max-width: 600px;
-                        margin: 0 auto;
-                    }
-            
-                    /* 控制按钮区域，横向排列，间距自适应 */
-                    .controls {
-                        margin-top: 30px;
-                        display: flex;
-                        justify-content: center;
-                        gap: 20px;
-                        flex-wrap: wrap;
-                    }
-            
-                    /* 按钮基础样式，圆角、内边距、过渡动画 */
-                    .btn {
-                        padding: 12px 24px;
-                        border: none;
-                        border-radius: 25px;
-                        font-size: 1rem;
-                        cursor: pointer;
-                        transition: all 0.3s ease;
-                        text-decoration: none;
-                        display: inline-block;
-                    }
-            
-                    /* 主要按钮样式，渐变背景，白色文字 */
-                    .btn-primary {
-                        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                        color: white;
-                    }
-            
-                    /* 主要按钮悬停效果，浮起和阴影 */
-                    .btn-primary:hover {
-                        transform: translateY(-2px);
-                        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-                    }
-            
-                    /* 次要按钮样式，浅灰背景，深色文字，边框 */
-                    .btn-secondary {
-                        background: #f8f9fa;
-                        color: #333;
-                        border: 2px solid #e9ecef;
-                    }
-            
-                    /* 次要按钮悬停效果，背景变深，浮起 */
-                    .btn-secondary:hover {
-                        background: #e9ecef;
-                        transform: translateY(-2px);
-                    }
-            
-                    /* 页脚样式，深色背景，白色文字，居中 */
-                    .footer {
-                        background: #333;
-                        color: white;
-                        text-align: center;
-                        padding: 20px;
-                    }
-            
-                    /* 响应式设计：在小屏幕下调整标题、按钮和布局 */
-                    @media (max-width: 768px) {
-                        .header h1 {
-                            font-size: 2rem;
-                        }
-                        
-                        .video-section {
-                            padding: 20px;
-                        }
-                        
-                        .controls {
-                            flex-direction: column;
-                            align-items: center;
-                        }
-                        
-                        .btn {
-                            width: 200px;
-                        }
-                    }
-            
-                    /* 加载动画和加载区样式（预留，未实际使用） */
-                    .loading {
-                        display: none;
-                        text-align: center;
-                        padding: 20px;
-                    }
-            
-                    .spinner {
-                        border: 4px solid #f3f3f3;
-                        border-top: 4px solid #667eea;
-                        border-radius: 50%;
-                        width: 40px;
-                        height: 40px;
-                        animation: spin 1s linear infinite;
-                        margin: 0 auto 20px;
-                    }
-            
-                    @keyframes spin {
-                        0% { transform: rotate(0deg); }
-                        100% { transform: rotate(360deg); }
-                    }
-                </style>
-            </head>
-    <body>
-        <div class="container mx-auto text-center"> <!-- 新增 text-center 类使内容居中 -->
-            <div class="header">
-                <h1>🎬 班级视频</h1>
-                <p>分工合作成功完成</p>
-            </div>
-    
-            <div class="video-section">
-                <div class="video-container mx-auto max-w-3xl"> <!-- 新增 mx-auto 使视频容器居中，max-w-3xl 限制最大宽度 -->
-                    <video class="video-player w-full" controls preload="metadata" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'%3E%3Crect width='800' height='450' fill='%23f0f0f0'/%3E%3Ctext x='400' y='225' text-anchor='middle' font-family='Arial' font-size='24' fill='%23999'%3E视频加载中...%3C/text%3E%3C/svg%3E">
-                        <source src="视频.mp4" type="video/mp4">
-                        您的浏览器不支持视频播放。
-                    </video>
+            <div class="grid">
+                <div class="stat-card">
+                    <h3>当前大棚数量</h3>
+                    <div class="stat-value">3</div>
+                    <div class="stat-unit">个监测点</div>
                 </div>
-    
-                <div class="controls mt-4"> <!-- 新增 mt-4 增加顶部间距 -->
-                    <button class="btn btn-primary" onclick="playVideo()">▶️ 播放</button>
-                    <button class="btn btn-secondary" onclick="pauseVideo()">⏸️ 暂停</button>
-                    <button class="btn btn-secondary" onclick="restartVideo()">🔄 重新播放</button>
-                    <button class="btn btn-secondary" onclick="toggleFullscreen()">⛶ 全屏</button>
+                <div class="stat-card">
+                    <h3>实时监测指标</h3>
+                    <div class="stat-value">4</div>
+                    <div class="stat-unit">项环境参数</div>
+                </div>
+                <div class="stat-card">
+                    <h3>数据更新频率</h3>
+                    <div class="stat-value">30</div>
+                    <div class="stat-unit">秒自动刷新</div>
+                </div>
+                <div class="stat-card">
+                    <h3>预计产量</h3>
+                    <div class="stat-value">12.5</div>
+                    <div class="stat-unit">吨/季</div>
                 </div>
             </div>
-        </div>
-    
-        <script>
-            const video = document.querySelector('.video-player');
-            
-            function playVideo() {
-                video.play();
-            }
-            
-            function pauseVideo() {
-                video.pause();
-            }
-            
-            function restartVideo() {
-                video.currentTime = 0;
-                video.play();
-            }
-            
-            function toggleFullscreen() {
-                if (video.requestFullscreen) {
-                    video.requestFullscreen();
-                } else if (video.webkitRequestFullscreen) {
-                    video.webkitRequestFullscreen();
-                } else if (video.msRequestFullscreen) {
-                    video.msRequestFullscreen();
-                }
-            }
-            
-            
-            // 视频加载事件
-            video.addEventListener('loadstart', function() {
-                console.log('视频开始加载...');
-            });
-            
-            video.addEventListener('canplay', function() {
-                console.log('视频可以播放');
-            });
-            
-            video.addEventListener('error', function() {
-                console.error('视频加载失败');
-                alert('视频加载失败，请检查文件路径是否正确');
-            });
-            
-            // 键盘快捷键支持
-            document.addEventListener('keydown', function(e) {
-                switch(e.code) {
-                    case 'Space':
-                        e.preventDefault();
-                        if (video.paused) {
-                            video.play();
-                        } else {
-                            video.pause();
-                        }
-                        break;
-                    case 'ArrowLeft':
-                        video.currentTime -= 10;
-                        break;
-                    case 'ArrowRight':
-                        video.currentTime += 10;
-                        break;
-                }
-            });
-            
-            // 页面加载完成后的初始化
-            window.addEventListener('load', function() {
-                console.log('视频展示页面加载完成');
-            });
-        </script>
-    </body>
-    
-    <!-- 关于实训 -->
-    <section id="about" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">关于实训</h2>
-                <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
-                <p class="text-gray-600 max-w-3xl mx-auto">本次实训是23智慧农业1班所有同学的重要课程实训</p>
-            </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div class="order-2 lg:order-1">
-                    <h3 class="text-2xl font-bold text-dark mb-6">实训目标</h3>
-                    <p class="text-gray-600 mb-6">
-                        这个实训通过简化建模信息的呈现和综合的过程，减少主动整合信息的需求；但是着重于在此基础上通过完成建模的各种任务，重新构建建模的心智图式，通过持续的建模的认知努力，从而达到真正的理解如何建模。
-                    </p>
-                    <h3 class="text-2xl font-bold text-dark mb-6">日程安排</h3>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-start">
-                            <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
-                            <span>第一天：环境配置与项目启动</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
-                            <span>第二天：功能开发与代码编写</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
-                            <span>第三天：测试与成果整理</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
-                            <span>第四天：各组成果展示</span>
-                        </li>
-                        
-                    </ul>
+            <div class="grid">
+                <div class="card">
+                    <h2>🌐 发布组B</h2>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">负责：网页框架开发、页面交互设计、Netlify线上部署</p>
+                    <button class="btn" onclick="switchPage('groupB')">查看本组成果</button>
                 </div>
-                <div class="order-1 lg:order-2">
-                    <!-- 可替换图片 -->
-                    <img src="%E6%A8%A1%E5%9E%8B%E5%9B%BE%E7%89%87/%E8%8D%89%E8%8E%932.jpg" alt="农业实训场景" class="rounded-xl shadow-xl w-full h-auto">
+                <div class="card">
+                    <h2>🧠 模型小组</h2>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">负责：DSSAT草莓预测运算、真实传感器数据接入</p>
+                    <button class="btn" onclick="switchPage('modelGroup')">查看模型成果</button>
+                </div>
+                <div class="card">
+                    <h2>🌱 农业参数小组</h2>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">负责：草莓种植标准参数、田间种植规范制定</p>
+                    <button class="btn" onclick="switchPage('agriGroup')">查看农业资料</button>
+                </div>
+                <div class="card">
+                    <h2>📊 可视化小组</h2>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">负责：图表展示、数据可视化、大屏监控展示</p>
+                    <button class="btn" onclick="switchPage('chartGroup')">查看可视化图表</button>
                 </div>
             </div>
-        </div>
-    </section>
 
-    
-    <!-- 实训组别区域 -->
-    <section id="groups" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">实训小组</h2>
-                <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
-                <p class="text-gray-600 max-w-3xl mx-auto">5个小组合力完成模型并报告成果</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- 代码组卡片 -->
-                <div class="bg-white rounded-xl shadow-xl overflow-hidden hover-scale group">
-                    <div class="h-60 overflow-hidden">
-                        <!-- 可替换图片 -->
-                        <img src="%E6%A8%A1%E5%9E%8B%E5%9B%BE%E7%89%87/%E5%B0%8F%E7%BB%841.jpg" alt="代码组工作场景" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="card" style="margin-top: 24px;">
+                <h2>🎯 项目快速入口</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">📡</div>
+                        <div style="font-weight: 600;">实时监控</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">查看大棚环境数据</div>
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-dark mb-3 flex items-center">
-                            <i class="fa fa-code text-primary mr-2"></i> 研发A组
-                        </h3>
-                        <p class="text-gray-600 mb-6">核对所有核心机理Python模块（生长计算、物候期判定、产量计算），进行模块功能测试，画代码文件关系图UML，添加代码中文注释
-                            </p>
-                        <a href="研发A.html" class="inline-block bg-primary hover:bg-primary/90 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-300">
-                            组内成果详情 <i class="fa fa-arrow-right ml-1"></i>
-                        </a>
+                    <div class="feature-item">
+                        <div class="feature-icon">📈</div>
+                        <div style="font-weight: 600;">趋势分析</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">历史数据图表</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🎬</div>
+                        <div style="font-weight: 600;">项目演示</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">观看视频介绍</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">⚙️</div>
+                        <div style="font-weight: 600;">参数配置</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">设置种植参数</div>
                     </div>
                 </div>
-
-
-                <!-- 研发组卡片 -->
-                <div class="bg-white rounded-xl shadow-xl overflow-hidden hover-scale group">
-                    <div class="h-60 overflow-hidden">
-                        <!-- 可替换图片 -->
-                        <img src="%E6%A8%A1%E5%9E%8B%E5%9B%BE%E7%89%87/%E5%B0%8F%E7%BB%842.jpg" alt="研发组工作场景" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-dark mb-3 flex items-center">
-                            <i class="fa fa-flask text-primary mr-2"></i> 研发B组
-                        </h3>
-                        <p class="text-gray-600 mb-6">分析模型输入，输出机制，准备示例输入数据（气象、土壤、作物参数），制定部署初步计划。研究并绘制出DSSAT 文件关系图UML，给出每个文件的作用找出DSSAT 草莓相关输入文件，用DSSAT生成输出文件，标注注释.md解释DSSAT的输入输出文件，写.md 文件的DSSAT模型运作原理，安装Windows Installer DSSAT介面板生成草莓结果，和python文件生成的结果对比，和DSSAT无界面版生成的结果对比研究DSSAT 绘图，可以模仿画DSSAT文件中的关系图UML
-                            </p>
-                        <a href="研发B.html" class="inline-block bg-primary hover:bg-primary/90 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-300">
-                            组内成果详情 <i class="fa fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 发布组卡片 -->
-                <div class="bg-white rounded-xl shadow-xl overflow-hidden hover-scale group">
-                    <div class="h-60 overflow-hidden">
-                        <!-- 可替换图片 -->
-                        <img src="%E6%A8%A1%E5%9E%8B%E5%9B%BE%E7%89%87/%E5%B0%8F%E7%BB%843.jpg" alt="发布组工作场景" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-dark mb-3 flex items-center">
-                            <i class="fa fa-bullhorn text-primary mr-2"></i> 发布A组
-                        </h3>
-                        <p class="text-gray-600 mb-6">对接DSSAT 输出结果从python文件和B组来的输出结果从而设计python得输出新图用matplotlib， seaborn等包，利用PPT展示与解释图片结果</p>
-                        <a href="发布A.html" class="inline-block bg-primary hover:bg-primary/90 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-300">
-                            组内成果详情 <i class="fa fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </div>
+                <button class="btn" style="margin-top: 20px;" onclick="switchPage('videoPage')">🎬 观看项目演示视频</button>
             </div>
         </div>
-    </section>
 
-    
-    <!-- 页脚 -->
-    <footer class="bg-dark text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4 flex items-center">
-                        <i class="fa fa-leaf text-accent mr-2"></i> 草莓智慧大棚农业模型
-                    </h3>
-                    <p class="text-gray-400 mb-6">
-                        由昆明学院23智慧农业1班共同研究完成
-                    </p>
-                </div>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold mb-4">网页内容制作</h3>
-                    <ul class="space-y-2">
-                        <li class="flex items-center">
-                            <i class="fa fa-map-marker text-accent mr-2"></i>
-                            <span class="text-gray-400">23智慧农业1班发布B组</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fa fa-envelope text-accent mr-2"></i>
-                            <span class="text-gray-400">25456258456@qq.com</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fa fa-phone text-accent mr-2"></i>
-                            <span class="text-gray-400">0871-12345678</span>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold mb-4">快速链接</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">首页</a></li>
-                        <li><a href="#groups" class="text-gray-400 hover:text-white transition-colors duration-300">实训组别</a></li>
-                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors duration-300">关于实训</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 mt-10 pt-6 text-center text-gray-500">
-                <p>&copy; 2025 发布B组. 保留所有权利.</p>
-            </div>
-        </div>
-    </footer>
+        <div id="groupB" class="page-block">
+            <h1>发布组 B - 智慧大棚网页框架</h1>
+            <p class="tip">本组职责：前端页面开发、动态交互实现、外网部署</p>
 
-    <!-- 回到顶部按钮 -->
-    <button id="backToTop" class="fixed bottom-8 right-8 bg-primary/80 hover:bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300 opacity-0 translate-y-10">
-        <i class="fa fa-arrow-up"></i>
-    </button>
-
-    <!-- JavaScript -->
-    <script>
-        // 导航栏滚动效果
-        const navbar = document.getElementById('navbar');
-        const backToTop = document.getElementById('backToTop');
-        
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                navbar.classList.add('py-2', 'bg-primary/95', 'backdrop-blur-md');
-                navbar.classList.remove('py-3', 'bg-primary');
-                backToTop.classList.remove('opacity-0', 'translate-y-10');
-                backToTop.classList.add('opacity-100', 'translate-y-0');
-            } else {
-                navbar.classList.remove('py-2', 'bg-primary/95', 'backdrop-blur-md');
-                navbar.classList.add('py-3', 'bg-primary');
-                backToTop.classList.add('opacity-0', 'translate-y-10');
-                backToTop.classList.remove('opacity-100', 'translate-y-0');
-            }
-        });
-        
-        // 回到顶部功能
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        
-        // 移动端菜单
-        const menuBtn = document.getElementById('menuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            menuBtn.innerHTML = mobileMenu.classList.contains('hidden') ? 
-                '<i class="fa fa-bars"></i>' : 
-                '<i class="fa fa-times"></i>';
-        });
-        
-        // 平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    // 关闭移动菜单（如果打开）
-                    if (!mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.add('hidden');
-                        menuBtn.innerHTML = '<i class="fa fa-bars"></i>';
-                    }
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>🌡️ 一号大棚实时监测</h2>
+                        <button class="btn" id="refreshBtn">🔄 刷新数据</button>
+                    </div>
                     
-                    // 滚动到目标位置
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
+                    <div style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span>环境温度</span>
+                            <span class="status-badge" id="tempStatus">正常</span>
+                        </div>
+                        <span class="sensor-value" id="tempText">23.6</span>
+                        <span class="sensor-unit">℃</span>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span>空气湿度</span>
+                            <span class="status-badge" id="humStatus">正常</span>
+                        </div>
+                        <span class="sensor-value" id="humText">71</span>
+                        <span class="sensor-unit">%RH</span>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span>二氧化碳浓度</span>
+                            <span class="status-badge" id="co2Status">正常</span>
+                        </div>
+                        <span class="sensor-value" id="co2Text">645</span>
+                        <span class="sensor-unit">ppm</span>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span>光照强度</span>
+                            <span class="status-badge" id="lightStatus">正常</span>
+                        </div>
+                        <span class="sensor-value" id="lightText">32600</span>
+                        <span class="sensor-unit">lux</span>
+                    </div>
+
+                    <div class="refresh-info">
+                        <span>⏱️ 自动刷新倒计时：</span>
+                        <span class="countdown" id="countdown">30</span>
+                        <span>秒</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>📋 页面框架说明</h2>
+                    <ul style="padding-left: 24px; line-height: 2; color: var(--text-secondary);">
+                        <li>多小组导航切换功能</li>
+                        <li>模拟数据动态交互按钮</li>
+                        <li>30秒自动刷新机制</li>
+                        <li>阈值状态告警徽章</li>
+                        <li>深色/浅色主题切换</li>
+                        <li>预留视频、图表、文档位置</li>
+                        <li>适配Netlify外网部署</li>
+                    </ul>
+                    <div style="margin-top: 20px; padding: 16px; background: rgba(41, 128, 185, 0.05); border-radius: 8px;">
+                        <h3 style="font-size: 14px;">🌐 部署信息</h3>
+                        <p style="font-size: 13px; color: var(--text-secondary);">支持Netlify一键部署，静态页面无需后端</p>
+                        <p style="font-size: 13px; color: var(--text-secondary);">部署配置文件：netlify.toml</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 24px;">
+                <h2>⚙️ 草莓种植参数配置</h2>
+                <div class="grid" style="margin-top: 0;">
+                    <div class="form-group">
+                        <label>草莓品种</label>
+                        <select>
+                            <option>红颜草莓</option>
+                            <option>章姬草莓</option>
+                            <option>奶油草莓</option>
+                            <option>丰香草莓</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>预期种植周期(天)</label>
+                        <input type="number" value="90" min="60" max="150">
+                    </div>
+                    <div class="form-group">
+                        <label>目标产量(kg)</label>
+                        <input type="number" value="5000" min="1000" max="20000">
+                    </div>
+                    <div class="form-group">
+                        <label>适宜温度范围(℃)</label>
+                        <input type="text" value="18-28" readonly>
+                    </div>
+                </div>
+                <button class="btn" style="margin-top: 16px;">💾 保存配置</button>
+                <p class="tip">以上参数仅为示例，农业小组后续提供标准参数</p>
+            </div>
+        </div>
+
+        <div id="modelGroup" class="page-block">
+            <h1>🧠 模型小组 - DSSAT草莓预测模型</h1>
+            <p class="tip">下方为模型预测计算模块，等待模型组上传真实计算逻辑与结果</p>
+
+            <div class="grid">
+                <div class="card">
+                    <h2>📊 产量预测计算模块</h2>
+                    <div class="form-group">
+                        <label>当前生长周期(天)</label>
+                        <input type="number" value="45" min="1" max="150">
+                    </div>
+                    <div class="form-group">
+                        <label>平均温度(℃)</label>
+                        <input type="number" value="23.5" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label>平均湿度(%RH)</label>
+                        <input type="number" value="70" min="30" max="100">
+                    </div>
+                    <button class="btn" id="predictBtn">🔮 计算预测产量</button>
+                    
+                    <div id="predictResult" style="margin-top: 20px; padding: 16px; background: rgba(39, 174, 96, 0.1); border-radius: 8px; display: none;">
+                        <h3 style="color: var(--success-color);">预测结果</h3>
+                        <p>预计产量：<strong>12,500 kg</strong></p>
+                        <p>预测准确率：<strong>89.5%</strong></p>
+                        <p style="font-size: 12px; color: var(--text-secondary); margin-top: 8px;">【模拟数据，后续接入真实DSSAT模型计算结果】</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>📈 预测趋势图表</h2>
+                    <div class="chart-container">
+                        <canvas id="predictChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 24px;">
+                <h2>📚 模型输入输出接口说明</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>参数名称</th>
+                                <th>输入/输出</th>
+                                <th>数据类型</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>环境温度</td>
+                                <td>输入</td>
+                                <td>Float</td>
+                                <td>大棚内实时温度(℃)</td>
+                            </tr>
+                            <tr>
+                                <td>空气湿度</td>
+                                <td>输入</td>
+                                <td>Float</td>
+                                <td>大棚内相对湿度(%RH)</td>
+                            </tr>
+                            <tr>
+                                <td>CO2浓度</td>
+                                <td>输入</td>
+                                <td>Integer</td>
+                                <td>二氧化碳浓度(ppm)</td>
+                            </tr>
+                            <tr>
+                                <td>光照强度</td>
+                                <td>输入</td>
+                                <td>Integer</td>
+                                <td>光照强度(lux)</td>
+                            </tr>
+                            <tr>
+                                <td>预测产量</td>
+                                <td>输出</td>
+                                <td>Float</td>
+                                <td>预计草莓产量(kg)</td>
+                            </tr>
+                            <tr>
+                                <td>成熟时间</td>
+                                <td>输出</td>
+                                <td>Integer</td>
+                                <td>预计成熟天数(天)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="agriGroup" class="page-block">
+            <h1>🌱 农业参数小组 - 草莓种植标准参数</h1>
+            <p class="tip">下方为草莓品种参数库，等待农业组完善种植标准、品种资料</p>
+
+            <div class="grid">
+                <div class="card">
+                    <h2>🍓 草莓品种参数库</h2>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>品种名称</th>
+                                    <th>适宜温度(℃)</th>
+                                    <th>适宜湿度(%RH)</th>
+                                    <th>种植周期(天)</th>
+                                    <th>亩产量(kg)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>红颜草莓</td>
+                                    <td>18-25</td>
+                                    <td>60-80</td>
+                                    <td>90-110</td>
+                                    <td>2000-3000</td>
+                                </tr>
+                                <tr>
+                                    <td>章姬草莓</td>
+                                    <td>15-23</td>
+                                    <td>65-85</td>
+                                    <td>85-105</td>
+                                    <td>1500-2500</td>
+                                </tr>
+                                <tr>
+                                    <td>奶油草莓</td>
+                                    <td>17-26</td>
+                                    <td>60-75</td>
+                                    <td>95-120</td>
+                                    <td>1800-2800</td>
+                                </tr>
+                                <tr>
+                                    <td>丰香草莓</td>
+                                    <td>16-24</td>
+                                    <td>65-80</td>
+                                    <td>80-100</td>
+                                    <td>1600-2400</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>📋 田间种植规范</h2>
+                    <ul style="padding-left: 24px; line-height: 2; color: var(--text-secondary);">
+                        <li>定植密度：8000-10000株/亩</li>
+                        <li>行距：25-30厘米</li>
+                        <li>株距：15-20厘米</li>
+                        <li>施肥周期：10-15天/次</li>
+                        <li>灌溉方式：滴灌/微喷</li>
+                        <li>病虫害防治：生物防治为主</li>
+                    </ul>
+                    
+                    <div style="margin-top: 20px; padding: 16px; background: rgba(243, 156, 18, 0.1); border-radius: 8px;">
+                        <h3 style="color: var(--warning-color); font-size: 14px;">⚠ 注意事项</h3>
+                        <p style="font-size: 13px; color: var(--text-secondary);">温度超过30℃时需通风降温，低于10℃时需加温保温。湿度超过85%易引发灰霉病，需及时除湿。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 24px;">
+                <h2>🌿 土壤参数标准</h2>
+                <div class="grid" style="margin-top: 0;">
+                    <div class="form-group">
+                        <label>土壤pH值</label>
+                        <input type="text" value="5.5-6.5" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>土壤有机质含量</label>
+                        <input type="text" value="≥2.0%" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>土壤含盐量</label>
+                        <input type="text" value="≤0.15%" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>土壤湿度</label>
+                        <input type="text" value="60-70%" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="chartGroup" class="page-block">
+            <h1>📊 可视化小组 - 数据图表展示</h1>
+            <p class="tip">下方为环境数据趋势图表，展示24小时模拟监测数据</p>
+
+            <div class="grid">
+                <div class="card">
+                    <h2>🌡️ 温度变化趋势</h2>
+                    <div class="chart-container">
+                        <canvas id="tempChart"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>💧 湿度变化趋势</h2>
+                    <div class="chart-container">
+                        <canvas id="humChart"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>💨 CO2浓度变化趋势</h2>
+                    <div class="chart-container">
+                        <canvas id="co2Chart"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>☀️ 光照强度变化趋势</h2>
+                    <div class="chart-container">
+                        <canvas id="lightChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 24px;">
+                <h2>📈 多参数综合对比</h2>
+                <div class="chart-container" style="height: 350px;">
+                    <canvas id="combinedChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div id="videoPage" class="page-block">
+            <h1>🎬 项目演示视频</h1>
+            <p class="tip">当前为视频占位，后续可以替换本地视频/在线视频链接</p>
+
+            <div class="video-box">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+            </div>
+
+            <div class="grid" style="margin-top: 24px;">
+                <div class="card">
+                    <h2>📝 视频说明</h2>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">本视频展示智慧草莓大棚监控系统的核心功能，包括实时环境监测、数据可视化、智能预测等模块。</p>
+                </div>
+                <div class="card">
+                    <h2>🔗 视频链接</h2>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">可以在这里添加视频下载链接或其他平台的视频地址。</p>
+                    <button class="btn-outline" style="margin-top: 12px;">📥 下载视频</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const navLinks = document.querySelectorAll("nav a");
+        const pages = document.querySelectorAll(".page-block");
+        
+        function switchPage(targetId) {
+            pages.forEach(p => p.classList.remove("show"));
+            document.getElementById(targetId).classList.add("show");
+            navLinks.forEach(link => {
+                link.classList.remove("active");
+                if (link.dataset.target === targetId) link.classList.add("active");
             });
+        }
+        
+        navLinks.forEach(link => {
+            link.onclick = () => switchPage(link.dataset.target);
+        });
+
+        const themeToggle = document.getElementById("themeToggle");
+        const html = document.documentElement;
+        
+        themeToggle.onclick = () => {
+            const currentTheme = html.getAttribute("data-theme") || "light";
+            if (currentTheme === "light") {
+                html.setAttribute("data-theme", "dark");
+                themeToggle.textContent = "☀️ 浅色模式";
+            } else {
+                html.setAttribute("data-theme", "light");
+                themeToggle.textContent = "🌙 深色模式";
+            }
+        };
+
+        function getFakeData() {
+            return {
+                temp: (18 + Math.random() * 12).toFixed(1),
+                humidity: (50 + Math.random() * 35).toFixed(0),
+                co2: (400 + Math.random() * 600).toFixed(0),
+                light: (10000 + Math.random() * 40000).toFixed(0)
+            };
+        }
+
+        function updateStatus(id, value, thresholds) {
+            const badge = document.getElementById(id);
+            let status = "normal";
+            let text = "正常";
+            
+            if (value < thresholds.min || value > thresholds.max) {
+                status = "danger";
+                text = "危险";
+            } else if (value < thresholds.min + (thresholds.max - thresholds.min) * 0.2 || 
+                       value > thresholds.max - (thresholds.max - thresholds.min) * 0.2) {
+                status = "warning";
+                text = "警告";
+            }
+            
+            badge.className = `status-badge status-${status}`;
+            badge.textContent = text;
+        }
+
+        function updateData() {
+            const data = getFakeData();
+            document.getElementById("tempText").innerText = data.temp;
+            document.getElementById("humText").innerText = data.humidity;
+            document.getElementById("co2Text").innerText = data.co2;
+            document.getElementById("lightText").innerText = data.light;
+            
+            updateStatus("tempStatus", parseFloat(data.temp), { min: 18, max: 28 });
+            updateStatus("humStatus", parseInt(data.humidity), { min: 50, max: 85 });
+            updateStatus("co2Status", parseInt(data.co2), { min: 400, max: 1000 });
+            updateStatus("lightStatus", parseInt(data.light), { min: 10000, max: 50000 });
+        }
+
+        document.getElementById("refreshBtn").addEventListener("click", () => {
+            updateData();
+            countdown = 30;
+        });
+
+        let countdown = 30;
+        setInterval(() => {
+            countdown--;
+            const countdownEl = document.getElementById("countdown");
+            if (countdownEl) {
+                countdownEl.innerText = countdown;
+            }
+            if (countdown <= 0) {
+                updateData();
+                countdown = 30;
+            }
+        }, 1000);
+
+        document.getElementById("predictBtn").addEventListener("click", () => {
+            document.getElementById("predictResult").style.display = "block";
+        });
+
+        function generateTimeLabels() {
+            const labels = [];
+            for (let i = 24; i >= 0; i--) {
+                const hour = (new Date().getHours() - i + 24) % 24;
+                labels.push(`${hour.toString().padStart(2, '0')}:00`);
+            }
+            return labels;
+        }
+
+        function generateTrendData(base, variance, count = 25) {
+            return Array.from({ length: count }, () => 
+                parseFloat((base + (Math.random() - 0.5) * variance * 2).toFixed(1))
+            );
+        }
+
+        const ctxTemp = document.getElementById("tempChart").getContext("2d");
+        new Chart(ctxTemp, {
+            type: "line",
+            data: {
+                labels: generateTimeLabels(),
+                datasets: [{
+                    label: "温度 (℃)",
+                    data: generateTrendData(23, 5),
+                    borderColor: "#e74c3c",
+                    backgroundColor: "rgba(231, 76, 60, 0.1)",
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true }
+                },
+                scales: {
+                    y: { beginAtZero: false }
+                }
+            }
+        });
+
+        const ctxHum = document.getElementById("humChart").getContext("2d");
+        new Chart(ctxHum, {
+            type: "line",
+            data: {
+                labels: generateTimeLabels(),
+                datasets: [{
+                    label: "湿度 (%RH)",
+                    data: generateTrendData(70, 15),
+                    borderColor: "#3498db",
+                    backgroundColor: "rgba(52, 152, 219, 0.1)",
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true }
+                },
+                scales: {
+                    y: { beginAtZero: false }
+                }
+            }
+        });
+
+        const ctxCo2 = document.getElementById("co2Chart").getContext("2d");
+        new Chart(ctxCo2, {
+            type: "line",
+            data: {
+                labels: generateTimeLabels(),
+                datasets: [{
+                    label: "CO2 (ppm)",
+                    data: generateTrendData(650, 200),
+                    borderColor: "#9b59b6",
+                    backgroundColor: "rgba(155, 89, 182, 0.1)",
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true }
+                },
+                scales: {
+                    y: { beginAtZero: false }
+                }
+            }
+        });
+
+        const ctxLight = document.getElementById("lightChart").getContext("2d");
+        new Chart(ctxLight, {
+            type: "line",
+            data: {
+                labels: generateTimeLabels(),
+                datasets: [{
+                    label: "光照 (lux)",
+                    data: generateTrendData(30000, 15000),
+                    borderColor: "#f39c12",
+                    backgroundColor: "rgba(243, 156, 18, 0.1)",
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true }
+                },
+                scales: {
+                    y: { beginAtZero: false }
+                }
+            }
+        });
+
+        const ctxCombined = document.getElementById("combinedChart").getContext("2d");
+        new Chart(ctxCombined, {
+            type: "line",
+            data: {
+                labels: generateTimeLabels(),
+                datasets: [
+                    {
+                        label: "温度 (℃)",
+                        data: generateTrendData(23, 5),
+                        borderColor: "#e74c3c",
+                        backgroundColor: "rgba(231, 76, 60, 0.1)",
+                        fill: false,
+                        tension: 0.4,
+                        pointRadius: 2,
+                        yAxisID: "y"
+                    },
+                    {
+                        label: "湿度 (%RH)",
+                        data: generateTrendData(70, 15),
+                        borderColor: "#3498db",
+                        backgroundColor: "rgba(52, 152, 219, 0.1)",
+                        fill: false,
+                        tension: 0.4,
+                        pointRadius: 2,
+                        yAxisID: "y1"
+                    },
+                    {
+                        label: "CO2 (ppm)",
+                        data: generateTrendData(650, 200),
+                        borderColor: "#9b59b6",
+                        backgroundColor: "rgba(155, 89, 182, 0.1)",
+                        fill: false,
+                        tension: 0.4,
+                        pointRadius: 2,
+                        yAxisID: "y2"
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true }
+                },
+                scales: {
+                    y: { type: "linear", display: true, position: "left", title: { display: true, text: "温度" } },
+                    y1: { type: "linear", display: true, position: "right", title: { display: true, text: "湿度" }, grid: { drawOnChartArea: false } },
+                    y2: { type: "linear", display: false, position: "right" }
+                }
+            }
+        });
+
+        const ctxPredict = document.getElementById("predictChart").getContext("2d");
+        new Chart(ctxPredict, {
+            type: "bar",
+            data: {
+                labels: ["第30天", "第45天", "第60天", "第75天", "第90天"],
+                datasets: [{
+                    label: "预测产量 (kg)",
+                    data: [3000, 5500, 8000, 10500, 12500],
+                    backgroundColor: ["#27ae60", "#2ecc71", "#3498db", "#9b59b6", "#f39c12"],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true }
+                }
+            }
         });
     </script>
 </body>

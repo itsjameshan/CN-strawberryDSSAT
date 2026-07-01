@@ -389,7 +389,8 @@ class CropgroStrawberry:
         if stage in ['FRUIT_DEVELOPMENT', 'FRUIT_MATURITY', 'SENESCENCE']:
             sla *= 0.8  # Reduced SLA during later stages
             
-        self.plant_state.leaf_area_index = self.plant_state.leaf_biomass * sla
+        plant_density = 5.0  # plants/m²
+        self.plant_state.leaf_area_index = self.plant_state.leaf_biomass * sla * plant_density
         
         # Update root depth
         max_root_growth_rate = 0.5  # Maximum root growth rate (cm/day)
@@ -784,8 +785,13 @@ if __name__ == "__main__":
     print(f"Final fruit biomass: "
           f"{results['fruit_biomass'].iloc[-1]:.2f} g/plant")
     print(f"Final leaf area index: "
-          f"{results['leaf_area_index'].iloc[-1]:.2f} m²/m²")
+          f"{results['leaf_area_index'].iloc[-1]:.2f} m2/m2")
     print(f"Final phenological stage: {results['stage'].iloc[-1]}")
+    
+    # Save plot to file
+    plot_filename = "strawberry_simulation_results.png"
+    fig.savefig(plot_filename, dpi=150, bbox_inches='tight')
+    print(f"\nPlot saved to: {plot_filename}")
     
     # Show plot
     plt.show()

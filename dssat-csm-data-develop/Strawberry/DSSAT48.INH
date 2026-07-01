@@ -1,8 +1,8 @@
-*EXP.DETAILS: UFWM1401SR 2014 WIMAUMA STRAWBERRY GROWTH AND YIELD ANALYSIS TRIAL     
+*EXP.DETAILS: UFBA1401SR 2014 BALM STRAWBERRY VARIETY TRIAL                          
 
 *FILES
 @N  EXP.DATA    AFILE        ADIR
-  1 EXP         UFWM1401.SRA                                                                                 
+  1 EXP         UFBA1401.SRA                                                                                 
 @N  SPECIES     SPFILE       SPDIR
   1 SPE         SRGRO048.SPE ///app/dssat/Genotype/                                                          
 @N  ECOTYPE     EFILE        EDIR
@@ -12,7 +12,7 @@
 @N  SOIL        SFILE        SDIR
   1 SOIL        SOIL.SOL                                                                                     
 @N  WEATHER     WFILE        WDIR
-  1 WEATH       UFWM1401.WTH                                                                                 
+  1 WEATH       UFBA1401.WTH                                                                                 
 
 *SIMULATION CONTROL
 @N  GENERAL     NYERS NREPS START   SDATE RSEED SNAME.................... MODEL...
@@ -40,15 +40,15 @@
 
 *TREATMENTS
 @N   R O C TNAME....................  CU  FL  SA  IC  MP  MI  MF  MR  MC  MT  ME  MH  SM
-  2  1 1 0 Sensation                   2   1   0   0   1   0   0   0   0   0   0   1   1
+  1  1 1 0 Radiance                    1   1   0   0   1   0   0   0   0   0   0   1   1
 
 *CULTIVARS
 @C  CR INGENO CNAME
-  2 SR SR0002 Sensation       
+  1 SR SR0001 Radiance        
 
 *FIELDS
 @L  ID_FIELD WSTA....  FLSA  FLOB  FLDT  FLDD  FLDS  FLST SLTX   SLDP ID_SOIL    PMALB  PMWD
-  1 UFWM0001 UFWM1401   0.0  -99. DR000  -99.  100.   -99 -99    -99. UFGA010700-99.00 -99.0
+  1 UFBA0001 UFBA1401   0.0  -99. DR000  -99.  100.   -99 -99    -99. UFGA010700-99.00 -99.0
 @L             XCRD            YCRD      ELEV              AREA  SLEN  FLWR  SLAS PRMGT
   1       -99.00000       -99.00000    -99.00               1.0  100.   1.0 -99.0   -99   -99
 
@@ -85,7 +85,7 @@
   1 2014344 GS000   -99   -99  100.    0.
   1 2014348 GS000   -99   -99  100.    0.
   1 2014351 GS000   -99   -99  100.    0.
-  1 2014354 GS000   -99   -99  100.    0.
+  1 2014355 GS000   -99   -99  100.    0.
   1 2014357 GS000   -99   -99  100.    0.
   1 2014362 GS000   -99   -99  100.    0.
   1 2015001 GS000   -99   -99  100.    0.
@@ -111,6 +111,3 @@
   1 2015070 GS000   -99   -99  100.    0.
   1 2015074 GS000   -99   -99  100.    0.
   1 2015077 GS000   -99   -99  100.    0.
-  1 2015081 GS000   -99   -99  100.    0.
-  1 2015084 GS000   -99   -99  100.    0.
-  1 2015087 GS000   -99   -99  100.    0.

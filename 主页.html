@@ -274,12 +274,17 @@
     
             <div class="video-section">
                 <div class="video-container mx-auto max-w-3xl"> <!-- 新增 mx-auto 使视频容器居中，max-w-3xl 限制最大宽度 -->
-                    <video class="video-player w-full" controls preload="metadata" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'%3E%3Crect width='800' height='450' fill='%23f0f0f0'/%3E%3Ctext x='400' y='225' text-anchor='middle' font-family='Arial' font-size='24' fill='%23999'%3E视频加载中...%3C/text%3E%3C/svg%3E">
+                    <video class="video-player w-full" controls preload="metadata" poster="模型图片/草莓2.jpg">
                         <source src="视频.mp4" type="video/mp4">
                         您的浏览器不支持视频播放。
                     </video>
                 </div>
-    
+
+                <div class="video-info mt-6">
+                    <h3 class="video-title">📹 实训演示视频</h3>
+                    <p class="video-description">发布组B | 草莓智慧大棚农业模型实训成果演示</p>
+                </div>
+
                 <div class="controls mt-4"> <!-- 新增 mt-4 增加顶部间距 -->
                     <button class="btn btn-primary" onclick="playVideo()">▶️ 播放</button>
                     <button class="btn btn-secondary" onclick="pauseVideo()">⏸️ 暂停</button>

@@ -27,6 +27,7 @@ video, and presentation assets.
 | `comparison_results/dssat_python_detailed_comparison.csv` | Modified | Regenerated row-level DSSAT-vs-Python comparison data. |
 | `comparison_results/dssat_python_summary_comparison.csv` | Modified | Regenerated summary statistics and correlations matching the target figure. |
 | `comparison_results/ufba1401_dssat_python_comparison.png` | Added | Generated 3x3 comparison figure for visual review. |
+| `docs/UFBA1401_research_merge_audit.md` | Added | Records the selective merge scope, file-level rationale, and verification evidence. |
 
 ## Files Excluded
 
@@ -40,7 +41,7 @@ The integration branch intentionally excludes unrelated content from the source 
 - unrelated markdown guides and presentation notes
 - whole-repository snapshot artifacts from the unrelated branch history
 
-The safe branch diff contains only the nine included files listed above.
+The safe branch diff contains only the ten included files listed above.
 
 ## Key Code Changes
 
@@ -80,8 +81,8 @@ Important mapping decision:
 | Lines | Area | Purpose |
 | --- | --- | --- |
 | 24-36 | `dssat_date_to_calendar` | Converts DSSAT `YYDDD` dates such as `14282` to calendar dates. |
-| 40-91 | `_parse_wth_file` | Parses DSSAT `.WTH` rows, extracts SRAD/TMAX/TMIN/RAIN/WIND/RHUM, converts wind from km/day to m/s. |
-| 95-138 | `load_dssat_weather` | Accepts one or more `.WTH` files, merges cross-year weather, deduplicates by DSSAT date, and slices from the planting date. |
+| 40-93 | `_parse_wth_file` | Parses DSSAT `.WTH` rows, extracts SRAD/TMAX/TMIN/RAIN/WIND/RHUM, converts wind from km/day to m/s. |
+| 97-146 | `load_dssat_weather` | Accepts one or more `.WTH` files, merges cross-year weather, deduplicates by DSSAT date, and slices from the planting date. |
 | 149-150 | Manual test paths | Documents the exact UFBA1401/UFBA1501 weather files used by the research result. |
 
 ### `generate_ufba1401_comparison.py`
@@ -96,10 +97,10 @@ Important mapping decision:
 | 112-128 | `convert_python_output` | Converts Python units to DSSAT comparison units. |
 | 118 | `GWAD` conversion | Uses `seed_biomass * 43.0`. |
 | 125 | `G#AD` conversion | Uses `fruit_number * 795.5`. |
-| 131-158 | `build_comparison` | Produces detailed and summary comparison DataFrames. |
-| 161-211 | `plot_comparison` | Generates the 3x3 figure with 8 time-series panels plus mean-value comparison. |
-| 203-205 | Figure title | Matches the target figure title and experiment metadata. |
-| 215-241 | CLI entrypoint | Default input is `dssat_results/UFBA1401/PlantGro.OUT`; outputs CSVs and PNG to `comparison_results/`. |
+| 131-166 | `build_comparison` | Checks row count and DAP alignment, then produces detailed and summary comparison DataFrames. |
+| 170-221 | `plot_comparison` | Generates the 3x3 figure with 8 time-series panels plus mean-value comparison. |
+| 211-214 | Figure title | Matches the target figure title and experiment metadata. |
+| 224-248 | CLI entrypoint | Default input is `dssat_results/UFBA1401/PlantGro.OUT`; outputs CSVs and PNG to `comparison_results/`. |
 
 ## Data Files
 
@@ -111,6 +112,7 @@ Important mapping decision:
 | `comparison_results/dssat_python_detailed_comparison.csv` | 25,618 bytes | Row-level comparison data. |
 | `comparison_results/dssat_python_summary_comparison.csv` | 887 bytes | Summary statistics and correlations. |
 | `comparison_results/ufba1401_dssat_python_comparison.png` | 409,190 bytes | Generated comparison figure. |
+| `docs/UFBA1401_research_merge_audit.md` | 9,803 bytes | Selective merge audit and verification record. |
 
 ## Verification
 

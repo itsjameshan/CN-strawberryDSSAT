@@ -129,8 +129,17 @@ def convert_python_output(py_df: pd.DataFrame, length: int) -> pd.DataFrame:
 
 
 def build_comparison(dssat_df: pd.DataFrame, python_df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
-    length = min(len(dssat_df), len(python_df))
+    if len(python_df) < len(dssat_df):
+        raise ValueError(
+            f"Python output has {len(python_df)} rows, fewer than DSSAT output {len(dssat_df)} rows"
+        )
+
+    length = len(dssat_df)
     python_converted = convert_python_output(python_df, length)
+    dssat_dap = dssat_df["DAP"].iloc[:length].reset_index(drop=True)
+    python_dap = python_converted["DAP"].reset_index(drop=True)
+    if not dssat_dap.equals(python_dap):
+        raise ValueError("DSSAT and Python outputs are not aligned by DAP")
 
     detailed = pd.DataFrame({"DAP": dssat_df["DAP"].iloc[:length].to_numpy()})
     summary_rows = []

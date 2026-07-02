@@ -71,7 +71,9 @@ def _parse_wth_file(wth_path):
             tmin = float(parts[3])
             rain = float(parts[4])
             wind_kmd = float(parts[6])
-            rhum = float(parts[8]) if len(parts) > 8 and parts[8] != '' else 70.0
+            # UFBA WTH files leave PAR/EVAP blank, so split() collapses those
+            # columns and RHUM becomes the final token rather than parts[8].
+            rhum = float(parts[-1]) if len(parts) >= 8 else 70.0
 
             wind_ms = wind_kmd / 86.4  # km/d → m/s
             date_str = dssat_date_to_calendar(dssat_date)
@@ -124,6 +126,10 @@ def load_dssat_weather(wth_path, planting_dssat_date, n_days):
     start_idx = plant_idx[0]
     end_idx = min(start_idx + n_days, len(df))
     result = df.iloc[start_idx:end_idx].reset_index(drop=True)
+    if len(result) < n_days:
+        raise ValueError(
+            f"天气文件只有 {len(result)} 天可用, 少于请求的 {n_days} 天"
+        )
 
     # 移除临时列
     result = result.drop(columns=['dssat_date'])

@@ -358,6 +358,13 @@
     .video-placeholder .icon { font-size: 80px; margin-bottom: 16px; opacity: .5; }
     .video-placeholder h3 { font-size: 22px; font-weight: 900; margin-bottom: 8px; }
     .video-placeholder p { font-size: 14px; opacity: .7; }
+    .video-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
 
     .photo-grid {
       display: grid;
@@ -602,19 +609,14 @@
 
   <div class="section-header">
     <h1><span class="icon">🎬</span>实训演示视频</h1>
-    <p class="subtitle">预留视频位置，后期可插入实训演示视频</p>
+    <p class="subtitle">6月30日实训演示视频，已转为网页播放格式</p>
   </div>
 
   <div class="video-box">
-    <!-- 预留视频位置，后期插入视频时取消注释并替换src -->
-    <!-- <video src="your-video.mp4" controls poster="video-poster.jpg"></video> -->
-    <!-- 或使用iframe嵌入外部视频： -->
-    <!-- <iframe src="https://www.youtube.com/embed/your-video-id" allowfullscreen></iframe> -->
-    <div class="video-placeholder">
-      <div class="icon">🎥</div>
-      <h3>实训演示视频</h3>
-      <p>点击上方导航查看各小组详细成果</p>
-    </div>
+    <video src="2024-training-demo.mp4" controls preload="metadata" poster="2024-training-demo-poster.jpg"></video>
+  </div>
+  <div class="video-actions">
+    <a class="btn" href="2024-training-demo.mp4" download>下载演示视频</a>
   </div>
 </div>
 

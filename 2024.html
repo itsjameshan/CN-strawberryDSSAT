@@ -420,6 +420,61 @@
     .ppt-placeholder .icon { font-size: 64px; margin-bottom: 16px; opacity: .4; }
     .ppt-placeholder h3 { font-size: 20px; font-weight: 900; margin-bottom: 8px; }
     .ppt-placeholder p { font-size: 14px; opacity: .7; }
+    .ppt-container.has-file {
+      display: flex;
+      flex-direction: column;
+    }
+    .ppt-toolbar {
+      min-height: 76px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      border-bottom: 1px solid var(--rule);
+      background: rgba(255, 250, 241, .78);
+    }
+    [data-theme="dark"] .ppt-toolbar {
+      background: rgba(38, 21, 17, .88);
+    }
+    .ppt-meta h3 {
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 2px;
+      color: var(--ink);
+    }
+    .ppt-meta p {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .ppt-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+    .ppt-actions a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: #fff7ea;
+      background: linear-gradient(135deg, var(--berry), var(--berry-hot));
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 900;
+      box-shadow: 0 10px 24px rgba(177, 18, 38, .22);
+    }
+    .ppt-frame {
+      flex: 1;
+      min-height: 0;
+      width: 100%;
+      border: 0;
+      background: #fff;
+    }
 
     .team-card {
       text-align: center;
@@ -472,6 +527,8 @@
       .hero::before { display: none; }
       .hero-overlay { left: 22px; right: 22px; }
       .photo-grid { grid-template-columns: repeat(2, 1fr); }
+      .ppt-toolbar { align-items: flex-start; flex-direction: column; }
+      .ppt-actions { justify-content: flex-start; }
     }
 
     @media (max-width: 480px) {
@@ -557,7 +614,6 @@
 <div id="researchA" class="page-block">
   <div class="section-header">
     <h1><span class="icon">🔬</span>研发组A</h1>
-    <p class="subtitle">学习梳理DSSAT草莓模型底层机理，搭建模型重构方案与参数对照表；开展模型机理验证、模块功能测试，绘制UML关系图并完善PPT；进行模型机理重构与验证成果展示</p>
   </div>
 
   <div class="card">
@@ -604,12 +660,18 @@
 
   <div class="card">
     <h2>📊 PPT展示</h2>
-    <div class="ppt-container">
-      <div class="ppt-placeholder">
-        <div class="icon">📋</div>
-        <h3>研发组A PPT展示</h3>
-        <p>预留PPT嵌入位置，可插入iframe或上传PPT文件</p>
+    <div class="ppt-container has-file">
+      <div class="ppt-toolbar">
+        <div class="ppt-meta">
+          <h3>科研组1.pptx</h3>
+          <p>研发组A成果汇报</p>
+        </div>
+        <div class="ppt-actions">
+          <a href="https://cnstrawberrydssat.netlify.app/24%E6%99%BA%E5%86%9C%E5%86%9C%E4%B8%9A%E6%A8%A1%E5%9E%8B%E5%AD%A6%E5%AE%9E%E8%AE%AD%E5%B1%95%E7%A4%BA/%E7%A7%91%E7%A0%94%E7%BB%841.pptx" target="_blank" rel="noopener">打开PPT</a>
+          <a href="https://cnstrawberrydssat.netlify.app/24%E6%99%BA%E5%86%9C%E5%86%9C%E4%B8%9A%E6%A8%A1%E5%9E%8B%E5%AD%A6%E5%AE%9E%E8%AE%AD%E5%B1%95%E7%A4%BA/%E7%A7%91%E7%A0%94%E7%BB%841.pptx" download>下载</a>
+        </div>
       </div>
+      <iframe class="ppt-frame" title="研发组A PPT展示" loading="lazy" src="https://view.officeapps.live.com/op/embed.aspx?src=https%3A%2F%2Fcnstrawberrydssat.netlify.app%2F24%25E6%2599%25BA%25E5%2586%259C%25E5%2586%259C%25E4%25B8%259A%25E6%25A8%25A1%25E5%259E%258B%25E5%25AD%25A6%25E5%25AE%259E%25E8%25AE%25AD%25E5%25B1%2595%25E7%25A4%25BA%2F%25E7%25A7%2591%25E7%25A0%2594%25E7%25BB%25841.pptx"></iframe>
     </div>
   </div>
 </div>
@@ -618,7 +680,6 @@
 <div id="researchB" class="page-block">
   <div class="section-header">
     <h1><span class="icon">📊</span>研发组B</h1>
-    <p class="subtitle">掌握Git基础操作，整理草莓模型输入数据集与输入输出说明文档；分析模型输入输出机制，运行DSSAT生成结果并和Python结果比对，完成多情景模拟分析；展示数据处理与情景模拟成果</p>
   </div>
 
   <div class="card">
@@ -665,12 +726,18 @@
 
   <div class="card">
     <h2>📊 PPT展示</h2>
-    <div class="ppt-container">
-      <div class="ppt-placeholder">
-        <div class="icon">📋</div>
-        <h3>研发组B PPT展示</h3>
-        <p>预留PPT嵌入位置，可插入iframe或上传PPT文件</p>
+    <div class="ppt-container has-file">
+      <div class="ppt-toolbar">
+        <div class="ppt-meta">
+          <h3>科研B组总结汇报 (1).pptx</h3>
+          <p>研发组B成果汇报</p>
+        </div>
+        <div class="ppt-actions">
+          <a href="https://cnstrawberrydssat.netlify.app/24%E6%99%BA%E5%86%9C%E5%86%9C%E4%B8%9A%E6%A8%A1%E5%9E%8B%E5%AD%A6%E5%AE%9E%E8%AE%AD%E5%B1%95%E7%A4%BA/%E7%A7%91%E7%A0%94B%E7%BB%84%E6%80%BB%E7%BB%93%E6%B1%87%E6%8A%A5%20(1).pptx" target="_blank" rel="noopener">打开PPT</a>
+          <a href="https://cnstrawberrydssat.netlify.app/24%E6%99%BA%E5%86%9C%E5%86%9C%E4%B8%9A%E6%A8%A1%E5%9E%8B%E5%AD%A6%E5%AE%9E%E8%AE%AD%E5%B1%95%E7%A4%BA/%E7%A7%91%E7%A0%94B%E7%BB%84%E6%80%BB%E7%BB%93%E6%B1%87%E6%8A%A5%20(1).pptx" download>下载</a>
+        </div>
       </div>
+      <iframe class="ppt-frame" title="研发组B PPT展示" loading="lazy" src="https://view.officeapps.live.com/op/embed.aspx?src=https%3A%2F%2Fcnstrawberrydssat.netlify.app%2F24%25E6%2599%25BA%25E5%2586%259C%25E5%2586%259C%25E4%25B8%259A%25E6%25A8%25A1%25E5%259E%258B%25E5%25AD%25A6%25E5%25AE%259E%25E8%25AE%25AD%25E5%25B1%2595%25E7%25A4%25BA%2F%25E7%25A7%2591%25E7%25A0%2594B%25E7%25BB%2584%25E6%2580%25BB%25E7%25BB%2593%25E6%25B1%2587%25E6%258A%25A5%2520(1).pptx"></iframe>
     </div>
   </div>
 </div>
@@ -679,7 +746,6 @@
 <div id="publishA" class="page-block">
   <div class="section-header">
     <h1><span class="icon">📖</span>发布组A</h1>
-    <p class="subtitle">初期搭建项目PPT模板，收集实训背景资料；后续对接各组数据，使用绘图库生成可视化图表，整合优化最终展示PPT与演示素材；负责项目整体介绍、成果总结并主持展示环节</p>
   </div>
 
   <div class="card">
@@ -726,12 +792,18 @@
 
   <div class="card">
     <h2>📊 PPT展示</h2>
-    <div class="ppt-container">
-      <div class="ppt-placeholder">
-        <div class="icon">📋</div>
-        <h3>发布组A PPT展示</h3>
-        <p>预留PPT嵌入位置，可插入iframe或上传PPT文件</p>
+    <div class="ppt-container has-file">
+      <div class="ppt-toolbar">
+        <div class="ppt-meta">
+          <h3>发布组A.pptx</h3>
+          <p>发布组A成果汇报</p>
+        </div>
+        <div class="ppt-actions">
+          <a href="https://cnstrawberrydssat.netlify.app/24%E6%99%BA%E5%86%9C%E5%86%9C%E4%B8%9A%E6%A8%A1%E5%9E%8B%E5%AD%A6%E5%AE%9E%E8%AE%AD%E5%B1%95%E7%A4%BA/%E5%8F%91%E5%B8%83%E7%BB%84A.pptx" target="_blank" rel="noopener">打开PPT</a>
+          <a href="https://cnstrawberrydssat.netlify.app/24%E6%99%BA%E5%86%9C%E5%86%9C%E4%B8%9A%E6%A8%A1%E5%9E%8B%E5%AD%A6%E5%AE%9E%E8%AE%AD%E5%B1%95%E7%A4%BA/%E5%8F%91%E5%B8%83%E7%BB%84A.pptx" download>下载</a>
+        </div>
       </div>
+      <iframe class="ppt-frame" title="发布组A PPT展示" loading="lazy" src="https://view.officeapps.live.com/op/embed.aspx?src=https%3A%2F%2Fcnstrawberrydssat.netlify.app%2F24%25E6%2599%25BA%25E5%2586%259C%25E5%2586%259C%25E4%25B8%259A%25E6%25A8%25A1%25E5%259E%258B%25E5%25AD%25A6%25E5%25AE%259E%25E8%25AE%25AD%25E5%25B1%2595%25E7%25A4%25BA%2F%25E5%258F%2591%25E5%25B8%2583%25E7%25BB%2584A.pptx"></iframe>
     </div>
   </div>
 </div>

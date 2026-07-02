@@ -144,9 +144,10 @@ if __name__ == '__main__':
     # 测试跨年合并加载 (2014 + 2015 天气数据)
     # UFBA1401.WTH: 2014年数据 (种植日 14282 = 2014-10-09)
     # UFBA1501.WTH: 2015年数据 (覆盖到采收结束 15077 = 2015-03-18)
+    # 天气文件内置在仓库 weather/ 目录
     wth_paths = [
-        'dssat-csm-data-develop/Strawberry/UFBA1401.WTH',
-        'dssat-csm-data-develop/Weather/UFBA1501.WTH',
+        'weather/UFBA1401.WTH',
+        'weather/UFBA1501.WTH',
     ]
     planting_date = 14282  # 2014-10-09
     n_days = 110  # 模拟 110 天 (覆盖到 2015-01-25 采收结束)

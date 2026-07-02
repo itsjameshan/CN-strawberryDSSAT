@@ -2342,6 +2342,7 @@ def run_example_simulation():
       - 采收结束: 2015-01-25 (DSSAT YYDDD=15025)
       - 模拟天数: 110 天 (覆盖完整采收期)
     天气数据来源: UFBA1401.WTH (2014) + UFBA1501.WTH (2015) 跨年合并
+    天气文件已内置在仓库 weather/ 目录, clone 后可直接运行.
     """
     # 导入 DSSAT 天气加载模块
     from load_dssat_weather import load_dssat_weather
@@ -2376,9 +2377,10 @@ def run_example_simulation():
     n_days = 110  # 覆盖到 2015-01-25 采收结束 (DSSAT 最后采收 15025)
 
     # 加载 DSSAT 实际天气数据 (跨年合并 2014+2015)
+    # 天气文件内置在仓库 weather/ 目录, 保证 clone 后可独立运行
     wth_paths = [
-        'dssat-csm-data-develop/Strawberry/UFBA1401.WTH',
-        'dssat-csm-data-develop/Weather/UFBA1501.WTH',
+        'weather/UFBA1401.WTH',
+        'weather/UFBA1501.WTH',
     ]
     weather_df = load_dssat_weather(wth_paths, planting_dssat_date, n_days)
 

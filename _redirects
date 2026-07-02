@@ -1,16 +1,24 @@
 # Netlify redirects file
 
-# Redirect main Chinese homepage to index
-/主页.html /index.html 200
+# Root index.html is the cohort landing page (two links: 23级 / 24级).
 
-# Handle other Chinese filenames - serve them directly  
+# Friendly aliases for each cohort site
+/23级 /2023.html 200
+/24级 /2024.html 200
+/2023 /2023.html 200
+/2024 /2024.html 200
+
+# Legacy 23级 homepage names -> 2023 site
+/主页.html /2023.html 200
+
+# Handle other Chinese filenames - serve them directly
 /发布A.html /发布A.html 200
-/发布A动态.html /发布A动态.html 200  
+/发布A动态.html /发布A动态.html 200
 /研发A.html /研发A.html 200
 /研发B.html /研发B.html 200
 
 # Handle Chinese image folder and files
 /模型图片/* /模型图片/:splat 200
 
-# Handle 404 errors by serving index.html
-/* /index.html 404 
+# Handle 404 errors by serving the landing page
+/* /index.html 404

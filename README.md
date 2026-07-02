@@ -8,7 +8,12 @@ This repository contains a Python implementation of the CROPGRO-Strawberry crop 
 ## 🌐 Web Interface
 ## 🌐 网页界面
 
-访问我们的交互式网页界面：**https://cnstrawberrydssat.netlify.app/**
+访问我们的交互式网页界面 / Visit our web interface：**https://cnstrawberrydssat.netlify.app/**
+
+主页提供两个年级的项目网站入口，可分别查看 / The landing page links to both cohort sites:
+
+- **24级（2024届）** 智慧草莓大棚 · 实训平台：https://cnstrawberrydssat.netlify.app/2024.html
+- **23级（2023届）** 草莓大棚农业模型：https://cnstrawberrydssat.netlify.app/2023.html
 
 The web interface provides:
 网页界面提供：

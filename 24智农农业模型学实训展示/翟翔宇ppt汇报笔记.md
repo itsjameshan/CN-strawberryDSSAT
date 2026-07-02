@@ -8,6 +8,21 @@
 > 本汇报基于《草莓模型对齐工作日志_6.30-7.2_详细版》PPT（共67页），逐页标注讲解要点。
 > 全文围绕"将 Python 实现的 CROPGRO-Strawberry 模型参数与计算公式对齐 DSSAT Fortran 版本"这一核心目标展开。
 
+## 与已合并复现文件的关联
+
+本汇报材料对应 `main` 分支中已合并的 UFBA1401 复现链路。汇报负责解释对齐过程和参数修改逻辑，下面这些文件负责实际复现图表和数据。
+
+| 文件 | 作用 |
+| --- | --- |
+| [`../docs/UFBA1401_research_merge_audit.md`](../docs/UFBA1401_research_merge_audit.md) | 记录本次研究成果进入 `main` 的选择范围、排除范围和验证结果。 |
+| [`../generate_ufba1401_comparison.py`](../generate_ufba1401_comparison.py) | 一键重新生成 UFBA1401 DSSAT-vs-Python 对比 CSV 和 3x3 图。 |
+| [`../cropgro-strawberry-implementation.py`](../cropgro-strawberry-implementation.py) | 已对齐 DSSAT 机制和参数的 Python 草莓模型实现。 |
+| [`../load_dssat_weather.py`](../load_dssat_weather.py) | 读取 UFBA1401/UFBA1501 DSSAT `.WTH` 天气文件并转换给 Python 模型使用。 |
+| [`../weather/UFBA1401.WTH`](../weather/UFBA1401.WTH) 和 [`../weather/UFBA1501.WTH`](../weather/UFBA1501.WTH) | Python 复现使用的 2014-2015 跨年天气输入。 |
+| [`../dssat_results/UFBA1401/PlantGro.OUT`](../dssat_results/UFBA1401/PlantGro.OUT) | DSSAT/Fortran 参考输出，是对比图中蓝色曲线的数据来源。 |
+| [`../comparison_results/ufba1401_dssat_python_comparison.png`](../comparison_results/ufba1401_dssat_python_comparison.png) | 汇报中对应的最终 DSSAT-vs-Python 对比图。 |
+| [`草莓模型对齐工作日志_6.30-7.2_详细版 (1).pptx`](<草莓模型对齐工作日志_6.30-7.2_详细版 (1).pptx>) | 本笔记对应的 PPT 汇报文件。 |
+
 ---
 
 ## 第一部分：项目总览（第1-2页）

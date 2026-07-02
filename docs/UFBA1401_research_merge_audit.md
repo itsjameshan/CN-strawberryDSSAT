@@ -29,6 +29,17 @@ video, and presentation assets.
 | `comparison_results/ufba1401_dssat_python_comparison.png` | Added | Generated 3x3 comparison figure for visual review. |
 | `docs/UFBA1401_research_merge_audit.md` | Added | Records the selective merge scope, file-level rationale, and verification evidence. |
 
+## Related Presentation Materials
+
+These files document the same UFBA1401 DSSAT-vs-Python alignment result from the
+student reporting side. They are linked here for traceability, while the files in
+the previous section remain the executable reproducibility chain.
+
+| File | Relationship to this merge |
+| --- | --- |
+| [`24智农农业模型学实训展示/翟翔宇ppt汇报笔记.md`](<../24智农农业模型学实训展示/翟翔宇ppt汇报笔记.md>) | Speaker notes that explain the step-by-step parameter and mechanism alignment process behind the merged model changes. |
+| [`24智农农业模型学实训展示/草莓模型对齐工作日志_6.30-7.2_详细版 (1).pptx`](<../24智农农业模型学实训展示/草莓模型对齐工作日志_6.30-7.2_详细版 (1).pptx>) | Presentation deck for the UFBA1401 alignment work; use together with this audit and `generate_ufba1401_comparison.py` to connect the narrative results to the reproducible files. |
+
 ## Files Excluded
 
 The integration branch intentionally excludes unrelated content from the source branch:

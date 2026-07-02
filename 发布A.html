@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>发布A组 - 草莓智慧大棚农业模型</title>
+    <!-- 引入Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- 配置Tailwind自定义颜色和字体 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1E5128', // 昆明学院主色调-绿色
+                        secondary: '#4E9F3D', // 辅助绿色
+                        accent: '#D8E9A8', // 点缀色
+                        dark: '#191A19', // 深色
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- 自定义工具类 -->
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .tab-active {
+                border-bottom: 2px solid theme('colors.primary'); /* 修正border-botton拼写错误 */
+                color: theme('colors.primary');
+                font-weight: bold;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- 导航栏 -->
+    <header class="bg-primary text-white shadow-lg fixed w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-leaf text-accent text-2xl"></i>
+                <h1 class="text-xl md:text-2xl font-bold">草莓智慧大棚农业模型</h1>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="主页副本2.html" class="hover:text-accent transition-colors duration-300">首页</a>
+                <a href="主页副本2.html#groups" class="hover:text-accent transition-colors duration-300">实训组别</a>
+                <a href="主页副本2.html#about" class="hover:text-accent transition-colors duration-300">关于实训</a>
+            </nav>
+            <button class="md:hidden text-2xl" id="menuBtn">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        <!-- 移动端菜单 -->
+        <div class="md:hidden hidden bg-primary/95 backdrop-blur-md" id="mobileMenu">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+                <a href="主页副本2.html" class="py-2 border-b border-gray-700 hover:text-accent transition-colors duration-300">首页</a>
+                <a href="主页副本2.html#groups" class="py-2 border-b border-gray-700 hover:text-accent transition-colors duration-300">实训组别</a>
+                <a href="主页副本2.html#about" class="py-2 hover:text-accent transition-colors duration-300">关于实训</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 页面头部 -->
+    <section class="relative pt-24 pb-16 bg-gradient-to-r from-primary to-secondary text-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div>
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4 flex items-center">
+                        <i class="fa fa-bullhorn text-accent mr-3"></i> 发布A组
+                    </h2>
+                    <p class="text-accent/90 max-w-2xl">负责实训成果的展示、推广和应用，通过多种媒介形式向外界展示我们的农业模型学实训成果。</p>
+                </div>
+                <div class="mt-6 md:mt-0">
+                    <nav class="flex space-x-4">
+                        <a href="主页.html" class="text-white/80 hover:text-white transition-colors duration-300">首页</a>
+                        <span class="text-white/60">/</span>
+                        <a href="主页.html#groups" class="text-white/80 hover:text-white transition-colors duration-300">实训组别</a>
+                        <span class="text-white/60">/</span>
+                        <span class="text-white font-medium">发布组</span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" class="w-full h-10 md:h-16">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="fill-gray-50"></path>
+                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="fill-gray-50"></path>
+                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="fill-gray-50"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- 内容区域 -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <!-- 选项卡导航 -->
+            <div class="mb-12">
+                <div class="flex flex-wrap border-b border-gray-200">
+                    <button class="tab-btn tab-active py-4 px-6 focus:outline-none" data-tab="tab1">
+                        <i class="fa fa-picture-o mr-2"></i> 图片
+                   
+                    </button>    
+                </div>
+            </div>
+
+            <!-- 视频展示区，包含播放器、信息和控制按钮 -->
+        <div class="video-section">
+            <!-- 新增：动态图展示区域，点击跳转到发布A动态.html -->
+            <div style="text-align:center; margin-bottom:40px;">
+                <a href="发布A动态.html" target="_blank" style="display:inline-block;">
+                    <!-- 可替换为实际动态图，这里用SVG动画占位 -->
+                    <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="60" cy="60" r="50" fill="#667eea" opacity="0.2"/>
+                        <circle cx="60" cy="60" r="40" fill="#667eea" opacity="0.4">
+                            <animate attributeName="r" values="40;55;40" dur="1.2s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="60" cy="60" r="20" fill="#764ba2">
+                            <animate attributeName="r" values="20;35;20" dur="0.8s" repeatCount="indefinite"/>
+                        </circle>
+                        <text x="60" y="65" text-anchor="middle" font-size="18" fill="#fff" font-family="Arial">动态</text>
+                    </svg>
+                    <div style="margin-top:10px; color:#667eea; font-size:1.1rem;">点击查看发布A动态</div>
+                </a>
+            </div>
+     
+           
+                
+
+            <!-- 选项卡内容 -->
+            <div class="tab-content" id="tab1">
+                <h3 class="text-2xl font-bold text-dark mb-8">成果展示图片</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- 可替换图片 1 -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale">
+                        <img src="发布A结果图/12CD448147BCDD9FDF037DA506DF5E16.png" alt="成果展示图片1" class="w-full h-60 object-cover">
+                        
+                    </div>
+                    
+                    <!-- 可替换图片 2 -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale">
+                        <img src="发布A结果图/3B6EE605EE2ECCC917237882FD8BD419.png" alt="成果展示图片2" class="w-full h-60 object-cover">
+                        
+                    </div>
+                    
+                    <!-- 可替换图片 3 -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale">
+                        <img src="发布A结果图/591DAF4EED50E2A604ADA21E1C6B87DD.png" alt="成果展示图片3" class="w-full h-60 object-cover">
+                       
+                    </div>
+                    
+                    <!-- 可替换图片 4 -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale">
+                        <img src="发布A结果图/84652E6FCE67724DA707B9DF78A95B9A.png" alt="成果展示图片4" class="w-full h-60 object-cover">
+                        
+                    </div>
+                    
+                    <!-- 可替换图片 5 -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale">
+                        <img src="发布A结果图/A91AE50356D4882B4F82D1B61F398D3E.png" alt="成果展示图片5" class="w-full h-60 object-cover">
+                       
+                    </div>
+                    
+                    <!-- 可替换图片 6 -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale">
+                        <img src="发布A结果图/C32471FA7092F06C4261B7B3B740CA12.png" alt="成果展示图片6" class="w-full h-60 object-cover">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+ 
+    
+
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fa fa-leaf text-accent mr-2"></i> 草莓智慧大棚农业模型
+                    </h3>
+                    <p class="text-gray-400 mb-6">
+                        由昆明学院23智慧农业1班共同研究完成
+                    </p>
+                </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">网页内容制作</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fa fa-map-marker text-accent mr-2"></i>
+                            <span class="text-gray-400">23智慧农业1班发布B组</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-envelope text-accent mr-2"></i>
+                            <span class="text-gray-400">25456258456@qq.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-phone text-accent mr-2"></i>
+                            <span class="text-gray-400">0871-12345678</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">快速链接</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">首页</a></li>
+                        <li><a href="#groups" class="text-gray-400 hover:text-white transition-colors duration-300">实训组别</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors duration-300">关于实训</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-10 pt-6 text-center text-gray-500">
+                <p>&copy; 2025 发布B组. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- 回到顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-primary/80 hover:bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300 opacity-0 translate-y-10">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar'); // 原代码中navbar元素实际ID不存在，此处保留原逻辑
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                // 导航栏滚动效果
+                backToTop.classList.remove('opacity-0', 'translate-y-10');
+                backToTop.classList.add('opacity-100', 'translate-y-0');
+            } else {
+                backToTop.classList.add('opacity-0', 'translate-y-10');
+                backToTop.classList.remove('opacity-100', 'translate-y-0');
+            }
+        });
+        
+        // 回到顶部功能
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 移动端菜单
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuBtn.innerHTML = mobileMenu.classList.contains('hidden') ? 
+                '<i class="fa fa-bars"></i>' : 
+                '<i class="fa fa-times"></i>';
+        });
+        
+        // 选项卡切换
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // 移除所有选项卡按钮的活动状态
+                tabBtns.forEach(b => {
+                    b.classList.remove('tab-active');
+                    b.classList.remove('text-primary', 'font-bold');
+                    b.classList.add('text-gray-500');
+                });
+                
+                // 添加当前按钮的活动状态
+                btn.classList.add('tab-active', 'text-primary', 'font-bold');
+                btn.classList.remove('text-gray-500');
+                
+                // 隐藏所有选项卡内容
+                tabContents.forEach(content => {
+                    content.classList.add('hidden');
+                });
+                
+                // 显示当前选项卡内容
+                const tabId = btn.getAttribute('data-tab');
+                document.getElementById(tabId).classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>草莓大棚农业模型</title>
+    <!-- 引入Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- 配置Tailwind自定义颜色和字体 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1E5128', // 昆明学院主色调-绿色
+                        secondary: '#4E9F3D', // 辅助绿色
+                        accent: '#D8E9A8', // 点缀色
+                        dark: '#191A19', // 深色
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- 自定义工具类 -->
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .hover-scale {
+                transition: transform 0.3s ease;
+            }
+            .hover-scale:hover {
+                transform: scale(1.05);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- 导航栏 -->
+    <header class="bg-primary text-white shadow-lg fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-leaf text-accent text-2xl"></i>
+                <h1 class="text-xl md:text-2xl font-bold">草莓大棚农业模型</h1>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#" class="hover:text-accent transition-colors duration-300">首页</a>
+                <a href="#live" class="hover:text-accent transition-colors duration-300">视频</a>
+                <a href="#about" class="hover:text-accent transition-colors duration-300">关于实训</a>
+                <a href="#groups" class="hover:text-accent transition-colors duration-300">实训组别</a>
+            </nav>
+            <button class="md:hidden text-2xl" id="menuBtn">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- 移动端菜单 -->
+        <div class="md:hidden hidden bg-primary/95 backdrop-blur-md" id="mobileMenu">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+                <a href="#" class="py-2 border-b border-gray-700 hover:text-accent transition-colors duration-300">首页</a>
+                <a href="#live" class="py-2 hover:text-accent transition-colors duration-300">视频</a>
+                <a href="#about" class="py-2 hover:text-accent transition-colors duration-300">关于实训</a>
+                <a href="#groups" class="py-2 border-b border-gray-700 hover:text-accent transition-colors duration-300">实训组别</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <!-- 可替换背景图 -->
+            <img src="模型图片/草莓1.jpg" alt="农业实训背景" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-dark/50"></div>
+        </div>
+        <div class="container mx-auto px-4 z-10 text-center">
+            <h2 class="text-[clamp(2rem,5vw,4rem)] font-bold text-white mb-6 text-shadow">
+                草莓智慧大棚农业模型
+            </h2>
+            <p class="text-[clamp(1rem,2vw,1.5rem)] text-white/90 mb-10 max-w-3xl mx-auto">
+                展示农业模型学实训成果，探索现代农业科技发展
+            </p>
+            <a href="#live" class="inline-block bg-secondary hover:bg-secondary/80 text-white font-medium py-3 px-8 rounded-lg shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                成果展示 <i class="fa fa-arrow-down ml-2"></i>
+            </a>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#groups" class="text-white text-4xl opacity-80 hover:opacity-100 transition-opacity duration-300">
+                <i class="fa fa-angle-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <section id="live" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>班级视频</title>
+                <style>
+                    /* 主标题样式，较大字号和下边距 */
+                    .header h1 {
+                        font-size: 2.5rem;
+                        margin-bottom: 10px;
+                        font-weight: 300;
+                    }
+            
+                    /* 副标题样式，稍小字号和透明度 */
+                    .header p {
+                        font-size: 1.1rem;
+                        opacity: 0.9;
+                    }
+            
+                    /* 视频展示区外边距 */
+                    .video-section {
+                        padding: 40px;
+                    }
+            
+                    /* 视频播放器外部容器，居中、圆角、阴影 */
+                    .video-container {
+                        position: relative;
+                        width: 100%;
+                        max-width: 800px;
+                        margin: 0 auto;
+                        border-radius: 15px;
+                        overflow: hidden;
+                        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+                    }
+            
+                    /* 视频播放器本身，宽度100%，圆角 */
+                    .video-player {
+                        width: 100%;
+                        height: auto;
+                        display: block;
+                        border-radius: 15px;
+                    }
+            
+                    /* 视频信息区，标题和描述居中显示 */
+                    .video-info {
+                        margin-top: 30px;
+                        text-align: center;
+                    }
+            
+                    /* 视频标题样式 */
+                    .video-title {
+                        font-size: 1.8rem;
+                        color: #333;
+                        margin-bottom: 15px;
+                        font-weight: 600;
+                    }
+            
+                    /* 视频描述样式 */
+                    .video-description {
+                        font-size: 1.1rem;
+                        color: #666;
+                        line-height: 1.6;
+                        max-width: 600px;
+                        margin: 0 auto;
+                    }
+            
+                    /* 控制按钮区域，横向排列，间距自适应 */
+                    .controls {
+                        margin-top: 30px;
+                        display: flex;
+                        justify-content: center;
+                        gap: 20px;
+                        flex-wrap: wrap;
+                    }
+            
+                    /* 按钮基础样式，圆角、内边距、过渡动画 */
+                    .btn {
+                        padding: 12px 24px;
+                        border: none;
+                        border-radius: 25px;
+                        font-size: 1rem;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        text-decoration: none;
+                        display: inline-block;
+                    }
+            
+                    /* 主要按钮样式，渐变背景，白色文字 */
+                    .btn-primary {
+                        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                        color: white;
+                    }
+            
+                    /* 主要按钮悬停效果，浮起和阴影 */
+                    .btn-primary:hover {
+                        transform: translateY(-2px);
+                        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+                    }
+            
+                    /* 次要按钮样式，浅灰背景，深色文字，边框 */
+                    .btn-secondary {
+                        background: #f8f9fa;
+                        color: #333;
+                        border: 2px solid #e9ecef;
+                    }
+            
+                    /* 次要按钮悬停效果，背景变深，浮起 */
+                    .btn-secondary:hover {
+                        background: #e9ecef;
+                        transform: translateY(-2px);
+                    }
+            
+                    /* 页脚样式，深色背景，白色文字，居中 */
+                    .footer {
+                        background: #333;
+                        color: white;
+                        text-align: center;
+                        padding: 20px;
+                    }
+            
+                    /* 响应式设计：在小屏幕下调整标题、按钮和布局 */
+                    @media (max-width: 768px) {
+                        .header h1 {
+                            font-size: 2rem;
+                        }
+                        
+                        .video-section {
+                            padding: 20px;
+                        }
+                        
+                        .controls {
+                            flex-direction: column;
+                            align-items: center;
+                        }
+                        
+                        .btn {
+                            width: 200px;
+                        }
+                    }
+            
+                    /* 加载动画和加载区样式（预留，未实际使用） */
+                    .loading {
+                        display: none;
+                        text-align: center;
+                        padding: 20px;
+                    }
+            
+                    .spinner {
+                        border: 4px solid #f3f3f3;
+                        border-top: 4px solid #667eea;
+                        border-radius: 50%;
+                        width: 40px;
+                        height: 40px;
+                        animation: spin 1s linear infinite;
+                        margin: 0 auto 20px;
+                    }
+            
+                    @keyframes spin {
+                        0% { transform: rotate(0deg); }
+                        100% { transform: rotate(360deg); }
+                    }
+                </style>
+            </head>
+    <body>
+        <div class="container mx-auto text-center"> <!-- 新增 text-center 类使内容居中 -->
+            <div class="header">
+                <h1>🎬 班级视频</h1>
+                <p>分工合作成功完成</p>
+            </div>
+    
+            <div class="video-section">
+                <div class="video-container mx-auto max-w-3xl"> <!-- 新增 mx-auto 使视频容器居中，max-w-3xl 限制最大宽度 -->
+                    <video class="video-player w-full" controls preload="metadata" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'%3E%3Crect width='800' height='450' fill='%23f0f0f0'/%3E%3Ctext x='400' y='225' text-anchor='middle' font-family='Arial' font-size='24' fill='%23999'%3E视频加载中...%3C/text%3E%3C/svg%3E">
+                        <source src="视频.mp4" type="video/mp4">
+                        您的浏览器不支持视频播放。
+                    </video>
+                </div>
+    
+                <div class="controls mt-4"> <!-- 新增 mt-4 增加顶部间距 -->
+                    <button class="btn btn-primary" onclick="playVideo()">▶️ 播放</button>
+                    <button class="btn btn-secondary" onclick="pauseVideo()">⏸️ 暂停</button>
+                    <button class="btn btn-secondary" onclick="restartVideo()">🔄 重新播放</button>
+                    <button class="btn btn-secondary" onclick="toggleFullscreen()">⛶ 全屏</button>
+                </div>
+            </div>
+        </div>
+    
+        <script>
+            const video = document.querySelector('.video-player');
+            
+            function playVideo() {
+                video.play();
+            }
+            
+            function pauseVideo() {
+                video.pause();
+            }
+            
+            function restartVideo() {
+                video.currentTime = 0;
+                video.play();
+            }
+            
+            function toggleFullscreen() {
+                if (video.requestFullscreen) {
+                    video.requestFullscreen();
+                } else if (video.webkitRequestFullscreen) {
+                    video.webkitRequestFullscreen();
+                } else if (video.msRequestFullscreen) {
+                    video.msRequestFullscreen();
+                }
+            }
+            
+            
+            // 视频加载事件
+            video.addEventListener('loadstart', function() {
+                console.log('视频开始加载...');
+            });
+            
+            video.addEventListener('canplay', function() {
+                console.log('视频可以播放');
+            });
+            
+            video.addEventListener('error', function() {
+                console.error('视频加载失败');
+                alert('视频加载失败，请检查文件路径是否正确');
+            });
+            
+            // 键盘快捷键支持
+            document.addEventListener('keydown', function(e) {
+                switch(e.code) {
+                    case 'Space':
+                        e.preventDefault();
+                        if (video.paused) {
+                            video.play();
+                        } else {
+                            video.pause();
+                        }
+                        break;
+                    case 'ArrowLeft':
+                        video.currentTime -= 10;
+                        break;
+                    case 'ArrowRight':
+                        video.currentTime += 10;
+                        break;
+                }
+            });
+            
+            // 页面加载完成后的初始化
+            window.addEventListener('load', function() {
+                console.log('视频展示页面加载完成');
+            });
+        </script>
+    </body>
+    
+    <!-- 关于实训 -->
+    <section id="about" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">关于实训</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto">本次实训是23智慧农业1班所有同学的重要课程实训</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1">
+                    <h3 class="text-2xl font-bold text-dark mb-6">实训目标</h3>
+                    <p class="text-gray-600 mb-6">
+                        这个实训通过简化建模信息的呈现和综合的过程，减少主动整合信息的需求；但是着重于在此基础上通过完成建模的各种任务，重新构建建模的心智图式，通过持续的建模的认知努力，从而达到真正的理解如何建模。
+                    </p>
+                    <h3 class="text-2xl font-bold text-dark mb-6">日程安排</h3>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                            <span>第一天：环境配置与项目启动</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                            <span>第二天：功能开发与代码编写</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                            <span>第三天：测试与成果整理</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                            <span>第四天：各组成果展示</span>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <div class="order-1 lg:order-2">
+                    <!-- 可替换图片 -->
+                    <img src="模型图片/草莓2.jpg" alt="农业实训场景" class="rounded-xl shadow-xl w-full h-auto">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- 实训组别区域 -->
+    <section id="groups" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">实训小组</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto">5个小组合力完成模型并报告成果</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 代码组卡片 -->
+                <div class="bg-white rounded-xl shadow-xl overflow-hidden hover-scale group">
+                    <div class="h-60 overflow-hidden">
+                        <!-- 可替换图片 -->
+                        <img src="模型图片/小组1.jpg" alt="代码组工作场景" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-dark mb-3 flex items-center">
+                            <i class="fa fa-code text-primary mr-2"></i> 研发A组
+                        </h3>
+                        <p class="text-gray-600 mb-6">核对所有核心机理Python模块（生长计算、物候期判定、产量计算），进行模块功能测试，画代码文件关系图UML，添加代码中文注释
+                            </p>
+                        <a href="研发A.html" class="inline-block bg-primary hover:bg-primary/90 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-300">
+                            组内成果详情 <i class="fa fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+
+                <!-- 研发组卡片 -->
+                <div class="bg-white rounded-xl shadow-xl overflow-hidden hover-scale group">
+                    <div class="h-60 overflow-hidden">
+                        <!-- 可替换图片 -->
+                        <img src="模型图片/小组2.jpg" alt="研发组工作场景" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-dark mb-3 flex items-center">
+                            <i class="fa fa-flask text-primary mr-2"></i> 研发B组
+                        </h3>
+                        <p class="text-gray-600 mb-6">分析模型输入，输出机制，准备示例输入数据（气象、土壤、作物参数），制定部署初步计划。研究并绘制出DSSAT 文件关系图UML，给出每个文件的作用找出DSSAT 草莓相关输入文件，用DSSAT生成输出文件，标注注释.md解释DSSAT的输入输出文件，写.md 文件的DSSAT模型运作原理，安装Windows Installer DSSAT介面板生成草莓结果，和python文件生成的结果对比，和DSSAT无界面版生成的结果对比研究DSSAT 绘图，可以模仿画DSSAT文件中的关系图UML
+                            </p>
+                        <a href="研发B.html" class="inline-block bg-primary hover:bg-primary/90 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-300">
+                            组内成果详情 <i class="fa fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 发布组卡片 -->
+                <div class="bg-white rounded-xl shadow-xl overflow-hidden hover-scale group">
+                    <div class="h-60 overflow-hidden">
+                        <!-- 可替换图片 -->
+                        <img src="模型图片/小组3.jpg" alt="发布组工作场景" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-dark mb-3 flex items-center">
+                            <i class="fa fa-bullhorn text-primary mr-2"></i> 发布A组
+                        </h3>
+                        <p class="text-gray-600 mb-6">对接DSSAT 输出结果从python文件和B组来的输出结果从而设计python得输出新图用matplotlib， seaborn等包，利用PPT展示与解释图片结果</p>
+                        <a href="发布A.html" class="inline-block bg-primary hover:bg-primary/90 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-300">
+                            组内成果详情 <i class="fa fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fa fa-leaf text-accent mr-2"></i> 草莓智慧大棚农业模型
+                    </h3>
+                    <p class="text-gray-400 mb-6">
+                        由昆明学院23智慧农业1班共同研究完成
+                    </p>
+                </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">网页内容制作</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fa fa-map-marker text-accent mr-2"></i>
+                            <span class="text-gray-400">23智慧农业1班发布B组</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-envelope text-accent mr-2"></i>
+                            <span class="text-gray-400">25456258456@qq.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-phone text-accent mr-2"></i>
+                            <span class="text-gray-400">0871-12345678</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">快速链接</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">首页</a></li>
+                        <li><a href="#groups" class="text-gray-400 hover:text-white transition-colors duration-300">实训组别</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors duration-300">关于实训</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-10 pt-6 text-center text-gray-500">
+                <p>&copy; 2025 发布B组. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 回到顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-primary/80 hover:bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300 opacity-0 translate-y-10">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('py-2', 'bg-primary/95', 'backdrop-blur-md');
+                navbar.classList.remove('py-3', 'bg-primary');
+                backToTop.classList.remove('opacity-0', 'translate-y-10');
+                backToTop.classList.add('opacity-100', 'translate-y-0');
+            } else {
+                navbar.classList.remove('py-2', 'bg-primary/95', 'backdrop-blur-md');
+                navbar.classList.add('py-3', 'bg-primary');
+                backToTop.classList.add('opacity-0', 'translate-y-10');
+                backToTop.classList.remove('opacity-100', 'translate-y-0');
+            }
+        });
+        
+        // 回到顶部功能
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 移动端菜单
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuBtn.innerHTML = mobileMenu.classList.contains('hidden') ? 
+                '<i class="fa fa-bars"></i>' : 
+                '<i class="fa fa-times"></i>';
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // 关闭移动菜单（如果打开）
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        menuBtn.innerHTML = '<i class="fa fa-bars"></i>';
+                    }
+                    
+                    // 滚动到目标位置
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

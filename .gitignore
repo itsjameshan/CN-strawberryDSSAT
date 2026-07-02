@@ -1,0 +1,66 @@
+# macOS artifact files
+.DS_Store
+
+# Backup files
+~$*
+
+# Python bytecode and build outputs
+__pycache__/
+*.pyc
+
+# IDE / editor folders
+.trae/
+.vscode/
+.idea/
+
+# Large binaries
+*.mp4
+*.docx
+*.pptx
+*.png
+
+# Third-party / vendored source trees
+deepwiki.com/
+dssat-csm-data-develop/
+dssat-csm-os-develop/
+dssat-docker-master/
+
+# Output directories
+comparison_reports/
+comparison_results/
+validation_results/
+dssat_results/
+发布A结果图/
+模型图片/
+
+# Output / log files
+debug_output.txt
+results_report.txt
+validation_report.txt
+docker_build.log
+_redirects
+
+# One-off debug / diagnostic / analysis scripts
+debug_*.py
+diag_*.py
+diagnose_*.py
+analyze_*.py
+show_*.py
+explain_*.py
+test_comparison.py
+test_mapping.py
+update_python_comparison.py
+enhanced_compare_with_fortran.py
+run_all_comparisons.py
+plot_comparison.py
+seasonal_avg_comparison.py
+generate_*.py
+calc_thermal_time.py
+
+# Docker helper scripts (one-off)
+docker_i18n_apply.ps1
+docker_i18n_extract.ps1
+install_docker_to_d.ps1
+setup_windows.sh
+setup_windows3_backup.sh
+docker_manager.bat
